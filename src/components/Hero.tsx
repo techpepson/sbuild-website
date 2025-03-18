@@ -1,8 +1,9 @@
 
 import React, { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Globe, Lock, Shield } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, LineChart, Package, Shield } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import ThreeScene from './ThreeScene';
 
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -17,30 +18,23 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="relative pt-32 md:pt-44 pb-20 md:pb-32 overflow-hidden">
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-radial from-accent/5 to-transparent -z-10" />
+    <section className="relative pt-32 md:pt-40 pb-20 overflow-hidden">
+      {/* ThreeJS Animation Background */}
+      <ThreeScene />
       
-      {/* Background grid pattern */}
-      <div className="absolute inset-0 bg-grid-pattern opacity-5 -z-10" />
-      
-      {/* Animation circles */}
-      <div className="absolute top-1/4 right-[10%] w-64 h-64 bg-accent/5 rounded-full blur-3xl -z-10 animate-pulse-soft" />
-      <div className="absolute bottom-1/4 left-[10%] w-96 h-96 bg-accent/5 rounded-full blur-3xl -z-10 animate-float" />
-
-      <div className="container px-6 md:px-10 mx-auto max-w-7xl">
+      <div className="container px-4 mx-auto max-w-7xl">
         <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
           {/* Badge */}
           <div 
             className={cn(
               "inline-flex items-center py-1 px-3 mb-6 text-xs font-medium rounded-full",
-              "border border-accent/10 bg-accent/5 text-accent",
+              "border border-sbuild/20 bg-sbuild/5 text-sbuild",
               "transition-all duration-700 ease-out",
               isVisible ? "opacity-100 transform-none" : "opacity-0 translate-y-4"
             )}
           >
-            <span className="flex h-2 w-2 rounded-full bg-accent mr-2"></span>
-            Redefining Digital Ownership
+            <span className="flex h-2 w-2 rounded-full bg-sbuild mr-2"></span>
+            Advanced SaaS Solutions
           </div>
           
           {/* Headline */}
@@ -51,7 +45,7 @@ const Hero = () => {
               isVisible ? "opacity-100 transform-none" : "opacity-0 translate-y-4"
             )}
           >
-            The Future of <span className="gradient-text">Decentralized</span> Experiences
+            Innovative <span className="text-sbuild">SaaS Solutions</span> to Scale Your Business
           </h1>
           
           {/* Subheadline */}
@@ -62,8 +56,8 @@ const Hero = () => {
               isVisible ? "opacity-100 transform-none" : "opacity-0 translate-y-4"
             )}
           >
-            A platform that puts you in control - secure, transparent, and truly owned by its community.
-            Experience the next generation of digital interaction.
+            At SBuild Solutions, we craft scalable and high-performing software to drive growth and 
+            efficiency for businesses of all sizes.
           </p>
           
           {/* CTA Buttons */}
@@ -74,12 +68,13 @@ const Hero = () => {
               isVisible ? "opacity-100 transform-none" : "opacity-0 translate-y-4"
             )}
           >
-            <Button className="h-12 px-8 bg-accent hover:bg-accent/90 text-white rounded-lg shadow-lg shadow-accent/20 transition-all duration-300">
+            <Button className="h-12 px-8 bg-sbuild hover:bg-sbuild/90 text-white rounded-lg shadow-lg shadow-sbuild/20 transition-all duration-300">
               Get Started 
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
             <Button className="h-12 px-8 bg-white text-foreground hover:bg-gray-50 border border-gray-200 rounded-lg transition-all duration-300">
               Learn More
+              <ArrowUpRight className="ml-2 h-4 w-4" />
             </Button>
           </div>
           
@@ -92,27 +87,27 @@ const Hero = () => {
             )}
           >
             <div className="neo-card p-6 flex flex-col items-center text-center">
-              <div className="h-12 w-12 rounded-full bg-accent/10 flex items-center justify-center mb-4">
-                <Shield className="h-6 w-6 text-accent" />
+              <div className="h-12 w-12 rounded-full bg-sbuild/10 flex items-center justify-center mb-4">
+                <Package className="h-6 w-6 text-sbuild" />
               </div>
-              <h3 className="text-lg font-medium mb-2">Secure by Design</h3>
-              <p className="text-sm text-muted-foreground">Built on cryptographic principles ensuring your data remains protected.</p>
+              <h3 className="text-lg font-medium mb-2">Custom Solutions</h3>
+              <p className="text-sm text-muted-foreground">Tailored SaaS applications designed to meet your specific business needs.</p>
             </div>
             
             <div className="neo-card p-6 flex flex-col items-center text-center">
-              <div className="h-12 w-12 rounded-full bg-accent/10 flex items-center justify-center mb-4">
-                <Globe className="h-6 w-6 text-accent" />
+              <div className="h-12 w-12 rounded-full bg-sbuild/10 flex items-center justify-center mb-4">
+                <LineChart className="h-6 w-6 text-sbuild" />
               </div>
-              <h3 className="text-lg font-medium mb-2">Globally Connected</h3>
-              <p className="text-sm text-muted-foreground">Access your digital assets anywhere, with no central point of failure.</p>
+              <h3 className="text-lg font-medium mb-2">Scalable Architecture</h3>
+              <p className="text-sm text-muted-foreground">Build solutions that grow with your business, from startup to enterprise.</p>
             </div>
             
             <div className="neo-card p-6 flex flex-col items-center text-center">
-              <div className="h-12 w-12 rounded-full bg-accent/10 flex items-center justify-center mb-4">
-                <Lock className="h-6 w-6 text-accent" />
+              <div className="h-12 w-12 rounded-full bg-sbuild/10 flex items-center justify-center mb-4">
+                <Shield className="h-6 w-6 text-sbuild" />
               </div>
-              <h3 className="text-lg font-medium mb-2">Full Ownership</h3>
-              <p className="text-sm text-muted-foreground">You control your identity and data, with no intermediaries.</p>
+              <h3 className="text-lg font-medium mb-2">Enterprise Security</h3>
+              <p className="text-sm text-muted-foreground">Advanced security protocols to keep your data and users protected.</p>
             </div>
           </div>
         </div>

@@ -1,10 +1,14 @@
 
 import React, { useEffect } from 'react';
-import Hero from '@/components/Hero';
-import Features from '@/components/Features';
-import CallToAction from '@/components/CallToAction';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import Hero from '@/components/Hero';
+import AboutSection from '@/components/AboutSection';
+import ServicesSection from '@/components/ServicesSection';
+import Stats from '@/components/Stats';
+import ProjectsSection from '@/components/ProjectsSection';
+import InsightsSection from '@/components/InsightsSection';
+import CallToAction from '@/components/CallToAction';
 
 const Index = () => {
   useEffect(() => {
@@ -39,7 +43,11 @@ const Index = () => {
       <Navbar />
       <main>
         <Hero />
-        <Features />
+        <AboutSection />
+        <ServicesSection />
+        <Stats />
+        <ProjectsSection />
+        <InsightsSection />
         <CallToAction />
       </main>
       <Footer />

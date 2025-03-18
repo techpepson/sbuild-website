@@ -1,5 +1,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -16,7 +17,7 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 210 40% 22%;
+    --primary: 164 85% 16%;
     --primary-foreground: 210 40% 98%;
 
     --secondary: 210 20% 96%;
@@ -25,7 +26,7 @@
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
 
-    --accent: 216 79% 51%;
+    --accent: 164 87% 34%;
     --accent-foreground: 210 40% 98%;
 
     --destructive: 0 84.2% 60.2%;
@@ -57,8 +58,8 @@
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 164 85% 16%;
+    --primary-foreground: 210 40% 98%;
 
     --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
@@ -66,7 +67,7 @@
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
 
-    --accent: 216 79% 51%;
+    --accent: 164 87% 34%;
     --accent-foreground: 210 40% 98%;
 
     --destructive: 0 62.8% 30.6%;
@@ -111,6 +112,22 @@
 
 .gradient-text {
   @apply bg-clip-text text-transparent bg-gradient-to-r from-accent to-accent/70 animate-background-shine bg-[length:400%_100%];
+}
+
+.gradient-teal {
+  @apply bg-gradient-to-r from-teal-500 to-emerald-500;
+}
+
+.gradient-purple {
+  @apply bg-gradient-to-r from-purple-500 to-indigo-500;
+}
+
+.gradient-blue {
+  @apply bg-gradient-to-r from-blue-500 to-cyan-500;
+}
+
+.gradient-orange {
+  @apply bg-gradient-to-r from-orange-500 to-amber-500;
 }
 
 .smooth-scroll {
@@ -174,4 +191,24 @@
 
 .delay-500 {
   animation-delay: 500ms;
+}
+
+/* ThreeJS canvas container */
+.canvas-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+}
+
+/* Additional gradient utilities */
+.bg-gradient-conic {
+  background-image: conic-gradient(from 180deg at 50% 50%, #085550 0deg, #0ea5e9 180deg, #10b981 360deg);
+}
+
+.bg-gradient-radial-teal {
+  background-image: radial-gradient(circle at center, rgba(8, 85, 80, 0.1) 0%, rgba(8, 85, 80, 0) 70%);
 }
