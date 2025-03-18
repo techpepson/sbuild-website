@@ -43,7 +43,7 @@ const CallToAction = () => {
                 Get Started
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
-              <Button variant="outline" className="h-12 px-8 border-gray-200 rounded-lg ">
+              <Button variant="outline" className="h-12 px-8 border-gray-200 rounded-lg  hover: bg-gray-100">
                 <Mail className="mr-2 h-4 w-4" />
                 Contact Us
               </Button>
