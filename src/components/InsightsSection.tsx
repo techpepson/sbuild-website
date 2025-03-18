@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { ArrowRight, Calendar, Clock, User } from 'lucide-react';
 import { useInView } from 'react-intersection-observer';
 import { cn } from '@/lib/utils';
+import { Link } from 'react-router-dom';
 
 const InsightsSection = () => {
   const [ref, inView] = useInView({
@@ -13,6 +14,7 @@ const InsightsSection = () => {
 
   const articles = [
     {
+      id: 1,
       title: "The Future of SaaS: Trends to Watch in 2023",
       excerpt: "Explore the emerging trends in SaaS that are shaping the future of business software and digital transformation.",
       date: "Nov 15, 2023",
@@ -21,6 +23,7 @@ const InsightsSection = () => {
       image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&auto=format&fit=crop&q=80"
     },
     {
+      id: 2,
       title: "How Cloud Migration Can Reduce Your IT Costs",
       excerpt: "Learn how migrating to cloud-based solutions can significantly reduce your IT infrastructure and maintenance costs.",
       date: "Oct 28, 2023",
@@ -29,6 +32,7 @@ const InsightsSection = () => {
       image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&auto=format&fit=crop&q=80"
     },
     {
+      id: 3,
       title: "Designing SaaS Products for Maximum User Adoption",
       excerpt: "Discover the key UI/UX principles that can help your SaaS product achieve higher user adoption and retention rates.",
       date: "Oct 12, 2023",
@@ -51,10 +55,12 @@ const InsightsSection = () => {
             </p>
           </div>
           
-          <Button className="bg-sbuild hover:bg-sbuild/90">
-            Read More Insights
-            <ArrowRight className="ml-2 h-4 w-4" />
-          </Button>
+          <Link to="/insights">
+            <Button className="bg-sbuild hover:bg-sbuild/90">
+              Read More Insights
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
+          </Link>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -102,9 +108,9 @@ const InsightsSection = () => {
                     <span className="text-sm">{article.author}</span>
                   </div>
                   
-                  <a href="#" className="text-sbuild hover:underline inline-flex items-center text-sm font-medium">
+                  <Link to={`/insights/${article.id}`} className="text-sbuild hover:underline inline-flex items-center text-sm font-medium">
                     Read More <ArrowRight className="ml-1 h-3 w-3" />
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>

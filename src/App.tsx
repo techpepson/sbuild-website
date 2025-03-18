@@ -8,6 +8,9 @@ import Index from "./pages/Index";
 import About from "./pages/About";
 import Services from "./pages/Services";
 import Work from "./pages/Work";
+import Insights from "./pages/Insights";
+import InsightDetails from "./pages/InsightDetails";
+import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 
 // Load intersection observer polyfill for browsers that don't support it
@@ -26,6 +29,9 @@ const App = () => (
           <Route path="/about" element={<About />} />
           <Route path="/services" element={<Services />} />
           <Route path="/work" element={<Work />} />
+          <Route path="/insights" element={<Insights />} />
+          <Route path="/insights/:id" element={<InsightDetails />} />
+          <Route path="/contact" element={<Contact />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

@@ -30,6 +30,8 @@ const Navbar = () => {
     { name: 'About', href: '/about' },
     { name: 'Services', href: '/services' },
     { name: 'Our Work', href: '/work' },
+    { name: 'Insights', href: '/insights' },
+    { name: 'Contact', href: '/contact' },
   ];
   
   return (
@@ -71,7 +73,9 @@ const Navbar = () => {
           
           {/* Call to Action */}
           <div className="hidden md:flex items-center space-x-4">
-            <Button className="bg-sbuild hover:bg-sbuild/90">Contact Us</Button>
+            <Link to="/contact">
+              <Button className="bg-sbuild hover:bg-sbuild/90">Contact Us</Button>
+            </Link>
           </div>
           
           {/* Mobile Menu Button */}
@@ -108,7 +112,9 @@ const Navbar = () => {
                 {item.name}
               </Link>
             ))}
-            <Button className="mt-4 bg-sbuild hover:bg-sbuild/90">Contact Us</Button>
+            <Link to="/contact">
+              <Button className="mt-4 bg-sbuild hover:bg-sbuild/90">Contact Us</Button>
+            </Link>
           </div>
         </div>
       </div>
