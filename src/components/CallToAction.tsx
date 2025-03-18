@@ -19,7 +19,7 @@ const CallToAction = () => {
         <div className={cn("bg-white p-8 md:p-12 rounded-2xl shadow-xl relative overflow-hidden border border-gray-100 max-w-5xl mx-auto", "transition-all duration-700 transform", inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10")}>
           {/* Decorative elements */}
           <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-conic rounded-full opacity-20 blur-2xl -z-10"></div>
-          <div className="absolute bottom-0 left-0 w-40 h-40 bg-gradient-conic opacity-20 blur-2xl -z-10 rounded-3xl"></div>
+          <div className="absolute bottom-0 left-0 w-40 h-40 bg-gradient-conic opacity-20 blur-medium -z-10 rounded-3xl"></div>
           
           <div className="relative z-10">
             <div className="text-center max-w-3xl mx-auto mb-8">
