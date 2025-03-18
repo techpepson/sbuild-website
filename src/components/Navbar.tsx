@@ -31,7 +31,6 @@ const Navbar = () => {
     { name: 'Services', href: '/services' },
     { name: 'Our Work', href: '/work' },
     { name: 'Insights', href: '/insights' },
-    { name: 'Contact', href: '/contact' },
   ];
   
   return (
@@ -44,13 +43,12 @@ const Navbar = () => {
       <div className="container px-4 mx-auto max-w-7xl">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2 z-10">
-            <div className="w-9 h-9 rounded-lg bg-sbuild flex items-center justify-center">
-              <span className="text-white font-bold text-xl">S</span>
-            </div>
-            <span className="text-xl font-display font-semibold tracking-tight">
-              SBuild<span className="text-sbuild">Solutions</span>
-            </span>
+          <Link to="/" className="flex items-center z-10">
+            <img 
+              src="/lovable-uploads/0844fa11-deda-490d-88d1-0f95f51ce885.png" 
+              alt="SBuilsSolns Logo" 
+              className="h-10" 
+            />
           </Link>
           
           {/* Desktop Navigation */}
