@@ -12,7 +12,7 @@ const Hero = () => {
     }, 100);
     return () => clearTimeout(timer);
   }, []);
-  return <section className="relative pt-32 md:pt-40 pb-20 bg-sbuild/10 overflow-hidden">
+  return <section className="relative pt-32 md:pt-40 pb-20 overflow-hidden">
       {/* ThreeJS Animation Background */}
       <ThreeScene />
       
