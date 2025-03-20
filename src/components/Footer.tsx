@@ -48,13 +48,12 @@ const Footer = () => {
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-5">
           {/* Company Info */}
           <div className="lg:col-span-2">
-            <Link to="/" className="flex items-center space-x-2 mb-6">
-              <div className="w-10 h-10 rounded-lg bg-sbuild flex items-center justify-center">
-                <span className="text-white font-bold text-xl">S</span>
-              </div>
-              <span className="text-xl font-display font-semibold tracking-tight">
-                SBuild<span className="text-sbuild">Solutions</span>
-              </span>
+            <Link to="/" className="flex items-center mb-6">
+              <img 
+                src="/lovable-uploads/0844fa11-deda-490d-88d1-0f95f51ce885.png" 
+                alt="SBuild Solutions Logo" 
+                className="h-10" 
+              />
             </Link>
             <p className="text-muted-foreground max-w-md mb-6">
               At SBuild Solutions, we craft scalable and high-performing software to drive growth and 
