@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { cn } from '@/lib/utils';
@@ -6,11 +7,12 @@ import { ArrowRight, ExternalLink, Globe, Users, Zap, BarChart } from 'lucide-re
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import CallToAction from '@/components/CallToAction';
-import { useProjects, Project } from '@/hooks/use-projects';
-import { useSearchParams } from 'react-router-dom';
+import { useProjects } from '@/hooks/use-projects';
+import { useSearchParams, Link } from 'react-router-dom';
 
 const Work = () => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const projectId = searchParams.get('project');
   const initialFilter = searchParams.get('category') || 'all';
   const [activeFilter, setActiveFilter] = useState(initialFilter);
   
@@ -27,7 +29,7 @@ const Work = () => {
       searchParams.set('category', activeFilter);
     }
     setSearchParams(searchParams);
-  }, [activeFilter]);
+  }, [activeFilter, setSearchParams]);
 
   const [heroRef, heroInView] = useInView({
     triggerOnce: true,
@@ -43,6 +45,10 @@ const Work = () => {
   ];
 
   const { data: projects = [], isLoading, error } = useProjects(activeFilter === 'all' ? undefined : activeFilter);
+
+  const handleFilterClick = (filterId: string) => {
+    setActiveFilter(filterId);
+  };
 
   return (
     <div className="min-h-screen">
@@ -96,7 +102,7 @@ const Work = () => {
               {filters.map((filter) => (
                 <button
                   key={filter.id}
-                  onClick={() => setActiveFilter(filter.id)}
+                  onClick={() => handleFilterClick(filter.id)}
                   className={cn(
                     "px-5 py-2 rounded-full text-sm font-medium transition-all",
                     activeFilter === filter.id
@@ -190,9 +196,12 @@ const Work = () => {
                           ))}
                         </ul>
                         
-                        <a href="#" className="inline-flex items-center text-sbuild hover:underline">
+                        <Link 
+                          to={`/work?project=${project.id}`} 
+                          className="inline-flex items-center text-sbuild hover:underline"
+                        >
                           View Case Study <ExternalLink className="ml-1 h-4 w-4" />
-                        </a>
+                        </Link>
                       </div>
                     </div>
                   );
@@ -341,4 +350,3 @@ const Work = () => {
 };
 
 export default Work;
-

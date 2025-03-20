@@ -44,14 +44,10 @@ export function useProject(id: string) {
         .from('projects')
         .select('*')
         .eq('id', id)
-        .single();
+        .maybeSingle();
       
       if (error) {
         console.error('Error fetching project:', error);
-        if (error.code === 'PGRST116') {
-          // Record not found
-          return null;
-        }
         throw new Error(error.message);
       }
       
