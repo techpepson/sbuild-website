@@ -31,6 +31,7 @@ export function useProjects(category?: string) {
         throw new Error(error.message);
       }
       
+      console.log(`Fetched ${data?.length || 0} projects with category filter: ${category || 'all'}`);
       return data || [];
     },
   });

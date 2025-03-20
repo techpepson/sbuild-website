@@ -47,6 +47,7 @@ const Work = () => {
   const { data: projects = [], isLoading, error } = useProjects(activeFilter === 'all' ? undefined : activeFilter);
 
   const handleFilterClick = (filterId: string) => {
+    console.log(`Setting filter to: ${filterId}`);
     setActiveFilter(filterId);
   };
 
