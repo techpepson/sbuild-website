@@ -5,6 +5,7 @@ import { ArrowRight, Calendar, Clock, User } from 'lucide-react';
 import { useInView } from 'react-intersection-observer';
 import { cn } from '@/lib/utils';
 import { Link } from 'react-router-dom';
+import { useArticles } from '@/hooks/use-articles';
 
 const InsightsSection = () => {
   const [ref, inView] = useInView({
@@ -12,35 +13,8 @@ const InsightsSection = () => {
     threshold: 0.1,
   });
 
-  const articles = [
-    {
-      id: 1,
-      title: "The Future of SaaS: Trends to Watch in 2023",
-      excerpt: "Explore the emerging trends in SaaS that are shaping the future of business software and digital transformation.",
-      date: "Nov 15, 2023",
-      readTime: "5 min read",
-      author: "Alex Johnson",
-      image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&auto=format&fit=crop&q=80"
-    },
-    {
-      id: 2,
-      title: "How Cloud Migration Can Reduce Your IT Costs",
-      excerpt: "Learn how migrating to cloud-based solutions can significantly reduce your IT infrastructure and maintenance costs.",
-      date: "Oct 28, 2023",
-      readTime: "4 min read",
-      author: "Maria Garcia",
-      image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&auto=format&fit=crop&q=80"
-    },
-    {
-      id: 3,
-      title: "Designing SaaS Products for Maximum User Adoption",
-      excerpt: "Discover the key UI/UX principles that can help your SaaS product achieve higher user adoption and retention rates.",
-      date: "Oct 12, 2023",
-      readTime: "6 min read",
-      author: "David Chen",
-      image: "https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?w=800&auto=format&fit=crop&q=80"
-    }
-  ];
+  const { data: articles = [], isLoading, error } = useArticles();
+  const displayedArticles = articles.slice(0, 3); // Only display first 3 articles
 
   return (
     <section ref={ref} id="insights" className="py-20">
@@ -63,59 +37,77 @@ const InsightsSection = () => {
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {articles.map((article, index) => (
-            <div
-              key={index}
-              className={cn(
-                "group overflow-hidden rounded-xl bg-white border border-gray-100 shadow-sm hover:shadow-md transition-all",
-                "transition-all duration-500 transform",
-                inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8",
-                `delay-${index * 100}`
-              )}
-            >
-              <div className="h-48 overflow-hidden">
-                <img 
-                  src={article.image} 
-                  alt={article.title} 
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-              </div>
-              
-              <div className="p-6">
-                <div className="flex items-center text-sm text-muted-foreground mb-3 space-x-4">
-                  <div className="flex items-center">
-                    <Calendar className="mr-1 h-4 w-4" />
-                    {article.date}
-                  </div>
-                  <div className="flex items-center">
-                    <Clock className="mr-1 h-4 w-4" />
-                    {article.readTime}
-                  </div>
+        {isLoading && (
+          <div className="flex justify-center py-12">
+            <div className="animate-pulse space-y-8 w-full">
+              {[1, 2, 3].map((i) => (
+                <div key={i} className="h-64 bg-gray-200 rounded-xl"></div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {error && (
+          <div className="text-center py-12">
+            <p className="text-red-500">Error loading insights. Please try again later.</p>
+          </div>
+        )}
+
+        {!isLoading && !error && (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {displayedArticles.map((article, index) => (
+              <div
+                key={article.id}
+                className={cn(
+                  "group overflow-hidden rounded-xl bg-white border border-gray-100 shadow-sm hover:shadow-md transition-all",
+                  "transition-all duration-500 transform",
+                  inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8",
+                  `delay-${index * 100}`
+                )}
+              >
+                <div className="h-48 overflow-hidden">
+                  <img 
+                    src={article.image_url} 
+                    alt={article.title} 
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
                 </div>
                 
-                <h3 className="text-xl font-display font-semibold mb-3 group-hover:text-sbuild transition-colors">
-                  {article.title}
-                </h3>
-                
-                <p className="text-muted-foreground mb-4">
-                  {article.excerpt}
-                </p>
-                
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center">
-                    <User className="h-4 w-4 mr-2 text-sbuild" />
-                    <span className="text-sm">{article.author}</span>
+                <div className="p-6">
+                  <div className="flex items-center text-sm text-muted-foreground mb-3 space-x-4">
+                    <div className="flex items-center">
+                      <Calendar className="mr-1 h-4 w-4" />
+                      {article.date}
+                    </div>
+                    <div className="flex items-center">
+                      <Clock className="mr-1 h-4 w-4" />
+                      {article.read_time}
+                    </div>
                   </div>
                   
-                  <Link to={`/insights/${article.id}`} className="text-sbuild hover:underline inline-flex items-center text-sm font-medium">
-                    Read More <ArrowRight className="ml-1 h-3 w-3" />
-                  </Link>
+                  <h3 className="text-xl font-display font-semibold mb-3 group-hover:text-sbuild transition-colors">
+                    {article.title}
+                  </h3>
+                  
+                  <p className="text-muted-foreground mb-4">
+                    {article.excerpt}
+                  </p>
+                  
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center">
+                      <User className="h-4 w-4 mr-2 text-sbuild" />
+                      <span className="text-sm">{article.author}</span>
+                    </div>
+                    
+                    <Link to={`/insights/${article.id}`} className="text-sbuild hover:underline inline-flex items-center text-sm font-medium">
+                      Read More <ArrowRight className="ml-1 h-3 w-3" />
+                    </Link>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );

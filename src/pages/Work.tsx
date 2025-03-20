@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { cn } from '@/lib/utils';
@@ -7,14 +6,28 @@ import { ArrowRight, ExternalLink, Globe, Users, Zap, BarChart } from 'lucide-re
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import CallToAction from '@/components/CallToAction';
+import { useProjects, Project } from '@/hooks/use-projects';
+import { useSearchParams } from 'react-router-dom';
 
 const Work = () => {
-  const [activeFilter, setActiveFilter] = useState('all');
+  const [searchParams, setSearchParams] = useSearchParams();
+  const initialFilter = searchParams.get('category') || 'all';
+  const [activeFilter, setActiveFilter] = useState(initialFilter);
   
   useEffect(() => {
     // Scroll to top when component mounts
     window.scrollTo(0, 0);
   }, []);
+
+  useEffect(() => {
+    // Update search params when filter changes
+    if (activeFilter === 'all') {
+      searchParams.delete('category');
+    } else {
+      searchParams.set('category', activeFilter);
+    }
+    setSearchParams(searchParams);
+  }, [activeFilter]);
 
   const [heroRef, heroInView] = useInView({
     triggerOnce: true,
@@ -29,102 +42,7 @@ const Work = () => {
     { id: 'ecommerce', label: 'E-Commerce' },
   ];
 
-  const projects = [
-    {
-      id: 1,
-      title: "CloudSync Analytics",
-      category: "analytics",
-      client: "TechCorp Inc.",
-      description: "A cloud-based analytics platform that provides real-time insights and visualizations for business intelligence.",
-      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&auto=format&fit=crop&q=80",
-      gradient: "gradient-teal",
-      year: "2023",
-      results: [
-        "30% increase in data processing efficiency",
-        "Reduced reporting time from days to minutes",
-        "Seamless integration with existing systems"
-      ]
-    },
-    {
-      id: 2,
-      title: "WorkFlow Pro",
-      category: "management",
-      client: "Creative Solutions",
-      description: "An intuitive project management tool designed to streamline team collaboration and task management.",
-      image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&auto=format&fit=crop&q=80",
-      gradient: "gradient-purple",
-      year: "2022",
-      results: [
-        "40% improvement in team productivity",
-        "Centralized communication and file sharing",
-        "Customizable workflows for different departments"
-      ]
-    },
-    {
-      id: 3,
-      title: "SecurePay Gateway",
-      category: "fintech",
-      client: "Global Finance",
-      description: "A secure payment processing system with advanced fraud detection and multi-currency support.",
-      image: "https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?w=800&auto=format&fit=crop&q=80",
-      gradient: "gradient-blue",
-      year: "2023",
-      results: [
-        "99.99% uptime with enhanced security features",
-        "Support for 50+ international currencies",
-        "Reduced transaction costs by 15%"
-      ]
-    },
-    {
-      id: 4,
-      title: "EcoShop Platform",
-      category: "ecommerce",
-      client: "Green Retail",
-      description: "A comprehensive e-commerce solution for sustainable and eco-friendly products.",
-      image: "https://images.unsplash.com/photo-1556742031-c6961e8560b0?w=800&auto=format&fit=crop&q=80",
-      gradient: "gradient-orange",
-      year: "2022",
-      results: [
-        "200% increase in online sales within 6 months",
-        "Streamlined inventory management",
-        "Enhanced customer experience with personalized recommendations"
-      ]
-    },
-    {
-      id: 5,
-      title: "DataViz Dashboard",
-      category: "analytics",
-      client: "InsightMetrics",
-      description: "An advanced data visualization dashboard for complex business metrics and KPIs.",
-      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&auto=format&fit=crop&q=80",
-      gradient: "from-pink-500 to-rose-500",
-      year: "2021",
-      results: [
-        "Consolidated data from 12+ sources into a single view",
-        "Custom reporting capabilities for executive stakeholders",
-        "Real-time alerts and notifications for critical metrics"
-      ]
-    },
-    {
-      id: 6,
-      title: "TalentHub HR",
-      category: "management",
-      client: "Global Staffing Solutions",
-      description: "A comprehensive HR management system for recruitment, onboarding, and employee development.",
-      image: "https://images.unsplash.com/photo-1521791136064-7986c2920216?w=800&auto=format&fit=crop&q=80",
-      gradient: "from-amber-500 to-orange-500",
-      year: "2021",
-      results: [
-        "Reduced hiring time by 35%",
-        "Improved employee onboarding experience",
-        "Centralized employee records and performance tracking"
-      ]
-    }
-  ];
-
-  const filteredProjects = activeFilter === 'all' 
-    ? projects 
-    : projects.filter(project => project.category === activeFilter);
+  const { data: projects = [], isLoading, error } = useProjects(activeFilter === 'all' ? undefined : activeFilter);
 
   return (
     <div className="min-h-screen">
@@ -191,68 +109,99 @@ const Work = () => {
               ))}
             </div>
             
-            {/* Projects Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredProjects.map((project) => {
-                const [ref, inView] = useInView({
-                  triggerOnce: true,
-                  threshold: 0.1,
-                });
-                
-                return (
-                  <div
-                    key={project.id}
-                    ref={ref}
-                    className={cn(
-                      "group overflow-hidden rounded-xl bg-white shadow-sm border border-gray-100 transition-all hover:-translate-y-1 hover:shadow-md",
-                      "transition-all duration-500 transform",
-                      inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-                    )}
-                  >
-                    <div className="relative h-56 overflow-hidden">
-                      <div className={cn(
-                        "absolute inset-0 bg-gradient-to-br opacity-60 group-hover:opacity-70 transition-opacity",
-                        project.gradient
-                      )}></div>
-                      <img 
-                        src={project.image} 
-                        alt={project.title} 
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      />
-                      <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium">
-                        {filters.find(f => f.id === project.category)?.label || project.category}
-                      </div>
-                      <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium">
-                        {project.year}
-                      </div>
-                    </div>
-                    
-                    <div className="p-6">
-                      <h3 className="text-xl font-display font-semibold mb-1">{project.title}</h3>
-                      <p className="text-sbuild text-sm mb-3">Client: {project.client}</p>
-                      <p className="text-muted-foreground mb-4">{project.description}</p>
-                      
-                      <h4 className="font-medium text-sm uppercase tracking-wider mb-3">Key Results</h4>
-                      <ul className="space-y-2 mb-6">
-                        {project.results.map((result, index) => (
-                          <li key={index} className="flex items-start text-sm">
-                            <span className="text-sbuild mr-2">•</span>
-                            {result}
-                          </li>
-                        ))}
-                      </ul>
-                      
-                      <a href="#" className="inline-flex items-center text-sbuild hover:underline">
-                        View Case Study <ExternalLink className="ml-1 h-4 w-4" />
-                      </a>
-                    </div>
+            {/* Loading State */}
+            {isLoading && (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {[1, 2, 3, 4, 5, 6].map((i) => (
+                  <div key={i} className="animate-pulse">
+                    <div className="h-56 bg-gray-200 rounded-t-xl mb-4"></div>
+                    <div className="h-6 bg-gray-200 rounded w-3/4 mb-2"></div>
+                    <div className="h-4 bg-gray-200 rounded w-1/2 mb-4"></div>
+                    <div className="h-4 bg-gray-200 rounded w-full mb-2"></div>
+                    <div className="h-4 bg-gray-200 rounded w-full mb-2"></div>
+                    <div className="h-4 bg-gray-200 rounded w-3/4"></div>
                   </div>
-                );
-              })}
-            </div>
+                ))}
+              </div>
+            )}
+            
+            {/* Error State */}
+            {error && (
+              <div className="text-center py-12">
+                <p className="text-red-500 mb-4">Failed to load projects. Please try again later.</p>
+                <Button 
+                  variant="outline" 
+                  onClick={() => window.location.reload()}
+                >
+                  Retry
+                </Button>
+              </div>
+            )}
+            
+            {/* Projects Grid */}
+            {!isLoading && !error && (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {projects.map((project) => {
+                  const [ref, inView] = useInView({
+                    triggerOnce: true,
+                    threshold: 0.1,
+                  });
+                  
+                  return (
+                    <div
+                      key={project.id}
+                      ref={ref}
+                      className={cn(
+                        "group overflow-hidden rounded-xl bg-white shadow-sm border border-gray-100 transition-all hover:-translate-y-1 hover:shadow-md",
+                        "transition-all duration-500 transform",
+                        inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+                      )}
+                    >
+                      <div className="relative h-56 overflow-hidden">
+                        <div className={cn(
+                          "absolute inset-0 bg-gradient-to-br opacity-60 group-hover:opacity-70 transition-opacity",
+                          project.gradient
+                        )}></div>
+                        <img 
+                          src={project.image_url} 
+                          alt={project.title} 
+                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        />
+                        <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium">
+                          {filters.find(f => f.id === project.category)?.label || project.category}
+                        </div>
+                        <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium">
+                          {project.year}
+                        </div>
+                      </div>
+                      
+                      <div className="p-6">
+                        <h3 className="text-xl font-display font-semibold mb-1">{project.title}</h3>
+                        <p className="text-sbuild text-sm mb-3">Client: {project.client}</p>
+                        <p className="text-muted-foreground mb-4">{project.description}</p>
+                        
+                        <h4 className="font-medium text-sm uppercase tracking-wider mb-3">Key Results</h4>
+                        <ul className="space-y-2 mb-6">
+                          {project.results.map((result, index) => (
+                            <li key={index} className="flex items-start text-sm">
+                              <span className="text-sbuild mr-2">•</span>
+                              {result}
+                            </li>
+                          ))}
+                        </ul>
+                        
+                        <a href="#" className="inline-flex items-center text-sbuild hover:underline">
+                          View Case Study <ExternalLink className="ml-1 h-4 w-4" />
+                        </a>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
             
             {/* Empty State */}
-            {filteredProjects.length === 0 && (
+            {!isLoading && !error && projects.length === 0 && (
               <div className="text-center py-12">
                 <p className="text-muted-foreground mb-4">No projects found in this category.</p>
                 <Button 
@@ -392,3 +341,4 @@ const Work = () => {
 };
 
 export default Work;
+
