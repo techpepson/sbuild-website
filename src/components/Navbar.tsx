@@ -32,10 +32,13 @@ const Navbar = () => {
   };
 
   return (
-    <header className={cn(
-      "sticky top-0 z-50 w-full border-b border-gray-100 bg-white/80 backdrop-blur-md transition-all",
-      scrolled ? "shadow-sm py-3" : "py-4"
-    )}>
+    <header 
+      className={cn(
+        "sticky top-0 z-50 w-full border-b border-gray-100 bg-white/80 backdrop-blur-md transition-all",
+        scrolled ? "shadow-sm py-3" : "py-4"
+      )}
+      style={{ "--header-height": scrolled ? "64px" : "80px" } as React.CSSProperties}
+    >
       <div className="container px-4 mx-auto max-w-7xl">
         <div className="flex items-center justify-between">
           {/* Logo */}
@@ -75,13 +78,13 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile Menu - Fixed positioning to ensure it appears properly */}
-      <div className={cn(
-        "md:hidden fixed left-0 right-0 bg-white border-t border-gray-100 shadow-md transition-all duration-300 ease-in-out",
-        mobileMenuOpen 
-          ? "top-[calc(var(--header-height,_64px))] max-h-[calc(100vh-var(--header-height,_64px))] opacity-100 z-50" 
-          : "top-[calc(var(--header-height,_64px))] max-h-0 opacity-0 -z-10"
-      )}>
+      {/* Mobile Menu */}
+      <div 
+        className={cn(
+          "absolute left-0 right-0 md:hidden bg-white border-t border-gray-100 shadow-md z-40 transition-all duration-300 ease-in-out",
+          mobileMenuOpen ? "opacity-100 visible" : "opacity-0 invisible h-0"
+        )}
+      >
         <nav className="container px-4 py-4 mx-auto max-w-7xl">
           <ul className="space-y-4">
             <li>
