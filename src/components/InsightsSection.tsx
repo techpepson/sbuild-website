@@ -5,7 +5,8 @@ import { ArrowRight, Calendar, Clock, User } from 'lucide-react';
 import { useInView } from 'react-intersection-observer';
 import { cn } from '@/lib/utils';
 import { Link } from 'react-router-dom';
-import { useArticles } from '@/hooks/use-articles';
+import { useArticles } from '@/hooks/use-articles-data';
+import { Skeleton } from '@/components/ui/skeleton';
 
 const InsightsSection = () => {
   const [ref, inView] = useInView({
@@ -14,7 +15,7 @@ const InsightsSection = () => {
   });
 
   const { data: articles = [], isLoading, error } = useArticles();
-  const displayedArticles = articles.slice(0, 3); // Only display first 3 articles
+  const displayedArticles = articles.slice(0, 3); // Only show first 3 articles
 
   return (
     <section ref={ref} id="insights" className="py-20">
@@ -38,12 +39,26 @@ const InsightsSection = () => {
         </div>
 
         {isLoading && (
-          <div className="flex justify-center py-12">
-            <div className="animate-pulse space-y-8 w-full">
-              {[1, 2, 3].map((i) => (
-                <div key={i} className="h-64 bg-gray-200 rounded-xl"></div>
-              ))}
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[1, 2, 3].map((i) => (
+              <div key={i} className="rounded-xl overflow-hidden border border-gray-100 shadow-sm">
+                <Skeleton className="h-48 w-full" />
+                <div className="p-6 space-y-4">
+                  <div className="flex space-x-4">
+                    <Skeleton className="h-4 w-16" />
+                    <Skeleton className="h-4 w-16" />
+                  </div>
+                  <Skeleton className="h-6 w-full" />
+                  <Skeleton className="h-4 w-full" />
+                  <Skeleton className="h-4 w-full" />
+                  <Skeleton className="h-4 w-3/4" />
+                  <div className="flex justify-between items-center pt-2">
+                    <Skeleton className="h-4 w-24" />
+                    <Skeleton className="h-4 w-20" />
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         )}
 

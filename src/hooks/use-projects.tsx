@@ -36,8 +36,11 @@ export function useProjects(category?: string) {
       }
       
       console.log(`Fetched ${data?.length || 0} projects with category filter: ${category || 'all'}`);
+      
+      // If no data returned, return empty array instead of null
       return data || [];
     },
+    refetchOnWindowFocus: false, // Prevent refetching when window regains focus
   });
 }
 

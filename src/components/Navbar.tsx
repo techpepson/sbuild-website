@@ -92,7 +92,7 @@ const Navbar = () => {
           {/* Mobile Menu */}
           <div
             className={cn(
-              'fixed inset-0 bg-white z-40 flex flex-col justify-center items-center space-y-8 transition-all duration-300 md:hidden',
+              'fixed inset-0 bg-white/95 z-40 flex flex-col justify-center items-center space-y-8 transition-all duration-300 md:hidden',
               isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'
             )}
           >
@@ -104,13 +104,14 @@ const Navbar = () => {
                   'text-lg font-medium transition-colors',
                   location.pathname === item.href
                     ? 'text-sbuild'
-                    : 'text-muted-foreground hover:text-sbuild'
+                    : 'text-gray-800 hover:text-sbuild'
                 )}
+                onClick={() => setIsMobileMenuOpen(false)}
               >
                 {item.name}
               </Link>
             ))}
-            <Link to="/contact">
+            <Link to="/contact" onClick={() => setIsMobileMenuOpen(false)}>
               <Button className="mt-4 bg-sbuild hover:bg-sbuild/90">Contact Us</Button>
             </Link>
           </div>
