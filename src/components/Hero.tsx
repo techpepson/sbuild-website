@@ -1,8 +1,11 @@
+
 import React, { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, ArrowUpRight, LineChart, Package, Shield } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import ThreeScene from './ThreeScene';
+import { Link } from 'react-router-dom';
+
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
   useEffect(() => {
@@ -37,14 +40,18 @@ const Hero = () => {
           
           {/* CTA Buttons */}
           <div className={cn("flex flex-col sm:flex-row gap-4 mb-16 w-full sm:w-auto justify-center", "transition-all duration-700 delay-300 ease-out", isVisible ? "opacity-100 transform-none" : "opacity-0 translate-y-4")}>
-            <Button className="h-12 px-8 bg-sbuild hover:bg-sbuild/90 text-white rounded-lg shadow-lg shadow-sbuild/20 transition-all duration-300">
-              Get Started 
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
-            <Button className="h-12 px-8 bg-white text-foreground hover:bg-gray-50 border border-gray-200 rounded-lg transition-all duration-300">
-              Learn More
-              <ArrowUpRight className="ml-2 h-4 w-4" />
-            </Button>
+            <Link to="/contact">
+              <Button className="h-12 px-8 bg-sbuild hover:bg-sbuild/90 text-white rounded-lg shadow-lg shadow-sbuild/20 transition-all duration-300">
+                Get Started 
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </Link>
+            <a href="https://calendly.com" target="_blank" rel="noopener noreferrer">
+              <Button className="h-12 px-8 bg-white text-foreground hover:bg-gray-50 border border-gray-200 rounded-lg transition-all duration-300">
+                Schedule a Meeting
+                <ArrowUpRight className="ml-2 h-4 w-4" />
+              </Button>
+            </a>
           </div>
           
           {/* Feature highlights */}

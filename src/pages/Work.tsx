@@ -7,35 +7,100 @@ import { ArrowRight, ExternalLink, Globe, Users, Zap, BarChart } from 'lucide-re
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import CallToAction from '@/components/CallToAction';
-import { useProjects } from '@/hooks/use-projects';
+import { useProjects, useProject } from '@/hooks/use-projects';
 import { useSearchParams, Link } from 'react-router-dom';
+import { 
+  Drawer, 
+  DrawerContent, 
+  DrawerHeader,
+  DrawerTitle,
+  DrawerDescription,
+  DrawerFooter
+} from '@/components/ui/drawer';
 
-const Work = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const projectId = searchParams.get('project');
-  const initialFilter = searchParams.get('category') || 'all';
-  const [activeFilter, setActiveFilter] = useState(initialFilter);
+// Project details drawer component
+const ProjectDetails = ({ projectId, onClose }: { projectId: string | null, onClose: () => void }) => {
+  const { data: project, isLoading, error } = useProject(projectId || '');
   
-  useEffect(() => {
-    // Scroll to top when component mounts
-    window.scrollTo(0, 0);
-  }, []);
+  if (!projectId) return null;
+  
+  return (
+    <DrawerContent className="h-[85vh] overflow-y-auto">
+      <DrawerHeader>
+        <DrawerTitle className="text-2xl font-display font-semibold">
+          {isLoading ? 'Loading project...' : project?.title}
+        </DrawerTitle>
+        <DrawerDescription>
+          {isLoading ? 'Please wait...' : `Client: ${project?.client}`}
+        </DrawerDescription>
+      </DrawerHeader>
+      
+      {isLoading ? (
+        <div className="p-6 flex justify-center">
+          <div className="animate-pulse space-y-4 w-full">
+            <div className="h-56 bg-gray-200 rounded-lg"></div>
+            <div className="h-4 bg-gray-200 rounded w-3/4"></div>
+            <div className="h-4 bg-gray-200 rounded w-full"></div>
+            <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+          </div>
+        </div>
+      ) : error ? (
+        <div className="p-6 text-center">
+          <p className="text-red-500">Error loading project details. Please try again.</p>
+        </div>
+      ) : project ? (
+        <div className="p-6">
+          <div className="relative h-64 overflow-hidden rounded-lg mb-6">
+            <div className={cn(
+              "absolute inset-0 bg-gradient-to-br opacity-60",
+              project.gradient
+            )}></div>
+            <img 
+              src={project.image_url} 
+              alt={project.title} 
+              className="w-full h-full object-cover"
+            />
+          </div>
+          
+          <div className="flex flex-wrap gap-2 mb-6">
+            <div className="bg-gray-100 px-3 py-1 rounded-full text-xs font-medium">
+              {project.category}
+            </div>
+            <div className="bg-gray-100 px-3 py-1 rounded-full text-xs font-medium">
+              {project.year}
+            </div>
+          </div>
+          
+          <p className="text-muted-foreground mb-6">{project.description}</p>
+          
+          <h3 className="font-semibold text-lg mb-4">Key Results</h3>
+          <ul className="space-y-2 mb-8">
+            {project.results.map((result, index) => (
+              <li key={index} className="flex items-start">
+                <span className="text-sbuild mr-2 font-bold">•</span>
+                {result}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : (
+        <div className="p-6 text-center">
+          <p>Project not found.</p>
+        </div>
+      )}
+      
+      <DrawerFooter>
+        <Button onClick={onClose}>Close</Button>
+      </DrawerFooter>
+    </DrawerContent>
+  );
+};
 
-  useEffect(() => {
-    // Update search params when filter changes
-    if (activeFilter === 'all') {
-      searchParams.delete('category');
-    } else {
-      searchParams.set('category', activeFilter);
-    }
-    setSearchParams(searchParams);
-  }, [activeFilter, setSearchParams]);
-
-  const [heroRef, heroInView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
-
+// Filter component
+const ProjectFilters = ({ activeFilter, onFilterChange }: { 
+  activeFilter: string, 
+  onFilterChange: (filter: string) => void 
+}) => {
   const filters = [
     { id: 'all', label: 'All Projects' },
     { id: 'analytics', label: 'Analytics' },
@@ -44,11 +109,141 @@ const Work = () => {
     { id: 'ecommerce', label: 'E-Commerce' },
   ];
 
+  return (
+    <div className="flex flex-wrap justify-center gap-3 mb-12">
+      {filters.map((filter) => (
+        <button
+          key={filter.id}
+          onClick={() => onFilterChange(filter.id)}
+          className={cn(
+            "px-5 py-2 rounded-full text-sm font-medium transition-all",
+            activeFilter === filter.id
+              ? "bg-sbuild text-white shadow-md"
+              : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+          )}
+        >
+          {filter.label}
+        </button>
+      ))}
+    </div>
+  );
+};
+
+// Projects grid component
+const ProjectsGrid = ({ projects, onProjectClick }: { 
+  projects: any[], 
+  onProjectClick: (id: string) => void 
+}) => {
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {projects.map((project) => {
+        const [ref, inView] = useInView({
+          triggerOnce: true,
+          threshold: 0.1,
+        });
+        
+        return (
+          <div
+            key={project.id}
+            ref={ref}
+            className={cn(
+              "group overflow-hidden rounded-xl bg-white shadow-sm border border-gray-100 transition-all hover:-translate-y-1 hover:shadow-md",
+              "transition-all duration-500 transform",
+              inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+            )}
+          >
+            <div className="relative h-56 overflow-hidden">
+              <div className={cn(
+                "absolute inset-0 bg-gradient-to-br opacity-60 group-hover:opacity-70 transition-opacity",
+                project.gradient
+              )}></div>
+              <img 
+                src={project.image_url} 
+                alt={project.title} 
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+              <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium">
+                {project.category}
+              </div>
+              <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium">
+                {project.year}
+              </div>
+            </div>
+            
+            <div className="p-6">
+              <h3 className="text-xl font-display font-semibold mb-1">{project.title}</h3>
+              <p className="text-sbuild text-sm mb-3">Client: {project.client}</p>
+              <p className="text-muted-foreground mb-4">{project.description}</p>
+              
+              <h4 className="font-medium text-sm uppercase tracking-wider mb-3">Key Results</h4>
+              <ul className="space-y-2 mb-6">
+                {project.results.slice(0, 2).map((result: string, index: number) => (
+                  <li key={index} className="flex items-start text-sm">
+                    <span className="text-sbuild mr-2">•</span>
+                    {result}
+                  </li>
+                ))}
+                {project.results.length > 2 && (
+                  <li className="text-sm text-sbuild">+ {project.results.length - 2} more results</li>
+                )}
+              </ul>
+              
+              <button 
+                onClick={() => onProjectClick(project.id)}
+                className="inline-flex items-center text-sbuild hover:underline"
+              >
+                View Case Study <ExternalLink className="ml-1 h-4 w-4" />
+              </button>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+const Work = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const projectId = searchParams.get('project');
+  const initialCategory = searchParams.get('category') || 'all';
+  const [activeFilter, setActiveFilter] = useState(initialCategory);
+  
+  useEffect(() => {
+    // Scroll to top when component mounts
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
+    console.log(`Setting active filter: ${activeFilter}`);
+    // Update URL when filter changes
+    if (activeFilter === 'all') {
+      searchParams.delete('category');
+    } else {
+      searchParams.set('category', activeFilter);
+    }
+    setSearchParams(searchParams);
+  }, [activeFilter, searchParams, setSearchParams]);
+
   const { data: projects = [], isLoading, error } = useProjects(activeFilter === 'all' ? undefined : activeFilter);
 
+  const [heroRef, heroInView] = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
+
   const handleFilterClick = (filterId: string) => {
-    console.log(`Setting filter to: ${filterId}`);
+    console.log(`Changing filter to: ${filterId}`);
     setActiveFilter(filterId);
+  };
+  
+  const handleProjectClick = (id: string) => {
+    searchParams.set('project', id);
+    setSearchParams(searchParams);
+  };
+  
+  const handleCloseProject = () => {
+    searchParams.delete('project');
+    setSearchParams(searchParams);
   };
 
   return (
@@ -99,22 +294,7 @@ const Work = () => {
         <section className="py-16">
           <div className="container px-4 mx-auto max-w-7xl">
             {/* Filter Buttons */}
-            <div className="flex flex-wrap justify-center gap-3 mb-12">
-              {filters.map((filter) => (
-                <button
-                  key={filter.id}
-                  onClick={() => handleFilterClick(filter.id)}
-                  className={cn(
-                    "px-5 py-2 rounded-full text-sm font-medium transition-all",
-                    activeFilter === filter.id
-                      ? "bg-sbuild text-white shadow-md"
-                      : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-                  )}
-                >
-                  {filter.label}
-                </button>
-              ))}
-            </div>
+            <ProjectFilters activeFilter={activeFilter} onFilterChange={handleFilterClick} />
             
             {/* Loading State */}
             {isLoading && (
@@ -147,67 +327,7 @@ const Work = () => {
             
             {/* Projects Grid */}
             {!isLoading && !error && (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {projects.map((project) => {
-                  const [ref, inView] = useInView({
-                    triggerOnce: true,
-                    threshold: 0.1,
-                  });
-                  
-                  return (
-                    <div
-                      key={project.id}
-                      ref={ref}
-                      className={cn(
-                        "group overflow-hidden rounded-xl bg-white shadow-sm border border-gray-100 transition-all hover:-translate-y-1 hover:shadow-md",
-                        "transition-all duration-500 transform",
-                        inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-                      )}
-                    >
-                      <div className="relative h-56 overflow-hidden">
-                        <div className={cn(
-                          "absolute inset-0 bg-gradient-to-br opacity-60 group-hover:opacity-70 transition-opacity",
-                          project.gradient
-                        )}></div>
-                        <img 
-                          src={project.image_url} 
-                          alt={project.title} 
-                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                        />
-                        <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium">
-                          {filters.find(f => f.id === project.category)?.label || project.category}
-                        </div>
-                        <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium">
-                          {project.year}
-                        </div>
-                      </div>
-                      
-                      <div className="p-6">
-                        <h3 className="text-xl font-display font-semibold mb-1">{project.title}</h3>
-                        <p className="text-sbuild text-sm mb-3">Client: {project.client}</p>
-                        <p className="text-muted-foreground mb-4">{project.description}</p>
-                        
-                        <h4 className="font-medium text-sm uppercase tracking-wider mb-3">Key Results</h4>
-                        <ul className="space-y-2 mb-6">
-                          {project.results.map((result, index) => (
-                            <li key={index} className="flex items-start text-sm">
-                              <span className="text-sbuild mr-2">•</span>
-                              {result}
-                            </li>
-                          ))}
-                        </ul>
-                        
-                        <Link 
-                          to={`/work?project=${project.id}`} 
-                          className="inline-flex items-center text-sbuild hover:underline"
-                        >
-                          View Case Study <ExternalLink className="ml-1 h-4 w-4" />
-                        </Link>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
+              <ProjectsGrid projects={projects} onProjectClick={handleProjectClick} />
             )}
             
             {/* Empty State */}
@@ -274,73 +394,10 @@ const Work = () => {
           </div>
         </section>
 
-        {/* Testimonials Section */}
-        <section className="py-20">
-          <div className="container px-4 mx-auto max-w-7xl">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-display font-semibold tracking-tight mb-4">
-                What Our Clients Say
-              </h2>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Don't just take our word for it - hear from the businesses that have 
-                experienced the SBuild difference firsthand.
-              </p>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {[1, 2, 3].map((index) => {
-                const [ref, inView] = useInView({
-                  triggerOnce: true,
-                  threshold: 0.1,
-                });
-                
-                return (
-                  <div
-                    key={index}
-                    ref={ref}
-                    className={cn(
-                      "bg-white p-8 rounded-xl shadow-sm border border-gray-100",
-                      "transition-all duration-500 transform",
-                      inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8",
-                      `delay-${index * 100}`
-                    )}
-                  >
-                    <div className="flex items-center mb-6">
-                      <svg className="text-sbuild h-6 w-6 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                      </svg>
-                      <svg className="text-sbuild h-6 w-6 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                      </svg>
-                      <svg className="text-sbuild h-6 w-6 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                      </svg>
-                      <svg className="text-sbuild h-6 w-6 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                      </svg>
-                      <svg className="text-sbuild h-6 w-6" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                      </svg>
-                    </div>
-                    
-                    <p className="italic text-gray-600 mb-6">
-                      "SBuild Solutions transformed our business with their custom SaaS platform. Their team was professional, 
-                      responsive, and delivered a solution that exceeded our expectations. The results have been nothing short of exceptional."
-                    </p>
-                    
-                    <div className="flex items-center">
-                      <div className="h-12 w-12 rounded-full bg-gray-200 mr-4"></div>
-                      <div>
-                        <h4 className="font-medium">Client Name {index}</h4>
-                        <p className="text-sm text-muted-foreground">CEO, Company {index}</p>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </section>
+        {/* Project Details Drawer */}
+        <Drawer open={!!projectId} onOpenChange={(open) => !open && handleCloseProject()}>
+          <ProjectDetails projectId={projectId} onClose={handleCloseProject} />
+        </Drawer>
 
         {/* Call to Action */}
         <CallToAction />

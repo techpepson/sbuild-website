@@ -12,6 +12,12 @@ import Insights from "./pages/Insights";
 import InsightDetails from "./pages/InsightDetails";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
+import Privacy from "./pages/Privacy";
+import Terms from "./pages/Terms";
+import CaseStudies from "./pages/CaseStudies";
+import FAQs from "./pages/FAQs";
+import Careers from "./pages/Careers";
+import CookiePolicy from "./pages/CookiePolicy";
 
 // Load intersection observer polyfill for browsers that don't support it
 import { useInView } from 'react-intersection-observer';
@@ -32,6 +38,12 @@ const App = () => (
           <Route path="/insights" element={<Insights />} />
           <Route path="/insights/:id" element={<InsightDetails />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/case-studies" element={<CaseStudies />} />
+          <Route path="/faqs" element={<FAQs />} />
+          <Route path="/careers" element={<Careers />} />
+          <Route path="/cookie-policy" element={<CookiePolicy />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

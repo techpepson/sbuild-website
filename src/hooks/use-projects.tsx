@@ -20,8 +20,12 @@ export function useProjects(category?: string) {
     queryFn: async (): Promise<Project[]> => {
       let query = supabase.from('projects').select('*');
       
+      // Only apply category filter if a specific category is selected
       if (category && category !== 'all') {
         query = query.eq('category', category);
+        console.log(`Filtering projects by category: ${category}`);
+      } else {
+        console.log('Fetching all projects (no category filter)');
       }
       
       const { data, error } = await query.order('created_at', { ascending: false });

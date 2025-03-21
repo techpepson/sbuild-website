@@ -78,7 +78,7 @@ const Navbar = () => {
           
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden z-10"
+            className="md:hidden z-50"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle Menu"
           >
@@ -92,8 +92,8 @@ const Navbar = () => {
           {/* Mobile Menu */}
           <div
             className={cn(
-              'fixed inset-0 bg-white flex flex-col justify-center items-center space-y-8 transition-all duration-300 md:hidden',
-              isMobileMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
+              'fixed inset-0 bg-white z-40 flex flex-col justify-center items-center space-y-8 transition-all duration-300 md:hidden',
+              isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'
             )}
           >
             {navItems.map((item) => (

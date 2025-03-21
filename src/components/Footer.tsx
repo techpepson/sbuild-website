@@ -17,7 +17,7 @@ const Footer = () => {
         { name: 'About', href: '/about' },
         { name: 'Services', href: '/services' },
         { name: 'Our Work', href: '/work' },
-        { name: 'Contact', href: '/#contact' },
+        { name: 'Contact', href: '/contact' },
       ],
     },
     {
@@ -33,10 +33,10 @@ const Footer = () => {
     {
       title: 'Resources',
       links: [
-        { name: 'Blog', href: '/blog' },
         { name: 'Case Studies', href: '/case-studies' },
-        { name: 'Documentation', href: '/docs' },
         { name: 'FAQs', href: '/faqs' },
+        { name: 'Privacy Policy', href: '/privacy' },
+        { name: 'Terms of Service', href: '/terms' },
         { name: 'Careers', href: '/careers' },
       ],
     },
