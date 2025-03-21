@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
@@ -74,10 +75,12 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile Menu - Fixed this to ensure links are visible */}
+      {/* Mobile Menu - Fixed positioning to ensure it appears properly */}
       <div className={cn(
-        "md:hidden bg-white border-t border-gray-100 absolute left-0 right-0 shadow-md transition-all duration-300 ease-in-out overflow-hidden",
-        mobileMenuOpen ? "max-h-[500px] opacity-100 z-50" : "max-h-0 opacity-0 -z-10"
+        "md:hidden fixed left-0 right-0 bg-white border-t border-gray-100 shadow-md transition-all duration-300 ease-in-out",
+        mobileMenuOpen 
+          ? "top-[calc(var(--header-height,_64px))] max-h-[calc(100vh-var(--header-height,_64px))] opacity-100 z-50" 
+          : "top-[calc(var(--header-height,_64px))] max-h-0 opacity-0 -z-10"
       )}>
         <nav className="container px-4 py-4 mx-auto max-w-7xl">
           <ul className="space-y-4">
