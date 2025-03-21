@@ -1,121 +1,133 @@
-
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { Menu, X } from 'lucide-react';
 
 const Navbar = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const location = useLocation();
-  
-  // Update scroll state on scroll
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      if (window.scrollY > 50) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
     };
-    
+
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
-  
-  // Close mobile menu when route changes
-  useEffect(() => {
-    setIsMobileMenuOpen(false);
-  }, [location.pathname]);
-  
-  const navItems = [
-    { name: 'Home', href: '/' },
-    { name: 'About', href: '/about' },
-    { name: 'Services', href: '/services' },
-    { name: 'Our Work', href: '/work' },
-    { name: 'Insights', href: '/insights' },
-  ];
-  
+
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(!mobileMenuOpen);
+  };
+
+  const closeMobileMenu = () => {
+    setMobileMenuOpen(false);
+  };
+
   return (
-    <header
-      className={cn(
-        'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
-        isScrolled ? 'py-3 bg-white/90 backdrop-blur-md shadow-sm' : 'py-5 bg-transparent'
-      )}
-    >
+    <header className={cn(
+      "sticky top-0 z-50 w-full border-b border-gray-100 bg-white/80 backdrop-blur-md transition-all",
+      scrolled ? "shadow-sm py-3" : "py-4"
+    )}>
       <div className="container px-4 mx-auto max-w-7xl">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center z-10">
-            <img 
-              src="/lovable-uploads/0844fa11-deda-490d-88d1-0f95f51ce885.png" 
-              alt="SBuilsSolns Logo" 
-              className="h-10" 
-            />
+          <Link to="/" className="flex items-center">
+            <span className="font-bold text-xl tracking-tight">
+              SBuild
+            </span>
           </Link>
-          
+
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
-            {navItems.map((item) => (
-              <Link
-                key={item.name}
-                to={item.href}
-                className={cn(
-                  'text-sm font-medium transition-colors',
-                  location.pathname === item.href
-                    ? 'text-sbuild'
-                    : 'text-muted-foreground hover:text-sbuild'
-                )}
-              >
-                {item.name}
-              </Link>
-            ))}
+          <nav className="hidden md:flex md:items-center md:space-x-6">
+            <Link to="/about" className="text-lg font-medium hover:text-sbuild transition-colors">
+              About
+            </Link>
+            <Link to="/services" className="text-lg font-medium hover:text-sbuild transition-colors">
+              Services
+            </Link>
+            <Link to="/work" className="text-lg font-medium hover:text-sbuild transition-colors">
+              Work
+            </Link>
+            <Link to="/insights" className="text-lg font-medium hover:text-sbuild transition-colors">
+              Insights
+            </Link>
+            <Link to="/contact" className="text-lg font-medium hover:text-sbuild transition-colors">
+              Contact
+            </Link>
           </nav>
-          
-          {/* Call to Action */}
-          <div className="hidden md:flex items-center space-x-4">
-            <Link to="/contact">
-              <Button className="bg-sbuild hover:bg-sbuild/90">Contact Us</Button>
-            </Link>
-          </div>
-          
-          {/* Mobile Menu Button */}
-          <button
-            className="md:hidden z-50"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-label="Toggle Menu"
+
+          {/* Mobile Navigation Toggle */}
+          <button 
+            onClick={toggleMobileMenu}
+            className="p-2 md:hidden"
+            aria-label="Toggle mobile menu"
           >
-            {isMobileMenuOpen ? (
-              <X className="h-6 w-6 text-foreground" />
-            ) : (
-              <Menu className="h-6 w-6 text-foreground" />
-            )}
+            {mobileMenuOpen ? <X /> : <Menu />}
           </button>
-          
-          {/* Mobile Menu */}
-          <div
-            className={cn(
-              'fixed inset-0 bg-white/95 z-40 flex flex-col justify-center items-center space-y-8 transition-all duration-300 md:hidden',
-              isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'
-            )}
-          >
-            {navItems.map((item) => (
-              <Link
-                key={item.name}
-                to={item.href}
-                className={cn(
-                  'text-lg font-medium transition-colors',
-                  location.pathname === item.href
-                    ? 'text-sbuild'
-                    : 'text-gray-800 hover:text-sbuild'
-                )}
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                {item.name}
-              </Link>
-            ))}
-            <Link to="/contact" onClick={() => setIsMobileMenuOpen(false)}>
-              <Button className="mt-4 bg-sbuild hover:bg-sbuild/90">Contact Us</Button>
-            </Link>
-          </div>
         </div>
+      </div>
+
+      {/* Mobile Menu - Fixed this to ensure links are visible */}
+      <div className={cn(
+        "md:hidden bg-white border-t border-gray-100 absolute left-0 right-0 shadow-md transition-all duration-300 ease-in-out overflow-hidden",
+        mobileMenuOpen ? "max-h-[500px] opacity-100 z-50" : "max-h-0 opacity-0 -z-10"
+      )}>
+        <nav className="container px-4 py-4 mx-auto max-w-7xl">
+          <ul className="space-y-4">
+            <li>
+              <Link 
+                to="/about" 
+                className="text-lg font-medium hover:text-sbuild transition-colors block py-2"
+                onClick={closeMobileMenu}
+              >
+                About
+              </Link>
+            </li>
+            <li>
+              <Link 
+                to="/services" 
+                className="text-lg font-medium hover:text-sbuild transition-colors block py-2"
+                onClick={closeMobileMenu}
+              >
+                Services
+              </Link>
+            </li>
+            <li>
+              <Link 
+                to="/work" 
+                className="text-lg font-medium hover:text-sbuild transition-colors block py-2"
+                onClick={closeMobileMenu}
+              >
+                Work
+              </Link>
+            </li>
+            <li>
+              <Link 
+                to="/insights" 
+                className="text-lg font-medium hover:text-sbuild transition-colors block py-2"
+                onClick={closeMobileMenu}
+              >
+                Insights
+              </Link>
+            </li>
+            <li>
+              <Link 
+                to="/contact" 
+                className="text-lg font-medium hover:text-sbuild transition-colors block py-2"
+                onClick={closeMobileMenu}
+              >
+                Contact
+              </Link>
+            </li>
+          </ul>
+        </nav>
       </div>
     </header>
   );
