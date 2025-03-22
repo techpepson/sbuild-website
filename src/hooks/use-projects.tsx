@@ -15,8 +15,11 @@ export type Project = {
 };
 
 export function useProjects(category?: string) {
+  // Ensure category is a stable value for query key
+  const categoryKey = category || 'all';
+  
   return useQuery({
-    queryKey: ['projects', category],
+    queryKey: ['projects', categoryKey],
     queryFn: async (): Promise<Project[]> => {
       let query = supabase.from('projects').select('*');
       
