@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { cn } from '@/lib/utils';
@@ -129,75 +128,89 @@ const ProjectFilters = ({ activeFilter, onFilterChange }: {
   );
 };
 
-// Projects grid component
+// Individual project card component to fix the hooks issue
+const ProjectCard = ({ project, onProjectClick, index }: { 
+  project: any, 
+  onProjectClick: (id: string) => void,
+  index: number
+}) => {
+  const [ref, inView] = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
+  
+  return (
+    <div
+      key={project.id}
+      ref={ref}
+      className={cn(
+        "group overflow-hidden rounded-xl bg-white shadow-sm border border-gray-100 transition-all hover:-translate-y-1 hover:shadow-md",
+        "transition-all duration-500 transform",
+        inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+      )}
+    >
+      <div className="relative h-56 overflow-hidden">
+        <div className={cn(
+          "absolute inset-0 bg-gradient-to-br opacity-60 group-hover:opacity-70 transition-opacity",
+          project.gradient
+        )}></div>
+        <img 
+          src={project.image_url} 
+          alt={project.title} 
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+        />
+        <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium">
+          {project.category}
+        </div>
+        <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium">
+          {project.year}
+        </div>
+      </div>
+      
+      <div className="p-6">
+        <h3 className="text-xl font-display font-semibold mb-1">{project.title}</h3>
+        <p className="text-sbuild text-sm mb-3">Client: {project.client}</p>
+        <p className="text-muted-foreground mb-4">{project.description}</p>
+        
+        <h4 className="font-medium text-sm uppercase tracking-wider mb-3">Key Results</h4>
+        <ul className="space-y-2 mb-6">
+          {project.results.slice(0, 2).map((result: string, index: number) => (
+            <li key={index} className="flex items-start text-sm">
+              <span className="text-sbuild mr-2">•</span>
+              {result}
+            </li>
+          ))}
+          {project.results.length > 2 && (
+            <li className="text-sm text-sbuild">+ {project.results.length - 2} more results</li>
+          )}
+        </ul>
+        
+        <button 
+          onClick={() => onProjectClick(project.id)}
+          className="inline-flex items-center text-sbuild hover:underline"
+        >
+          View Case Study <ExternalLink className="ml-1 h-4 w-4" />
+        </button>
+      </div>
+    </div>
+  );
+};
+
+// Projects grid component - fixed to avoid calling hooks in a loop
 const ProjectsGrid = ({ projects, onProjectClick }: { 
   projects: any[], 
   onProjectClick: (id: string) => void 
 }) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {projects.map((project) => {
-        const [ref, inView] = useInView({
-          triggerOnce: true,
-          threshold: 0.1,
-        });
-        
-        return (
-          <div
-            key={project.id}
-            ref={ref}
-            className={cn(
-              "group overflow-hidden rounded-xl bg-white shadow-sm border border-gray-100 transition-all hover:-translate-y-1 hover:shadow-md",
-              "transition-all duration-500 transform",
-              inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-            )}
-          >
-            <div className="relative h-56 overflow-hidden">
-              <div className={cn(
-                "absolute inset-0 bg-gradient-to-br opacity-60 group-hover:opacity-70 transition-opacity",
-                project.gradient
-              )}></div>
-              <img 
-                src={project.image_url} 
-                alt={project.title} 
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-              />
-              <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium">
-                {project.category}
-              </div>
-              <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium">
-                {project.year}
-              </div>
-            </div>
-            
-            <div className="p-6">
-              <h3 className="text-xl font-display font-semibold mb-1">{project.title}</h3>
-              <p className="text-sbuild text-sm mb-3">Client: {project.client}</p>
-              <p className="text-muted-foreground mb-4">{project.description}</p>
-              
-              <h4 className="font-medium text-sm uppercase tracking-wider mb-3">Key Results</h4>
-              <ul className="space-y-2 mb-6">
-                {project.results.slice(0, 2).map((result: string, index: number) => (
-                  <li key={index} className="flex items-start text-sm">
-                    <span className="text-sbuild mr-2">•</span>
-                    {result}
-                  </li>
-                ))}
-                {project.results.length > 2 && (
-                  <li className="text-sm text-sbuild">+ {project.results.length - 2} more results</li>
-                )}
-              </ul>
-              
-              <button 
-                onClick={() => onProjectClick(project.id)}
-                className="inline-flex items-center text-sbuild hover:underline"
-              >
-                View Case Study <ExternalLink className="ml-1 h-4 w-4" />
-              </button>
-            </div>
-          </div>
-        );
-      })}
+      {projects.map((project, index) => (
+        <ProjectCard
+          key={project.id}
+          project={project}
+          onProjectClick={onProjectClick}
+          index={index}
+        />
+      ))}
     </div>
   );
 };
@@ -209,13 +222,11 @@ const Work = () => {
   const [activeFilter, setActiveFilter] = useState(initialCategory);
   
   useEffect(() => {
-    // Scroll to top when component mounts
     window.scrollTo(0, 0);
   }, []);
 
   useEffect(() => {
     console.log(`Setting active filter: ${activeFilter}`);
-    // Update URL when filter changes
     if (activeFilter === 'all') {
       searchParams.delete('category');
     } else {
@@ -408,3 +419,4 @@ const Work = () => {
 };
 
 export default Work;
+
