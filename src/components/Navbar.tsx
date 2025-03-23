@@ -42,13 +42,14 @@ const Navbar = () => {
     >
       <div className="container px-4 mx-auto max-w-7xl">
         <div className="flex items-center justify-between">
-          {/* Logo */}
+          {/* Logo - Updated to use the same logo as footer */}
           <Link to="/" className="flex items-center">
             <div className="flex items-center gap-2">
-              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M22.5 4C18.5 4 15 6.5 15 10.5C15 14.5 11.5 17 7.5 17C3.5 17 0 19.5 0 23.5C0 27.5 3.5 30 7.5 30C11.5 30 15 27.5 15 23.5C15 19.5 18.5 17 22.5 17C26.5 17 30 14.5 30 10.5C30 6.5 26.5 4 22.5 4Z" fill="#059669"/>
-              </svg>
-              <span className="font-bold text-xl tracking-tight">SBuild</span>
+              <img 
+                src="/lovable-uploads/0844fa11-deda-490d-88d1-0f95f51ce885.png" 
+                alt="SBuild Solutions Logo" 
+                className="h-10" 
+              />
             </div>
           </Link>
 

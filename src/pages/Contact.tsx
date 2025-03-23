@@ -57,30 +57,6 @@ const ContactPage = () => {
     setSubmitting(false);
   };
 
-  const officeLocations = [
-    {
-      city: "San Francisco",
-      address: "123 Tech Blvd, San Francisco, CA 94105",
-      phone: "+1 (415) 555-0123",
-      email: "sf@sbuild.com",
-      mapUrl: "https://maps.google.com/?q=San+Francisco"
-    },
-    {
-      city: "New York",
-      address: "456 Digital Ave, New York, NY 10001",
-      phone: "+1 (212) 555-0456",
-      email: "nyc@sbuild.com",
-      mapUrl: "https://maps.google.com/?q=New+York"
-    },
-    {
-      city: "London",
-      address: "78 Tech Square, London EC1V 0AZ, UK",
-      phone: "+44 20 7946 0789",
-      email: "london@sbuild.com",
-      mapUrl: "https://maps.google.com/?q=London"
-    }
-  ];
-
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
@@ -273,7 +249,7 @@ const ContactPage = () => {
                 </Card>
               </div>
               
-              {/* Contact Information */}
+              {/* Contact Information - Replaced the entire Global Presence section */}
               <div 
                 ref={refRight}
                 className={cn(
@@ -284,57 +260,11 @@ const ContactPage = () => {
                 <div className="space-y-8">
                   <div>
                     <h2 className="text-2xl md:text-3xl font-display font-semibold tracking-tight mb-4">
-                      Our Global Presence
+                      Get in Touch
                     </h2>
                     <p className="text-muted-foreground mb-6">
-                      With offices worldwide, we're always close to our clients. Feel free to visit us or get in touch through your preferred channel.
+                      We'd love to hear from you. Feel free to reach out through your preferred channel or visit our office.
                     </p>
-                  </div>
-                  
-                  <div className="grid grid-cols-1 gap-6">
-                    {officeLocations.map((office, index) => (
-                      <Card 
-                        key={office.city} 
-                        className={cn(
-                          "overflow-hidden shadow-sm hover:shadow-md transition-all border border-gray-100/80",
-                          "transition-all duration-500 transform",
-                          inViewRight ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10",
-                          `delay-${index * 100}`
-                        )}
-                      >
-                        <CardContent className="p-6">
-                          <div className="flex items-start">
-                            <MapPin className="h-5 w-5 text-sbuild mr-3 mt-1 flex-shrink-0" />
-                            <div>
-                              <h3 className="text-lg font-semibold mb-2">{office.city} Office</h3>
-                              <p className="text-muted-foreground mb-4">{office.address}</p>
-                              
-                              <div className="space-y-2">
-                                <div className="flex items-center">
-                                  <Phone className="h-4 w-4 text-muted-foreground mr-2" />
-                                  <span>{office.phone}</span>
-                                </div>
-                                <div className="flex items-center">
-                                  <Mail className="h-4 w-4 text-muted-foreground mr-2" />
-                                  <span>{office.email}</span>
-                                </div>
-                              </div>
-                              
-                              <div className="mt-4">
-                                <a 
-                                  href={office.mapUrl} 
-                                  target="_blank" 
-                                  rel="noopener noreferrer"
-                                  className="text-sbuild hover:underline inline-flex items-center text-sm font-medium"
-                                >
-                                  View on Map <ArrowRight className="ml-1 h-3 w-3" />
-                                </a>
-                              </div>
-                            </div>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    ))}
                   </div>
                   
                   <div className="mt-8 bg-gradient-to-r from-sbuild/10 to-cyan-500/10 rounded-xl p-6">
@@ -433,19 +363,19 @@ const ContactPage = () => {
           </div>
         </section>
 
-        {/* Map Section */}
+        {/* Map Section - Updated location to Ghana North Legon Papa's Pizza */}
         <section className="py-16">
           <div className="container px-4 mx-auto max-w-7xl">
             <div className="rounded-xl overflow-hidden shadow-md border border-gray-100/80 h-[400px]">
               <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d25292.88215895483!2d-122.4292889!3d37.7749295!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80859a6d00690021%3A0x4a501367f076adff!2sSan%20Francisco%2C%20CA!5e0!3m2!1sen!2sus!4v1652672408978!5m2!1sen!2sus" 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3970.4954901440593!2d-0.18861502424054882!3d5.656700333271369!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xfdf9c7ebaeaaaab%3A0xd78257e67498c1f0!2sPapa&#39;s%20Pizza%20North%20Legon!5e0!3m2!1sen!2sgh!4v1696969347244!5m2!1sen!2sgh" 
                 width="100%" 
                 height="100%" 
                 style={{ border: 0 }} 
                 allowFullScreen 
                 loading="lazy" 
                 referrerPolicy="no-referrer-when-downgrade"
-                title="SBuild Office Locations"
+                title="SBuild Office Location - Ghana North Legon"
               ></iframe>
             </div>
           </div>
