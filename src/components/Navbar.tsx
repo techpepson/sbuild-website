@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -8,6 +8,8 @@ import { Button } from '@/components/ui/button';
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const location = useLocation();
+  const isHomePage = location.pathname === '/';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -39,9 +41,11 @@ const Navbar = () => {
     <header 
       className={cn(
         "sticky top-0 z-50 w-full transition-all duration-300 border-b",
-        scrolled 
-          ? "bg-white/80 backdrop-blur-md border-gray-200/20 shadow-sm py-3" 
-          : "bg-transparent border-transparent py-4"
+        isHomePage
+          ? scrolled 
+              ? "bg-white/80 backdrop-blur-md border-gray-200/20 shadow-sm py-3" 
+              : "bg-transparent border-transparent py-4"
+          : "bg-white/80 backdrop-blur-md border-gray-200/20 shadow-sm py-3"
       )}
       style={{ "--header-height": scrolled ? "64px" : "80px" } as React.CSSProperties}
     >
@@ -64,31 +68,41 @@ const Navbar = () => {
               <div className="flex space-x-8">
                 <Link to="/" className={cn(
                   "text-base font-medium transition-colors",
-                  scrolled ? "text-gray-800 hover:text-sbuild" : "text-white hover:text-white/80"
+                  isHomePage
+                    ? scrolled ? "text-gray-800 hover:text-sbuild" : "text-white hover:text-white/80"
+                    : "text-gray-800 hover:text-sbuild"
                 )}>
                   Home
                 </Link>
                 <Link to="/about" className={cn(
                   "text-base font-medium transition-colors",
-                  scrolled ? "text-gray-800 hover:text-sbuild" : "text-white hover:text-white/80"
+                  isHomePage
+                    ? scrolled ? "text-gray-800 hover:text-sbuild" : "text-white hover:text-white/80"
+                    : "text-gray-800 hover:text-sbuild"
                 )}>
                   About
                 </Link>
                 <Link to="/services" className={cn(
                   "text-base font-medium transition-colors",
-                  scrolled ? "text-gray-800 hover:text-sbuild" : "text-white hover:text-white/80"
+                  isHomePage
+                    ? scrolled ? "text-gray-800 hover:text-sbuild" : "text-white hover:text-white/80"
+                    : "text-gray-800 hover:text-sbuild"
                 )}>
                   Services
                 </Link>
                 <Link to="/work" className={cn(
                   "text-base font-medium transition-colors",
-                  scrolled ? "text-gray-800 hover:text-sbuild" : "text-white hover:text-white/80"
+                  isHomePage
+                    ? scrolled ? "text-gray-800 hover:text-sbuild" : "text-white hover:text-white/80"
+                    : "text-gray-800 hover:text-sbuild"
                 )}>
                   Our Work
                 </Link>
                 <Link to="/insights" className={cn(
                   "text-base font-medium transition-colors",
-                  scrolled ? "text-gray-800 hover:text-sbuild" : "text-white hover:text-white/80"
+                  isHomePage
+                    ? scrolled ? "text-gray-800 hover:text-sbuild" : "text-white hover:text-white/80"
+                    : "text-gray-800 hover:text-sbuild"
                 )}>
                   Insights
                 </Link>
@@ -104,7 +118,10 @@ const Navbar = () => {
           {/* Mobile Navigation Toggle */}
           <button 
             onClick={toggleMobileMenu}
-            className="p-2 md:hidden text-white"
+            className={cn(
+              "p-2 md:hidden",
+              isHomePage && !scrolled ? "text-white" : "text-gray-800"
+            )}
             aria-label="Toggle mobile menu"
           >
             {mobileMenuOpen ? <X /> : <Menu />}
@@ -116,7 +133,7 @@ const Navbar = () => {
       <div 
         className={cn(
           "absolute left-0 right-0 md:hidden backdrop-blur-md border-t shadow-md z-40 transition-all duration-300 ease-in-out",
-          scrolled ? "bg-white/90 border-gray-200/20" : "bg-black/80 border-white/10",
+          isHomePage && !scrolled ? "bg-black/80 border-white/10" : "bg-white/90 border-gray-200/20",
           mobileMenuOpen ? "max-h-[400px] opacity-100 visible" : "max-h-0 opacity-0 invisible overflow-hidden"
         )}
       >
@@ -127,7 +144,7 @@ const Navbar = () => {
                 to="/" 
                 className={cn(
                   "text-base font-medium block py-2 transition-colors",
-                  scrolled ? "text-gray-800 hover:text-sbuild" : "text-white hover:text-white/80"
+                  isHomePage && !scrolled ? "text-white hover:text-white/80" : "text-gray-800 hover:text-sbuild"
                 )}
                 onClick={closeMobileMenu}
               >
@@ -139,7 +156,7 @@ const Navbar = () => {
                 to="/about" 
                 className={cn(
                   "text-base font-medium block py-2 transition-colors",
-                  scrolled ? "text-gray-800 hover:text-sbuild" : "text-white hover:text-white/80"
+                  isHomePage && !scrolled ? "text-white hover:text-white/80" : "text-gray-800 hover:text-sbuild"
                 )}
                 onClick={closeMobileMenu}
               >
@@ -151,7 +168,7 @@ const Navbar = () => {
                 to="/services" 
                 className={cn(
                   "text-base font-medium block py-2 transition-colors",
-                  scrolled ? "text-gray-800 hover:text-sbuild" : "text-white hover:text-white/80"
+                  isHomePage && !scrolled ? "text-white hover:text-white/80" : "text-gray-800 hover:text-sbuild"
                 )}
                 onClick={closeMobileMenu}
               >
@@ -163,7 +180,7 @@ const Navbar = () => {
                 to="/work" 
                 className={cn(
                   "text-base font-medium block py-2 transition-colors",
-                  scrolled ? "text-gray-800 hover:text-sbuild" : "text-white hover:text-white/80"
+                  isHomePage && !scrolled ? "text-white hover:text-white/80" : "text-gray-800 hover:text-sbuild"
                 )}
                 onClick={closeMobileMenu}
               >
@@ -175,7 +192,7 @@ const Navbar = () => {
                 to="/insights" 
                 className={cn(
                   "text-base font-medium block py-2 transition-colors",
-                  scrolled ? "text-gray-800 hover:text-sbuild" : "text-white hover:text-white/80"
+                  isHomePage && !scrolled ? "text-white hover:text-white/80" : "text-gray-800 hover:text-sbuild"
                 )}
                 onClick={closeMobileMenu}
               >
