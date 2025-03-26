@@ -11,7 +11,10 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 50) {
+      // Calculate hero section height (approximate)
+      const heroHeight = window.innerHeight * 0.9; // 90% of viewport height
+      
+      if (window.scrollY > heroHeight) {
         setScrolled(true);
       } else {
         setScrolled(false);
@@ -35,8 +38,10 @@ const Navbar = () => {
   return (
     <header 
       className={cn(
-        "sticky top-0 z-50 w-full border-b border-white/10 bg-black/40 backdrop-blur-md transition-all",
-        scrolled ? "shadow-lg py-3" : "py-4"
+        "sticky top-0 z-50 w-full transition-all duration-300 border-b",
+        scrolled 
+          ? "bg-white/80 backdrop-blur-md border-gray-200/20 shadow-sm py-3" 
+          : "bg-transparent border-transparent py-4"
       )}
       style={{ "--header-height": scrolled ? "64px" : "80px" } as React.CSSProperties}
     >
@@ -57,19 +62,34 @@ const Navbar = () => {
           <div className="hidden md:flex md:items-center md:justify-between md:flex-1">
             <nav className="flex-1 flex justify-center">
               <div className="flex space-x-8">
-                <Link to="/" className="text-base font-medium text-white hover:text-sbuild transition-colors">
+                <Link to="/" className={cn(
+                  "text-base font-medium transition-colors",
+                  scrolled ? "text-gray-800 hover:text-sbuild" : "text-white hover:text-white/80"
+                )}>
                   Home
                 </Link>
-                <Link to="/about" className="text-base font-medium text-white hover:text-sbuild transition-colors">
+                <Link to="/about" className={cn(
+                  "text-base font-medium transition-colors",
+                  scrolled ? "text-gray-800 hover:text-sbuild" : "text-white hover:text-white/80"
+                )}>
                   About
                 </Link>
-                <Link to="/services" className="text-base font-medium text-white hover:text-sbuild transition-colors">
+                <Link to="/services" className={cn(
+                  "text-base font-medium transition-colors",
+                  scrolled ? "text-gray-800 hover:text-sbuild" : "text-white hover:text-white/80"
+                )}>
                   Services
                 </Link>
-                <Link to="/work" className="text-base font-medium text-white hover:text-sbuild transition-colors">
+                <Link to="/work" className={cn(
+                  "text-base font-medium transition-colors",
+                  scrolled ? "text-gray-800 hover:text-sbuild" : "text-white hover:text-white/80"
+                )}>
                   Our Work
                 </Link>
-                <Link to="/insights" className="text-base font-medium text-white hover:text-sbuild transition-colors">
+                <Link to="/insights" className={cn(
+                  "text-base font-medium transition-colors",
+                  scrolled ? "text-gray-800 hover:text-sbuild" : "text-white hover:text-white/80"
+                )}>
                   Insights
                 </Link>
               </div>
@@ -95,7 +115,8 @@ const Navbar = () => {
       {/* Mobile Menu */}
       <div 
         className={cn(
-          "absolute left-0 right-0 md:hidden bg-black/80 backdrop-blur-md border-t border-white/10 shadow-md z-40 transition-all duration-300 ease-in-out",
+          "absolute left-0 right-0 md:hidden backdrop-blur-md border-t shadow-md z-40 transition-all duration-300 ease-in-out",
+          scrolled ? "bg-white/90 border-gray-200/20" : "bg-black/80 border-white/10",
           mobileMenuOpen ? "max-h-[400px] opacity-100 visible" : "max-h-0 opacity-0 invisible overflow-hidden"
         )}
       >
@@ -104,7 +125,10 @@ const Navbar = () => {
             <li>
               <Link 
                 to="/" 
-                className="text-base font-medium text-white hover:text-sbuild transition-colors block py-2"
+                className={cn(
+                  "text-base font-medium block py-2 transition-colors",
+                  scrolled ? "text-gray-800 hover:text-sbuild" : "text-white hover:text-white/80"
+                )}
                 onClick={closeMobileMenu}
               >
                 Home
@@ -113,7 +137,10 @@ const Navbar = () => {
             <li>
               <Link 
                 to="/about" 
-                className="text-base font-medium text-white hover:text-sbuild transition-colors block py-2"
+                className={cn(
+                  "text-base font-medium block py-2 transition-colors",
+                  scrolled ? "text-gray-800 hover:text-sbuild" : "text-white hover:text-white/80"
+                )}
                 onClick={closeMobileMenu}
               >
                 About
@@ -122,7 +149,10 @@ const Navbar = () => {
             <li>
               <Link 
                 to="/services" 
-                className="text-base font-medium text-white hover:text-sbuild transition-colors block py-2"
+                className={cn(
+                  "text-base font-medium block py-2 transition-colors",
+                  scrolled ? "text-gray-800 hover:text-sbuild" : "text-white hover:text-white/80"
+                )}
                 onClick={closeMobileMenu}
               >
                 Services
@@ -131,7 +161,10 @@ const Navbar = () => {
             <li>
               <Link 
                 to="/work" 
-                className="text-base font-medium text-white hover:text-sbuild transition-colors block py-2"
+                className={cn(
+                  "text-base font-medium block py-2 transition-colors",
+                  scrolled ? "text-gray-800 hover:text-sbuild" : "text-white hover:text-white/80"
+                )}
                 onClick={closeMobileMenu}
               >
                 Our Work
@@ -140,7 +173,10 @@ const Navbar = () => {
             <li>
               <Link 
                 to="/insights" 
-                className="text-base font-medium text-white hover:text-sbuild transition-colors block py-2"
+                className={cn(
+                  "text-base font-medium block py-2 transition-colors",
+                  scrolled ? "text-gray-800 hover:text-sbuild" : "text-white hover:text-white/80"
+                )}
                 onClick={closeMobileMenu}
               >
                 Insights

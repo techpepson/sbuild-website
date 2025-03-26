@@ -39,7 +39,7 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen smooth-scroll bg-black">
+    <div className="min-h-screen smooth-scroll bg-white">
       <Navbar />
       <main>
         <Hero />
