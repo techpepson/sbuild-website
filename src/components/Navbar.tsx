@@ -35,14 +35,14 @@ const Navbar = () => {
   return (
     <header 
       className={cn(
-        "sticky top-0 z-50 w-full border-b border-gray-100 bg-white/80 backdrop-blur-md transition-all",
-        scrolled ? "shadow-sm py-3" : "py-4"
+        "sticky top-0 z-50 w-full border-b border-white/10 bg-black/40 backdrop-blur-md transition-all",
+        scrolled ? "shadow-lg py-3" : "py-4"
       )}
       style={{ "--header-height": scrolled ? "64px" : "80px" } as React.CSSProperties}
     >
       <div className="container px-4 mx-auto max-w-7xl">
         <div className="flex items-center justify-between">
-          {/* Logo - Updated to use the same logo as footer */}
+          {/* Logo */}
           <Link to="/" className="flex items-center">
             <div className="flex items-center gap-2">
               <img 
@@ -57,19 +57,19 @@ const Navbar = () => {
           <div className="hidden md:flex md:items-center md:justify-between md:flex-1">
             <nav className="flex-1 flex justify-center">
               <div className="flex space-x-8">
-                <Link to="/" className="text-base font-medium text-gray-700 hover:text-sbuild transition-colors">
+                <Link to="/" className="text-base font-medium text-white hover:text-sbuild transition-colors">
                   Home
                 </Link>
-                <Link to="/about" className="text-base font-medium text-gray-700 hover:text-sbuild transition-colors">
+                <Link to="/about" className="text-base font-medium text-white hover:text-sbuild transition-colors">
                   About
                 </Link>
-                <Link to="/services" className="text-base font-medium text-gray-700 hover:text-sbuild transition-colors">
+                <Link to="/services" className="text-base font-medium text-white hover:text-sbuild transition-colors">
                   Services
                 </Link>
-                <Link to="/work" className="text-base font-medium text-gray-700 hover:text-sbuild transition-colors">
+                <Link to="/work" className="text-base font-medium text-white hover:text-sbuild transition-colors">
                   Our Work
                 </Link>
-                <Link to="/insights" className="text-base font-medium text-gray-700 hover:text-sbuild transition-colors">
+                <Link to="/insights" className="text-base font-medium text-white hover:text-sbuild transition-colors">
                   Insights
                 </Link>
               </div>
@@ -84,7 +84,7 @@ const Navbar = () => {
           {/* Mobile Navigation Toggle */}
           <button 
             onClick={toggleMobileMenu}
-            className="p-2 md:hidden"
+            className="p-2 md:hidden text-white"
             aria-label="Toggle mobile menu"
           >
             {mobileMenuOpen ? <X /> : <Menu />}
@@ -95,7 +95,7 @@ const Navbar = () => {
       {/* Mobile Menu */}
       <div 
         className={cn(
-          "absolute left-0 right-0 md:hidden bg-white border-t border-gray-100 shadow-md z-40 transition-all duration-300 ease-in-out",
+          "absolute left-0 right-0 md:hidden bg-black/80 backdrop-blur-md border-t border-white/10 shadow-md z-40 transition-all duration-300 ease-in-out",
           mobileMenuOpen ? "max-h-[400px] opacity-100 visible" : "max-h-0 opacity-0 invisible overflow-hidden"
         )}
       >
@@ -104,7 +104,7 @@ const Navbar = () => {
             <li>
               <Link 
                 to="/" 
-                className="text-base font-medium text-gray-700 hover:text-sbuild transition-colors block py-2"
+                className="text-base font-medium text-white hover:text-sbuild transition-colors block py-2"
                 onClick={closeMobileMenu}
               >
                 Home
@@ -113,7 +113,7 @@ const Navbar = () => {
             <li>
               <Link 
                 to="/about" 
-                className="text-base font-medium text-gray-700 hover:text-sbuild transition-colors block py-2"
+                className="text-base font-medium text-white hover:text-sbuild transition-colors block py-2"
                 onClick={closeMobileMenu}
               >
                 About
@@ -122,7 +122,7 @@ const Navbar = () => {
             <li>
               <Link 
                 to="/services" 
-                className="text-base font-medium text-gray-700 hover:text-sbuild transition-colors block py-2"
+                className="text-base font-medium text-white hover:text-sbuild transition-colors block py-2"
                 onClick={closeMobileMenu}
               >
                 Services
@@ -131,7 +131,7 @@ const Navbar = () => {
             <li>
               <Link 
                 to="/work" 
-                className="text-base font-medium text-gray-700 hover:text-sbuild transition-colors block py-2"
+                className="text-base font-medium text-white hover:text-sbuild transition-colors block py-2"
                 onClick={closeMobileMenu}
               >
                 Our Work
@@ -140,7 +140,7 @@ const Navbar = () => {
             <li>
               <Link 
                 to="/insights" 
-                className="text-base font-medium text-gray-700 hover:text-sbuild transition-colors block py-2"
+                className="text-base font-medium text-white hover:text-sbuild transition-colors block py-2"
                 onClick={closeMobileMenu}
               >
                 Insights
