@@ -16,7 +16,7 @@ const Navbar = () => {
       // Calculate hero section height (approximate)
       const heroHeight = window.innerHeight * 0.9; // 90% of viewport height
       
-      if (window.scrollY > heroHeight) {
+      if (window.scrollY > 50) {
         setScrolled(true);
       } else {
         setScrolled(false);
@@ -40,7 +40,7 @@ const Navbar = () => {
   return (
     <header 
       className={cn(
-        "sticky top-0 z-50 w-full transition-all duration-300 border-b",
+        "fixed top-0 z-50 w-full transition-all duration-300 border-b",
         isHomePage
           ? scrolled 
               ? "bg-white/80 backdrop-blur-md border-gray-200/20 shadow-sm py-3" 
