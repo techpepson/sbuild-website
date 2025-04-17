@@ -3,7 +3,6 @@ import { Button } from '@/components/ui/button';
 import { ArrowRight, ArrowUpRight, LineChart, Package, Shield, Sparkles, Zap, LifeBuoy } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Link } from 'react-router-dom';
-
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -12,12 +11,10 @@ const Hero = () => {
     y: 0
   });
   const heroRef = useRef<HTMLElement>(null);
-
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsVisible(true);
     }, 100);
-
     const handleScroll = () => {
       if (heroRef.current) {
         const scrollPosition = window.scrollY;
@@ -26,7 +23,6 @@ const Hero = () => {
         setScrollProgress(progress);
       }
     };
-
     const handleMouseMove = (e: MouseEvent) => {
       if (heroRef.current) {
         const {
@@ -37,17 +33,14 @@ const Hero = () => {
           width,
           height
         } = heroRef.current.getBoundingClientRect();
-
         const x = (clientX / width - 0.5) * 2;
         const y = (clientY / height - 0.5) * 2;
-
         setMousePosition({
           x,
           y
         });
       }
     };
-
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('mousemove', handleMouseMove);
     return () => {
@@ -56,16 +49,13 @@ const Hero = () => {
       window.removeEventListener('mousemove', handleMouseMove);
     };
   }, []);
-
   const parallaxOffset = scrollProgress * 100;
   const contentOpacity = 1 - scrollProgress * 1.5;
-
   const mouseParallax = (strength: number) => ({
     transform: `translate(${mousePosition.x * strength}px, ${mousePosition.y * strength}px)`,
     transition: 'transform 0.1s ease-out'
   });
-
-  return <section ref={heroRef} className="relative pt-32 md:pt-40 pb-20 overflow-hidden min-h-screen flex items-center bg-gradient-to-br from-white via-blue-50 to-white">
+  return <section ref={heroRef} className="relative pt-32 md:pt-40 pb-20 overflow-hidden min-h-screen flex items-center ">
       <div className="absolute inset-0 z-0" style={{
       transform: `translateY(${parallaxOffset * 0.4}px)`,
       transition: 'transform 0.1s ease-out',
@@ -152,7 +142,6 @@ const Hero = () => {
       </div>
     </section>;
 };
-
 const Sparkle = ({
   count,
   color,
@@ -182,5 +171,4 @@ const Sparkle = ({
   });
   return <>{sparkles}</>;
 };
-
 export default Hero;
