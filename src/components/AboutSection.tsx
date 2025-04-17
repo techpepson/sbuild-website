@@ -1,32 +1,19 @@
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, CheckCircle2 } from 'lucide-react';
 import { useInView } from 'react-intersection-observer';
 import { cn } from '@/lib/utils';
-
 const AboutSection = () => {
   const [ref, inView] = useInView({
     triggerOnce: true,
-    threshold: 0.1,
+    threshold: 0.1
   });
-
-  const keyPoints = [
-    "Expertise in modern SaaS architecture and cloud-native solutions",
-    "Dedicated team of experienced developers, designers, and strategists",
-    "Focus on creating scalable, secure, and user-friendly applications",
-    "Commitment to ongoing support and continuous improvement"
-  ];
-
-  return (
-    <section ref={ref} id="about" className="py-20 overflow-hidden">
+  const keyPoints = ["Expertise in modern SaaS architecture and cloud-native solutions", "Dedicated team of experienced developers, designers, and strategists", "Focus on creating scalable, secure, and user-friendly applications", "Commitment to ongoing support and continuous improvement"];
+  return <section ref={ref} id="about" className="py-20 overflow-hidden">
       <div className="container px-4 mx-auto max-w-7xl">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Image/Illustration Side */}
-          <div className={cn(
-            "relative transition-all duration-700 transform",
-            inView ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-12"
-          )}>
+          <div className={cn("relative transition-all duration-700 transform", inView ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-12")}>
             <div className="relative z-10">
               <div className="w-full aspect-square max-w-lg rounded-2xl bg-gradient-to-br from-sbuild/90 to-cyan-500/80 p-1">
                 <div className="w-full h-full rounded-xl bg-white flex items-center justify-center overflow-hidden">
@@ -49,29 +36,21 @@ const AboutSection = () => {
           </div>
           
           {/* Content Side */}
-          <div className={cn(
-            "transition-all duration-700 transform",
-            inView ? "opacity-100 translate-x-0" : "opacity-0 translate-x-12"
-          )}>
+          <div className={cn("transition-all duration-700 transform", inView ? "opacity-100 translate-x-0" : "opacity-0 translate-x-12")}>
             <h2 className="text-3xl md:text-4xl font-display font-semibold tracking-tight mb-6">
               Who We Are
             </h2>
-            <p className="text-lg text-muted-foreground mb-6">
-              SBuild Solutions is a SaaS development company specializing in cutting-edge solutions that enhance 
-              productivity, efficiency, and security for businesses worldwide.
-            </p>
+            <p className="text-lg text-muted-foreground mb-6">SBuild Solutions is a SaaS development company specializing in cutting-edge solutions that enhance productivity, efficiency, and security for businesses worldwide.</p>
             <p className="text-lg text-muted-foreground mb-6">
               We combine technical expertise with business acumen to deliver software that solves real-world challenges 
               and creates tangible value for our clients.
             </p>
             
             <div className="space-y-3 mb-8">
-              {keyPoints.map((point, index) => (
-                <div key={index} className="flex items-start">
+              {keyPoints.map((point, index) => <div key={index} className="flex items-start">
                   <CheckCircle2 className="h-6 w-6 text-sbuild mr-2 flex-shrink-0" />
                   <p>{point}</p>
-                </div>
-              ))}
+                </div>)}
             </div>
             
             <Button className="bg-sbuild hover:bg-sbuild/90">
@@ -81,8 +60,6 @@ const AboutSection = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default AboutSection;
