@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -50,7 +49,7 @@ const Footer = () => {
           <div className="lg:col-span-2">
             <Link to="/" className="flex items-center mb-6">
               <img 
-                src="/lovable-uploads/0844fa11-deda-490d-88d1-0f95f51ce885.png" 
+                src="/lovable-uploads/6befea8b-db57-4a1b-a6f6-7fc4a54b594b.png" 
                 alt="SBuild Solutions Logo" 
                 className="h-10" 
               />
