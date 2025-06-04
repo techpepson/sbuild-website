@@ -68,25 +68,29 @@ const Footer = () => {
             </p>
             <div className="flex space-x-4">
               <a
-                href="#"
+                target="_blank"
+                href="https://www.facebook.com/profile.php?id=61561514013919"
                 className="h-10 w-10 rounded-full bg-gray-100 flex items-center justify-center text-sbuild hover:bg-sbuild hover:text-white transition-colors"
               >
                 <Facebook className="h-5 w-5" />
               </a>
               <a
-                href="#"
+                target="_blank"
+                href="https://x.com/sbuildsolns"
                 className="h-10 w-10 rounded-full bg-gray-100 flex items-center justify-center text-sbuild hover:bg-sbuild hover:text-white transition-colors"
               >
                 <Twitter className="h-5 w-5" />
               </a>
               <a
-                href="#"
+                target="_blank"
+                href="https://www.instagram.com/sbuildsolns/"
                 className="h-10 w-10 rounded-full bg-gray-100 flex items-center justify-center text-sbuild hover:bg-sbuild hover:text-white transition-colors"
               >
                 <Instagram className="h-5 w-5" />
               </a>
               <a
                 href="#"
+                target="_blank"
                 className="h-10 w-10 rounded-full bg-gray-100 flex items-center justify-center text-sbuild hover:bg-sbuild hover:text-white transition-colors"
               >
                 <Linkedin className="h-5 w-5" />

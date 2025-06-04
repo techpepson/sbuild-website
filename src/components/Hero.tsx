@@ -87,7 +87,7 @@ const Hero = () => {
         }}
       >
         <img
-          src="/lovable-uploads/043b23c9-dcd4-4d28-ac4d-13194f788df1.png"
+          src="/lovable-uploads/prof-image.jpg"
           alt="Earth from space with cloud network"
           className="w-full h-full object-cover"
         />
