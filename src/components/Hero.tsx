@@ -12,6 +12,15 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Link } from "react-router-dom";
+
+const backgroundImages = [
+  "/christina-wocintechchat-com-Q80LYxv_Tbs-unsplash.jpg",
+  "/emile-perron-xrVDYZRGdw4-unsplash.jpg",
+  "/fotis-fotopoulos-LJ9KY8pIH3E-unsplash.jpg",
+  "/Image20250616135229.jpg",
+  "/Image20250616135237.jpg",
+];
+
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -20,6 +29,9 @@ const Hero = () => {
     y: 0,
   });
   const heroRef = useRef<HTMLElement>(null);
+  const [bgIndex, setBgIndex] = useState(0);
+  const bgTimeout = useRef<NodeJS.Timeout | null>(null);
+
   useEffect(() => {
     // Initial page load animation
     const timer = setTimeout(() => {
@@ -54,12 +66,19 @@ const Hero = () => {
     };
     window.addEventListener("scroll", handleScroll);
     window.addEventListener("mousemove", handleMouseMove);
+
+    // Background slider
+    if (bgTimeout.current) clearTimeout(bgTimeout.current);
+    bgTimeout.current = setTimeout(() => {
+      setBgIndex((prev) => (prev + 1) % backgroundImages.length);
+    }, 4000);
     return () => {
       clearTimeout(timer);
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("mousemove", handleMouseMove);
+      if (bgTimeout.current) clearTimeout(bgTimeout.current);
     };
-  }, []);
+  }, [bgIndex]);
 
   // Calculate parallax and opacity effects based on scroll progress
   const parallaxOffset = scrollProgress * 100; // pixels to move elements
@@ -77,21 +96,23 @@ const Hero = () => {
       ref={heroRef}
       className="relative pt-32 md:pt-40 pb-20 overflow-hidden min-h-screen flex items-center"
     >
-      {/* Space-themed background image */}
-      <div
-        className="absolute inset-0 z-0"
-        style={{
-          transform: `translateY(${parallaxOffset * 0.4}px)`,
-          // slower parallax for background
-          transition: "transform 0.1s ease-out",
-        }}
-      >
-        <img
-          src="/lovable-uploads/prof-image.jpg"
-          alt="Earth from space with cloud network"
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-transparent"></div>
+      {/* Sliding background images */}
+      <div className="absolute inset-0 z-0">
+        {backgroundImages.map((img, idx) => (
+          <img
+            key={img}
+            src={img}
+            alt="Hero background"
+            className="w-full h-full object-cover absolute inset-0 transition-opacity duration-1000"
+            style={{
+              opacity: idx === bgIndex ? 1 : 0,
+              transition: "opacity 1s",
+              transform: `translateY(${parallaxOffset * 0.4}px)`,
+            }}
+            draggable={true}
+          />
+        ))}
+        <div className="absolute inset-0 bg-black/50"></div>
       </div>
 
       {/* Floating decorative elements */}
@@ -135,7 +156,7 @@ const Hero = () => {
           <div
             className={cn(
               "inline-flex items-center py-1 px-3 mb-6 text-xs font-medium rounded-full",
-              "border border-white/20 bg-white/5 text-white",
+              "border border-white/30 bg-white/10 text-white",
               "transition-all duration-700 ease-out",
               isVisible
                 ? "opacity-100 transform-none"
@@ -163,7 +184,7 @@ const Hero = () => {
           {/* Subheadline */}
           <p
             className={cn(
-              "text-md md:text-xl text-white/80 mb-8 max-w-3xl",
+              "text-md md:text-xl text-white/90 mb-8 max-w-3xl",
               "transition-all duration-700 delay-200 ease-out",
               isVisible
                 ? "opacity-100 transform-none"
@@ -221,7 +242,7 @@ const Hero = () => {
               <h3 className="text-lg font-medium mb-2 text-white">
                 Custom Solutions
               </h3>
-              <p className="text-sm text-white/70">
+              <p className="text-sm text-white/80">
                 Tailored SaaS applications designed to meet your specific
                 business needs.
               </p>
@@ -234,7 +255,7 @@ const Hero = () => {
               <h3 className="text-lg font-medium mb-2 text-white">
                 Scalable Architecture
               </h3>
-              <p className="text-sm text-white/70">
+              <p className="text-sm text-white/80">
                 Build solutions that grow with your business, from startup to
                 enterprise.
               </p>
@@ -247,7 +268,7 @@ const Hero = () => {
               <h3 className="text-lg font-medium mb-2 text-white">
                 Enterprise Security
               </h3>
-              <p className="text-sm text-white/70">
+              <p className="text-sm text-white/80">
                 Advanced security protocols to keep your data and users
                 protected.
               </p>

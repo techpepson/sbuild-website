@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import { cn } from "@/lib/utils";
@@ -65,12 +66,6 @@ const ProjectDetails = ({
       ) : project ? (
         <div className="p-6">
           <div className="relative h-64 overflow-hidden rounded-lg mb-6">
-            <div
-              className={cn(
-                "absolute inset-0 bg-gradient-to-br opacity-60",
-                project.gradient
-              )}
-            ></div>
             <img
               src={project.image_url}
               alt={project.title}
@@ -174,12 +169,6 @@ const ProjectCard = ({
       )}
     >
       <div className="relative h-56 overflow-hidden">
-        <div
-          className={cn(
-            "absolute inset-0 bg-gradient-to-br opacity-60 group-hover:opacity-70 transition-opacity",
-            project.gradient
-          )}
-        ></div>
         <img
           src={project.image_url}
           alt={project.title}

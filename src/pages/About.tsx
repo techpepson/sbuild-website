@@ -78,10 +78,9 @@ const About = () => {
 
   const teamMembers = [
     {
-      name: "John Smith",
+      name: "Professor Solomon",
       role: "CEO & Founder",
-      image:
-        "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&auto=format&fit=crop&q=80",
+      image: "/lovable-uploads/prof-image.jpg",
     },
     {
       name: "Sarah Johnson",
@@ -216,7 +215,7 @@ const About = () => {
               >
                 <div className="relative overflow-hidden rounded-2xl border-8 border-white shadow-xl">
                   <img
-                    src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&auto=format&fit=crop&q=80"
+                    src="/black-team-2.avif"
                     alt="SBuild team"
                     className="w-full h-auto"
                   />

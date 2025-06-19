@@ -5,7 +5,7 @@ import CallToAction from "@/components/CallToAction";
 import HeroSection from "@/components/services/HeroSection";
 import ServicesList from "@/components/services/ServicesList";
 
-const Services = () => {
+const   Services = () => {
   useEffect(() => {
     // Scroll to top when component mounts
     window.scrollTo(0, 0);
