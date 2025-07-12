@@ -34,6 +34,7 @@ const Footer = () => {
         { name: "API Development", href: "/services#api" },
         { name: "UI/UX Design", href: "/services#design" },
         { name: "Maintenance & Support", href: "/services#support" },
+        { name: "Mobile App Development", href: "/services#support" },
       ],
     },
     {

@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { useInView } from "react-intersection-observer";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { ArrowRight, CheckCircle2, ChevronDown, ChevronUp } from "lucide-react";
 import { ServiceType } from "./types";
 
 interface ServiceCardProps {
@@ -11,6 +11,7 @@ interface ServiceCardProps {
 }
 
 const ServiceCard = ({ service, index }: ServiceCardProps) => {
+  const [showDetails, setShowDetails] = useState(false);
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
@@ -90,11 +91,100 @@ const ServiceCard = ({ service, index }: ServiceCardProps) => {
           ))}
         </div>
 
-        <Button className="bg-sbuild hover:bg-sbuild/90">
-          Learn More
-          <ArrowRight className="ml-2 h-4 w-4" />
+        <Button
+          className="bg-sbuild hover:bg-sbuild/90"
+          onClick={() => setShowDetails(!showDetails)}
+        >
+          {showDetails ? "Show Less" : "Learn More"}
+          {showDetails ? (
+            <ChevronUp className="ml-2 h-4 w-4" />
+          ) : (
+            <ArrowRight className="ml-2 h-4 w-4" />
+          )}
         </Button>
       </div>
+
+      {/* Detailed Content */}
+      {showDetails && service.detailedContent && (
+        <div className="lg:col-span-2 mt-12">
+          <div className="bg-gray-50 rounded-xl p-8">
+            <h3 className="text-2xl font-display font-semibold mb-6">
+              Detailed Overview
+            </h3>
+            <p className="text-lg text-muted-foreground mb-8">
+              {service.detailedContent.overview}
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {/* Benefits */}
+              <div>
+                <h4 className="text-xl font-semibold mb-4 text-sbuild">
+                  Key Benefits
+                </h4>
+                <ul className="space-y-2">
+                  {service.detailedContent.benefits.map((benefit, idx) => (
+                    <li key={idx} className="flex items-start">
+                      <CheckCircle2 className="h-5 w-5 text-sbuild mr-2 flex-shrink-0 mt-0.5" />
+                      <span>{benefit}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Process */}
+              <div>
+                <h4 className="text-xl font-semibold mb-4 text-sbuild">
+                  Our Process
+                </h4>
+                <ul className="space-y-2">
+                  {service.detailedContent.process.map((step, idx) => (
+                    <li key={idx} className="flex items-start">
+                      <div className="h-5 w-5 rounded-full bg-sbuild text-white text-xs flex items-center justify-center mr-2 flex-shrink-0 mt-0.5">
+                        {idx + 1}
+                      </div>
+                      <span>{step}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            {/* Technologies */}
+            <div className="mt-8">
+              <h4 className="text-xl font-semibold mb-4 text-sbuild">
+                Technologies We Use
+              </h4>
+              <div className="flex flex-wrap gap-2">
+                {service.detailedContent.technologies.map((tech, idx) => (
+                  <span
+                    key={idx}
+                    className="px-3 py-1 bg-white border border-gray-200 rounded-full text-sm font-medium"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* Case Studies */}
+            {service.detailedContent.caseStudies && (
+              <div className="mt-8">
+                <h4 className="text-xl font-semibold mb-4 text-sbuild">
+                  Case Studies
+                </h4>
+                <ul className="space-y-2">
+                  {service.detailedContent.caseStudies.map((study, idx) => (
+                    <li key={idx} className="flex items-start">
+                      <div className="h-2 w-2 rounded-full bg-sbuild mr-3 flex-shrink-0 mt-2" />
+                      <span>{study}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 };

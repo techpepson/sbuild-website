@@ -1,7 +1,6 @@
-
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { cn } from '@/lib/utils';
+import React from "react";
+import { Link } from "react-router-dom";
+import { cn } from "@/lib/utils";
 
 interface MobileNavLinkProps {
   to: string;
@@ -9,16 +8,32 @@ interface MobileNavLinkProps {
   isHomePage: boolean;
   scrolled: boolean;
   onClick: () => void;
+  currentPath: string;
 }
 
-const MobileNavLink = ({ to, children, isHomePage, scrolled, onClick }: MobileNavLinkProps) => {
+const MobileNavLink = ({
+  to,
+  children,
+  isHomePage,
+  scrolled,
+  onClick,
+  currentPath,
+}: MobileNavLinkProps) => {
+  const isActive = currentPath === to;
+
   return (
     <li>
-      <Link 
-        to={to} 
+      <Link
+        to={to}
         className={cn(
           "text-base font-medium block py-2 transition-colors",
-          isHomePage && !scrolled ? "text-white hover:text-white/80" : "text-gray-800 hover:text-sbuild"
+          isHomePage && !scrolled
+            ? isActive
+              ? "text-white font-semibold"
+              : "text-white hover:text-white/80"
+            : isActive
+            ? "text-sbuild font-semibold"
+            : "text-gray-800 hover:text-sbuild"
         )}
         onClick={onClick}
       >

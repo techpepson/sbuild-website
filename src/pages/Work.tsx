@@ -14,8 +14,7 @@ import {
 import Navbar from "@/components/navbar";
 import Footer from "@/components/Footer";
 import CallToAction from "@/components/CallToAction";
-import { useProjects, useProject } from "@/hooks/use-projects";
-import { useSearchParams, Link } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import {
   Drawer,
   DrawerContent,
@@ -29,76 +28,77 @@ import {
 const ProjectDetails = ({
   projectId,
   onClose,
+  projectData,
 }: {
   projectId: string | null;
   onClose: () => void;
+  projectData: any;
 }) => {
-  const { data: project, isLoading, error } = useProject(projectId || "");
+  // Find the project from our data
+  const allProjects = [
+    ...projectData.completed,
+    ...projectData["in-progress"],
+    ...projectData.future,
+  ];
+  const project = allProjects.find((p: any) => p.id === projectId);
 
-  if (!projectId) return null;
+  if (!projectId || !project) return null;
 
   return (
     <DrawerContent className="h-[85vh] overflow-y-auto">
       <DrawerHeader>
         <DrawerTitle className="text-2xl font-display font-semibold">
-          {isLoading ? "Loading project..." : project?.title}
+          {project.title}
         </DrawerTitle>
-        <DrawerDescription>
-          {isLoading ? "Please wait..." : `Client: ${project?.client}`}
-        </DrawerDescription>
+        <DrawerDescription>Client: {project.client}</DrawerDescription>
       </DrawerHeader>
 
-      {isLoading ? (
-        <div className="p-6 flex justify-center">
-          <div className="animate-pulse space-y-4 w-full">
-            <div className="h-56 bg-gray-200 rounded-lg"></div>
-            <div className="h-4 bg-gray-200 rounded w-3/4"></div>
-            <div className="h-4 bg-gray-200 rounded w-full"></div>
-            <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+      <div className="p-6">
+        <div className="relative h-64 overflow-hidden rounded-lg mb-6">
+          <img
+            src={project.image_url}
+            alt={project.title}
+            className="w-full h-full object-cover"
+          />
+        </div>
+
+        <div className="flex flex-wrap gap-2 mb-6">
+          <div className="bg-gray-100 px-3 py-1 rounded-full text-xs font-medium">
+            {project.category}
+          </div>
+          <div className="bg-gray-100 px-3 py-1 rounded-full text-xs font-medium">
+            {project.year}
+          </div>
+          <div
+            className={cn(
+              "px-3 py-1 rounded-full text-xs font-medium",
+              project.status === "completed"
+                ? "bg-green-100 text-green-800"
+                : project.status === "in-progress"
+                ? "bg-blue-100 text-blue-800"
+                : "bg-yellow-100 text-yellow-800"
+            )}
+          >
+            {project.status === "completed"
+              ? "Completed"
+              : project.status === "in-progress"
+              ? "In Progress"
+              : "Future Project"}
           </div>
         </div>
-      ) : error ? (
-        <div className="p-6 text-center">
-          <p className="text-red-500">
-            Error loading project details. Please try again.
-          </p>
-        </div>
-      ) : project ? (
-        <div className="p-6">
-          <div className="relative h-64 overflow-hidden rounded-lg mb-6">
-            <img
-              src={project.image_url}
-              alt={project.title}
-              className="w-full h-full object-cover"
-            />
-          </div>
 
-          <div className="flex flex-wrap gap-2 mb-6">
-            <div className="bg-gray-100 px-3 py-1 rounded-full text-xs font-medium">
-              {project.category}
-            </div>
-            <div className="bg-gray-100 px-3 py-1 rounded-full text-xs font-medium">
-              {project.year}
-            </div>
-          </div>
+        <p className="text-muted-foreground mb-6">{project.description}</p>
 
-          <p className="text-muted-foreground mb-6">{project.description}</p>
-
-          <h3 className="font-semibold text-lg mb-4">Key Results</h3>
-          <ul className="space-y-2 mb-8">
-            {project.results.map((result, index) => (
-              <li key={index} className="flex items-start">
-                <span className="text-sbuild mr-2 font-bold">•</span>
-                {result}
-              </li>
-            ))}
-          </ul>
-        </div>
-      ) : (
-        <div className="p-6 text-center">
-          <p>Project not found.</p>
-        </div>
-      )}
+        <h3 className="font-semibold text-lg mb-4">Key Results</h3>
+        <ul className="space-y-2 mb-8">
+          {project.results.map((result: string, index: number) => (
+            <li key={index} className="flex items-start">
+              <span className="text-sbuild mr-2 font-bold">•</span>
+              {result}
+            </li>
+          ))}
+        </ul>
+      </div>
 
       <DrawerFooter>
         <Button onClick={onClose}>Close</Button>
@@ -107,36 +107,44 @@ const ProjectDetails = ({
   );
 };
 
-// Filter component
-const ProjectFilters = ({
-  activeFilter,
-  onFilterChange,
+// Project Status Tabs component
+const ProjectStatusTabs = ({
+  activeTab,
+  onTabChange,
 }: {
-  activeFilter: string;
-  onFilterChange: (filter: string) => void;
+  activeTab: string;
+  onTabChange: (tab: string) => void;
 }) => {
-  const filters = [
-    { id: "all", label: "All Projects" },
-    { id: "analytics", label: "Analytics" },
-    { id: "management", label: "Management" },
-    { id: "fintech", label: "FinTech" },
-    { id: "ecommerce", label: "E-Commerce" },
+  const tabs = [
+    { id: "completed", label: "Completed Projects", count: 3 },
+    { id: "in-progress", label: "In Progress", count: 5 },
+    { id: "future", label: "Future Projects", count: 6 },
   ];
 
   return (
     <div className="flex flex-wrap justify-center gap-3 mb-12">
-      {filters.map((filter) => (
+      {tabs.map((tab) => (
         <button
-          key={filter.id}
-          onClick={() => onFilterChange(filter.id)}
+          key={tab.id}
+          onClick={() => onTabChange(tab.id)}
           className={cn(
-            "px-5 py-2 rounded-full text-sm font-medium transition-all",
-            activeFilter === filter.id
+            "px-6 py-3 rounded-full text-sm font-medium transition-all flex items-center gap-2",
+            activeTab === tab.id
               ? "bg-sbuild text-white shadow-md"
               : "bg-gray-100 text-gray-600 hover:bg-gray-200"
           )}
         >
-          {filter.label}
+          {tab.label}
+          <span
+            className={cn(
+              "px-2 py-0.5 rounded-full text-xs",
+              activeTab === tab.id
+                ? "bg-white/20 text-white"
+                : "bg-gray-200 text-gray-600"
+            )}
+          >
+            {tab.count}
+          </span>
         </button>
       ))}
     </div>
@@ -179,6 +187,22 @@ const ProjectCard = ({
         </div>
         <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium">
           {project.year}
+        </div>
+        <div
+          className={cn(
+            "absolute bottom-4 left-4 px-3 py-1 rounded-full text-xs font-medium",
+            project.status === "completed"
+              ? "bg-green-500 text-white"
+              : project.status === "in-progress"
+              ? "bg-blue-500 text-white"
+              : "bg-yellow-500 text-white"
+          )}
+        >
+          {project.status === "completed"
+            ? "Completed"
+            : project.status === "in-progress"
+            ? "In Progress"
+            : "Future Project"}
         </div>
       </div>
 
@@ -242,37 +266,220 @@ const ProjectsGrid = ({
 const Work = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const projectId = searchParams.get("project");
-  const initialCategory = searchParams.get("category") || "all";
-  const [activeFilter, setActiveFilter] = useState(initialCategory);
+  const [activeTab, setActiveTab] = useState("completed");
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  useEffect(() => {
-    console.log(`Setting active filter: ${activeFilter}`);
-    if (activeFilter === "all") {
-      searchParams.delete("category");
-    } else {
-      searchParams.set("category", activeFilter);
-    }
-    setSearchParams(searchParams);
-  }, [activeFilter, searchParams, setSearchParams]);
+  // Project data organized by status
+  const projectData = {
+    completed: [
+      {
+        id: "comp-1",
+        title: "SGS Alumni System",
+        client: "University of Ghana - School of Graduate Studies",
+        category: "Education",
+        year: "2024",
+        status: "completed",
+        image_url: "/sgs-image.jpg",
+        description:
+          "A comprehensive alumni management system for the School of Graduate Studies that fosters connections, shares updates, and provides resources for continued professional and academic growth.",
+        results: [
+          "Streamlined bulk enrolment of graduating postgraduate alumni",
+          "Implemented event broadcasting and job advertisement features",
+          "Enhanced alumni network engagement through donations and birthday wishes",
+          "Improved find friend functionality for better alumni connections",
+        ],
+      },
+      {
+        id: "comp-2",
+        title: "Risk Management System",
+        client: "University of Ghana - Risk Management Office",
+        category: "Risk Management",
+        year: "2024",
+        status: "completed",
+        image_url: "/risk-mgmt-image.jpg",
+        description:
+          "A comprehensive risk management system for the University of Ghana that identifies, assesses, and manages risks to protect the institution's operations and goals.",
+        results: [
+          "Enhanced risk identification and assessment capabilities",
+          "Improved collaboration with departments for policy creation",
+          "Strengthened risk-aware culture across the institution",
+          "Streamlined regular risk assessment procedures",
+        ],
+      },
+      {
+        id: "comp-3",
+        title: "SGS Accreditation Portal",
+        client: "University of Ghana - School of Graduate Studies",
+        category: "Education",
+        year: "2024",
+        status: "completed",
+        image_url: "/sgs-image.jpg",
+        description:
+          "A web application that simplifies accreditation and re-accreditation processes for postgraduate programmes by automating workflows and enabling real-time compliance tracking.",
+        results: [
+          "Automated accreditation workflow from departments to GTEC",
+          "Streamlined documentation organization and submission",
+          "Enhanced real-time compliance tracking capabilities",
+          "Reduced administrative complexities and processing time",
+        ],
+      },
+    ],
+    "in-progress": [
+      {
+        id: "prog-4",
+        title: "LuggageBS",
+        client: "Student Storage Solutions",
+        category: "Mobile App",
+        year: "2024",
+        status: "in-progress",
+        image_url: "/luggage-bs.jpg",
+        description:
+          "A mobile app designed to revolutionize the way students manage their belongings during vacation breaks by providing seamless storage booking, item tracking, and hassle-free payments.",
+        results: [
+          "Developing storage slot booking system",
+          "Implementing item tracking and management",
+          "Integrating secure payment processing",
+          "Expected completion: Q2 2024",
+        ],
+      },
+      {
+        id: "prog-5",
+        title: "ThesisFlow",
+        client: "University of Ghana - School of Graduate Studies",
+        category: "Education",
+        year: "2024",
+        status: "in-progress",
+        image_url: "/thesis-flow.jpg",
+        description:
+          "A secure, web-based system designed to streamline the submission and tracking of postgraduate thesis and dissertations for the University of Ghana.",
+        results: [
+          "Developing online thesis submission platform",
+          "Implementing real-time progress tracking",
+          "Creating supervisor and department monitoring tools",
+          "Expected completion: Q3 2024",
+        ],
+      },
+    ],
+    future: [
+      {
+        id: "future-1",
+        title: "AI-Powered Chatbot for Customer Support",
+        client: "Ghana Telecom Services",
+        category: "AI/ML",
+        year: "2025",
+        status: "future",
+        image_url:
+          "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&auto=format&fit=crop&q=80",
+        description:
+          "A multilingual chatbot system that provides customer support in English and local Ghanaian languages for telecom services.",
+        results: [
+          "Planning natural language processing integration",
+          "Designing multilingual response system",
+          "Developing local language support",
+          "Expected start: Q2 2025",
+        ],
+      },
+      {
+        id: "future-2",
+        title: "AI Image Recognition for Agriculture",
+        client: "AgriTech Ghana",
+        category: "AI/ML",
+        year: "2025",
+        status: "future",
+        image_url:
+          "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&auto=format&fit=crop&q=80",
+        description:
+          "An AI system that analyzes crop images to detect diseases, pests, and provide farming recommendations for local farmers.",
+        results: [
+          "Planning image recognition algorithms",
+          "Designing mobile app interface",
+          "Developing crop database",
+          "Expected start: Q3 2025",
+        ],
+      },
+      {
+        id: "future-3",
+        title: "AI-Powered Text Analysis for Local News",
+        client: "Ghana News Network",
+        category: "AI/ML",
+        year: "2025",
+        status: "future",
+        image_url:
+          "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&auto=format&fit=crop&q=80",
+        description:
+          "A text analysis system that summarizes local news articles and provides sentiment analysis for media organizations.",
+        results: [
+          "Planning text processing algorithms",
+          "Designing summarization features",
+          "Developing sentiment analysis tools",
+          "Expected start: Q4 2025",
+        ],
+      },
+      {
+        id: "future-4",
+        title: "AI Voice Assistant for Local Businesses",
+        client: "Ghana Business Hub",
+        category: "AI/ML",
+        year: "2025",
+        status: "future",
+        image_url:
+          "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&auto=format&fit=crop&q=80",
+        description:
+          "A voice assistant system that helps local businesses with inventory management, customer queries, and basic operations.",
+        results: [
+          "Planning speech recognition integration",
+          "Designing voice command system",
+          "Developing business logic modules",
+          "Expected start: Q1 2026",
+        ],
+      },
+      {
+        id: "future-5",
+        title: "AI-Powered Fraud Detection for Mobile Money",
+        client: "Ghana Mobile Money",
+        category: "AI/ML",
+        year: "2025",
+        status: "future",
+        image_url:
+          "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800&auto=format&fit=crop&q=80",
+        description:
+          "A machine learning system that detects fraudulent transactions in mobile money platforms to enhance security.",
+        results: [
+          "Planning fraud detection algorithms",
+          "Designing real-time monitoring system",
+          "Developing security protocols",
+          "Expected start: Q2 2026",
+        ],
+      },
+      {
+        id: "future-6",
+        title: "AI Recommendation System for E-commerce",
+        client: "Ghana Online Market",
+        category: "AI/ML",
+        year: "2025",
+        status: "future",
+        image_url:
+          "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&auto=format&fit=crop&q=80",
+        description:
+          "A recommendation engine that suggests products to customers based on their browsing and purchase history.",
+        results: [
+          "Planning recommendation algorithms",
+          "Designing user preference tracking",
+          "Developing product matching system",
+          "Expected start: Q3 2026",
+        ],
+      },
+    ],
+  };
 
-  const {
-    data: projects = [],
-    isLoading,
-    error,
-  } = useProjects(activeFilter === "all" ? undefined : activeFilter);
+  const currentProjects =
+    projectData[activeTab as keyof typeof projectData] || [];
 
-  const [heroRef, heroInView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
-
-  const handleFilterClick = (filterId: string) => {
-    console.log(`Changing filter to: ${filterId}`);
-    setActiveFilter(filterId);
+  const handleTabChange = (tabId: string) => {
+    setActiveTab(tabId);
   };
 
   const handleProjectClick = (id: string) => {
@@ -284,6 +491,11 @@ const Work = () => {
     searchParams.delete("project");
     setSearchParams(searchParams);
   };
+
+  const [heroRef, heroInView] = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
 
   return (
     <div className="min-h-screen">
@@ -341,62 +553,29 @@ const Work = () => {
         {/* Portfolio Section */}
         <section className="py-16">
           <div className="container px-4 mx-auto max-w-7xl">
-            {/* Filter Buttons */}
-            <ProjectFilters
-              activeFilter={activeFilter}
-              onFilterChange={handleFilterClick}
+            {/* Status Tabs */}
+            <ProjectStatusTabs
+              activeTab={activeTab}
+              onTabChange={handleTabChange}
             />
 
-            {/* Loading State */}
-            {isLoading && (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {[1, 2, 3, 4, 5, 6].map((i) => (
-                  <div key={i} className="animate-pulse">
-                    <div className="h-56 bg-gray-200 rounded-t-xl mb-4"></div>
-                    <div className="h-6 bg-gray-200 rounded w-3/4 mb-2"></div>
-                    <div className="h-4 bg-gray-200 rounded w-1/2 mb-4"></div>
-                    <div className="h-4 bg-gray-200 rounded w-full mb-2"></div>
-                    <div className="h-4 bg-gray-200 rounded w-full mb-2"></div>
-                    <div className="h-4 bg-gray-200 rounded w-3/4"></div>
-                  </div>
-                ))}
-              </div>
-            )}
-
-            {/* Error State */}
-            {error && (
-              <div className="text-center py-12">
-                <p className="text-red-500 mb-4">
-                  Failed to load projects. Please try again later.
-                </p>
-                <Button
-                  variant="outline"
-                  onClick={() => window.location.reload()}
-                >
-                  Retry
-                </Button>
-              </div>
-            )}
-
             {/* Projects Grid */}
-            {!isLoading && !error && (
-              <ProjectsGrid
-                projects={projects}
-                onProjectClick={handleProjectClick}
-              />
-            )}
+            <ProjectsGrid
+              projects={currentProjects}
+              onProjectClick={handleProjectClick}
+            />
 
             {/* Empty State */}
-            {!isLoading && !error && projects.length === 0 && (
+            {currentProjects.length === 0 && (
               <div className="text-center py-12">
                 <p className="text-muted-foreground mb-4">
                   No projects found in this category.
                 </p>
                 <Button
                   variant="outline"
-                  onClick={() => setActiveFilter("all")}
+                  onClick={() => setActiveTab("completed")}
                 >
-                  Show All Projects
+                  View Completed Projects
                 </Button>
               </div>
             )}
@@ -466,7 +645,11 @@ const Work = () => {
           open={!!projectId}
           onOpenChange={(open) => !open && handleCloseProject()}
         >
-          <ProjectDetails projectId={projectId} onClose={handleCloseProject} />
+          <ProjectDetails
+            projectId={projectId}
+            onClose={handleCloseProject}
+            projectData={projectData}
+          />
         </Drawer>
 
         {/* Call to Action */}

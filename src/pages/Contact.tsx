@@ -91,7 +91,7 @@ const ContactPage = () => {
               <div className="flex flex-wrap justify-center gap-4">
                 <div className="inline-flex items-center rounded-full bg-white px-4 py-2 shadow-sm border border-gray-100">
                   <Phone className="h-4 w-4 text-sbuild mr-2" />
-                  <span>+1 (800) 555-0123</span>
+                  <span>+233241197511</span>
                 </div>
 
                 <div className="inline-flex items-center rounded-full bg-white px-4 py-2 shadow-sm border border-gray-100">
@@ -343,7 +343,7 @@ const ContactPage = () => {
                     </a>
 
                     <a
-                      href="tel:+18005550123"
+                      href="tel:+233241197511"
                       className="inline-flex items-center justify-center py-3 px-6 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors"
                     >
                       <Phone className="h-4 w-4 mr-2" />
@@ -405,15 +405,6 @@ const ContactPage = () => {
                   </CardContent>
                 </Card>
               ))}
-            </div>
-
-            <div className="text-center mt-10">
-              <p className="text-muted-foreground mb-4">
-                Can't find the answer you're looking for?
-              </p>
-              <Button className="bg-sbuild hover:bg-sbuild/90">
-                Contact Our Support Team
-              </Button>
             </div>
           </div>
         </section>

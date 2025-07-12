@@ -78,27 +78,45 @@ const About = () => {
 
   const teamMembers = [
     {
-      name: "Professor Solomon",
-      role: "CEO & Founder",
+      name: "Prof. Solomon Mensah",
+      role: "Founder & C.E.O.",
       image: "/lovable-uploads/prof-image.jpg",
     },
     {
-      name: "Sarah Johnson",
-      role: "CTO",
+      name: "Ms. Endurance Offeibea",
+      role: "Product Manager & UI/UX Designer",
       image:
-        "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1512361436605-a484bdb34b5f?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     },
     {
-      name: "David Lee",
-      role: "Head of Engineering",
+      name: "Ms. Elizabeth Akuafum Dick",
+      role: "Organizer & Communication Officer",
+      image:
+        "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&auto=format&fit=crop&q=80",
+    },
+    {
+      name: "Mr. Evans Nath",
+      role: "Lead Design Officer",
+      image:
+        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&auto=format&fit=crop&q=80",
+    },
+    {
+      name: "Mr. Benson Yeboah",
+      role: "Full Stack Developer",
+      image:
+        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&auto=format&fit=crop&q=80",
+    },
+    {
+      name: "Mr. Lord Konadu",
+      role: "Full Stack Developer",
+      image:
+        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&auto=format&fit=crop&q=80",
+    },
+    {
+      name: "Mr. Dickson Peprah",
+      role: "Frontend Developer",
       image:
         "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&auto=format&fit=crop&q=80",
-    },
-    {
-      name: "Emily Chen",
-      role: "Lead Designer",
-      image:
-        "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&auto=format&fit=crop&q=80",
     },
   ];
 
@@ -319,7 +337,7 @@ const About = () => {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
               {teamMembers.map((member, index) => (
                 <div
                   key={index}
@@ -369,13 +387,6 @@ const About = () => {
                   </div>
                 </div>
               ))}
-            </div>
-
-            <div className="text-center mt-12">
-              <Button className="bg-sbuild hover:bg-sbuild/90">
-                Join Our Team
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
             </div>
           </div>
         </section>
