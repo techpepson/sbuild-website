@@ -280,7 +280,7 @@ const Work = () => {
         title: "SGS Alumni System",
         client: "University of Ghana - School of Graduate Studies",
         category: "Education",
-        year: "2024",
+        year: "2025",
         status: "completed",
         image_url: "/sgs-image.jpg",
         description:
@@ -297,7 +297,7 @@ const Work = () => {
         title: "Risk Management System",
         client: "University of Ghana - Risk Management Office",
         category: "Risk Management",
-        year: "2024",
+        year: "2025",
         status: "completed",
         image_url: "/risk-mgmt-image.jpg",
         description:
@@ -314,9 +314,9 @@ const Work = () => {
         title: "SGS Accreditation Portal",
         client: "University of Ghana - School of Graduate Studies",
         category: "Education",
-        year: "2024",
+        year: "2025",
         status: "completed",
-        image_url: "/sgs-image.jpg",
+        image_url: "/sgs-accreditation.jpg",
         description:
           "A web application that simplifies accreditation and re-accreditation processes for postgraduate programmes by automating workflows and enabling real-time compliance tracking.",
         results: [
