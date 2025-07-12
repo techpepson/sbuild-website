@@ -96,7 +96,7 @@ const About = () => {
     },
     {
       name: "Mr. Evans Narh",
-      role: "Lead UI/UX Designer",
+      role: "Lead UI/UX Designer & Data Analyst",
       image:
         "https://plus.unsplash.com/premium_photo-1670966282879-ef5f3cbf1000?q=80&w=823&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     },
@@ -114,7 +114,7 @@ const About = () => {
     },
     {
       name: "Mr. Dickson Peprah",
-      role: "Frontend Mobile & Web App Developer",
+      role: "Mobile & Web App Developer",
       image:
         "https://images.unsplash.com/photo-1552481902-9ef2babf332d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8Z3JlZWslMjBnb2RzfGVufDB8fDB8fHww",
     },

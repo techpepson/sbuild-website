@@ -117,7 +117,7 @@ const ProjectStatusTabs = ({
 }) => {
   const tabs = [
     { id: "completed", label: "Completed Projects", count: 3 },
-    { id: "in-progress", label: "In Progress", count: 5 },
+    { id: "in-progress", label: "In Progress", count: 2 },
     { id: "future", label: "Future Projects", count: 6 },
   ];
 
@@ -297,7 +297,7 @@ const Work = () => {
         title: "Risk Management System",
         client: "University of Ghana - Risk Management Office",
         category: "Risk Management",
-        year: "2025",
+        year: "2023",
         status: "completed",
         image_url: "/risk-mgmt-image.jpg",
         description:
@@ -333,7 +333,7 @@ const Work = () => {
         title: "LuggageBS",
         client: "Student Storage Solutions",
         category: "Mobile App",
-        year: "2024",
+        year: "2025",
         status: "in-progress",
         image_url: "/luggage-bs.jpg",
         description:
@@ -350,7 +350,7 @@ const Work = () => {
         title: "ThesisFlow",
         client: "University of Ghana - School of Graduate Studies",
         category: "Education",
-        year: "2024",
+        year: "2025",
         status: "in-progress",
         image_url: "/thesis-flow.jpg",
         description:
@@ -387,7 +387,7 @@ const Work = () => {
         title: "AI Image Recognition for Agriculture",
         client: "AgriTech Ghana",
         category: "AI/ML",
-        year: "2025",
+        year: "2026",
         status: "future",
         image_url:
           "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&auto=format&fit=crop&q=80",
@@ -405,7 +405,7 @@ const Work = () => {
         title: "AI-Powered Text Analysis for Local News",
         client: "Ghana News Network",
         category: "AI/ML",
-        year: "2025",
+        year: "2026",
         status: "future",
         image_url:
           "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&auto=format&fit=crop&q=80",
@@ -423,7 +423,7 @@ const Work = () => {
         title: "AI Voice Assistant for Local Businesses",
         client: "Ghana Business Hub",
         category: "AI/ML",
-        year: "2025",
+        year: "2026",
         status: "future",
         image_url:
           "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&auto=format&fit=crop&q=80",
@@ -441,7 +441,7 @@ const Work = () => {
         title: "AI-Powered Fraud Detection for Mobile Money",
         client: "Ghana Mobile Money",
         category: "AI/ML",
-        year: "2025",
+        year: "2026",
         status: "future",
         image_url:
           "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800&auto=format&fit=crop&q=80",

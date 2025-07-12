@@ -91,12 +91,12 @@ const ContactPage = () => {
               <div className="flex flex-wrap justify-center gap-4">
                 <div className="inline-flex items-center rounded-full bg-white px-4 py-2 shadow-sm border border-gray-100">
                   <Phone className="h-4 w-4 text-sbuild mr-2" />
-                  <span>+233241197511</span>
+                  <span>+233558628269</span>
                 </div>
 
                 <div className="inline-flex items-center rounded-full bg-white px-4 py-2 shadow-sm border border-gray-100">
                   <Mail className="h-4 w-4 text-sbuild mr-2" />
-                  <span>contact@sbuild.com</span>
+                  <span>sbuildsolutions@gmail.com</span>
                 </div>
               </div>
             </div>
@@ -343,7 +343,7 @@ const ContactPage = () => {
                     </a>
 
                     <a
-                      href="tel:+233241197511"
+                      href="tel:+233558628269"
                       className="inline-flex items-center justify-center py-3 px-6 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors"
                     >
                       <Phone className="h-4 w-4 mr-2" />
