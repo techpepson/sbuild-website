@@ -90,13 +90,13 @@ const About = () => {
     },
     {
       name: "Ms. Elizabeth Akuafum Dick",
-      role: "Organizer & Communication Officer",
+      role: "Communication & Operations Manager",
       image:
         "https://plus.unsplash.com/premium_photo-1692948505024-20a1288d0b65?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fHVucmVhbCUyMGh1bWFufGVufDB8fDB8fHww",
     },
     {
       name: "Mr. Evans Narh",
-      role: "Lead Design Officer",
+      role: "Lead UI/UX Designer",
       image:
         "https://plus.unsplash.com/premium_photo-1670966282879-ef5f3cbf1000?q=80&w=823&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     },
@@ -108,7 +108,7 @@ const About = () => {
     },
     {
       name: "Mr. Lord Konadu",
-      role: "Full Stack Developer",
+      role: "Full Stack Developer & QA Manager",
       image:
         "https://plus.unsplash.com/premium_photo-1682310209998-4ab788b6625a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Y2h1cmNoJTIwbG9nb3xlbnwwfHwwfHx8MA%3D%3D",
     },
