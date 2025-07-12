@@ -85,38 +85,32 @@ const About = () => {
     {
       name: "Ms. Endurance Offeibea",
       role: "Product Manager & UI/UX Designer",
-      image:
-        "https://images.unsplash.com/photo-1646113235031-9c5d2cdcc21c?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      image: "/lovable-uploads/prof-image.jpg",
     },
     {
       name: "Ms. Elizabeth Akuafum Dick",
       role: "Organizer & Communication Officer",
-      image:
-        "https://plus.unsplash.com/premium_photo-1692948505024-20a1288d0b65?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fHVucmVhbCUyMGh1bWFufGVufDB8fDB8fHww",
+      image: "/lovable-uploads/prof-image.jpg",
     },
     {
       name: "Mr. Evans Nath",
       role: "Lead Design Officer",
-      image:
-        "https://plus.unsplash.com/premium_photo-1670966282879-ef5f3cbf1000?q=80&w=823&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      image: "/lovable-uploads/prof-image.jpg",
     },
     {
       name: "Mr. Benson Yeboah",
       role: "Full Stack Developer",
-      image:
-        "https://images.unsplash.com/photo-1594050372450-3cacc312c8d6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8Y2h1cmNoJTIwbG9nb3xlbnwwfHwwfHx8MA%3D%3D",
+      image: "/lovable-uploads/prof-image.jpg",
     },
     {
       name: "Mr. Lord Konadu",
       role: "Full Stack Developer",
-      image:
-        "https://plus.unsplash.com/premium_photo-1682310209998-4ab788b6625a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Y2h1cmNoJTIwbG9nb3xlbnwwfHwwfHx8MA%3D%3D",
+      image: "/lovable-uploads/prof-image.jpg",
     },
     {
       name: "Mr. Dickson Peprah",
       role: "Frontend Developer",
-      image:
-        "https://images.unsplash.com/photo-1552481902-9ef2babf332d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8Z3JlZWslMjBnb2RzfGVufDB8fDB8fHww",
+      image: "/lovable-uploads/prof-image.jpg",
     },
   ];
 
