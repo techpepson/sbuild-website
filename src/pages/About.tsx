@@ -114,9 +114,15 @@ const About = () => {
     },
     {
       name: "Mr. Dickson Peprah",
-      role: "Frontend Developer",
+      role: "Frontend Mobile & Web App Developer",
       image:
         "https://images.unsplash.com/photo-1552481902-9ef2babf332d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8Z3JlZWslMjBnb2RzfGVufDB8fDB8fHww",
+    },
+    {
+      name: "Mr. Kingsley Quarshie",
+      role: "Frontend Developer & Research Project Manager",
+      image:
+        "https://plus.unsplash.com/premium_photo-1734301371434-7aa82950e9af?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Z3JlZWslMjBnb2RzfGVufDB8fDB8fHww",
     },
   ];
 
