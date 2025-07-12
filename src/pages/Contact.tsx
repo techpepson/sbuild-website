@@ -13,6 +13,7 @@ import {
   Building,
   CheckCircle2,
   Globe,
+  Link,
   Mail,
   MapPin,
   MessageSquare,
@@ -94,9 +95,14 @@ const ContactPage = () => {
                   <span>+233558628269</span>
                 </div>
 
-                <div className="inline-flex items-center rounded-full bg-white px-4 py-2 shadow-sm border border-gray-100">
+                <div className="flex items-center rounded-full bg-white px-4 py-2 shadow-sm border border-gray-100">
                   <Mail className="h-4 w-4 text-sbuild mr-2" />
-                  <span>sbuildsolutions@gmail.com</span>
+                  <a
+                    href="mailto:sbuildsolutions@gmail.com"
+                    className="text-sbuild hover:underline"
+                  >
+                    sbuildsolutions@gmail.com
+                  </a>
                 </div>
               </div>
             </div>
