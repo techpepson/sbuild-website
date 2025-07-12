@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Welcome to Sbuild Solutions.
 
 ## Project info
@@ -67,3 +68,7 @@ Simply open [Lovable](https://lovable.dev/projects/6f184ddc-8aca-4c50-a80e-7341d
 ## I want to use a custom domain - is that possible?
 
 We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
+=======
+# sbuild-website
+This is the official repository of the sbuild website which is a software development company.
+>>>>>>> c23d1eb7a07a56eb032b168378c8e07858132c76
