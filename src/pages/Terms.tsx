@@ -145,13 +145,13 @@ const Terms = () => {
               <p>
                 SBuild Solutions
                 <br />
-                123 Tech Way
+                University of Ghana
                 <br />
-                San Francisco, CA 94105
+                Accra, Ghana.
                 <br />
-                Email: legal@sbuild.com
+                Email: sbuildsolutions@gmail.com
                 <br />
-                Phone: (555) 123-4567
+                Phone: +233558628269
               </p>
             </div>
           </div>

@@ -71,21 +71,33 @@ const Insights = () => {
   const filteredArticles = searchQuery
     ? allArticles.filter(
         (article) =>
-          article.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          article.excerpt.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          article.author.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          article.category.toLowerCase().includes(searchQuery.toLowerCase())
+          (article.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            article.excerpt.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            article.author.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            article.category
+              .toLowerCase()
+              .includes(searchQuery.toLowerCase())) &&
+          article.title.trim().toLowerCase() !== "ui/ux design" &&
+          !article.category.toLowerCase().includes("ui/ux")
       )
-    : allArticles;
+    : allArticles.filter(
+        (article) =>
+          article.title.trim().toLowerCase() !== "ui/ux design" &&
+          !article.category.toLowerCase().includes("ui/ux")
+      );
 
   const featuredArticle =
     filteredArticles.length > 0 ? filteredArticles[0] : null;
   const articles = filteredArticles.length > 1 ? filteredArticles.slice(1) : [];
 
-  // Get unique categories from articles
+  // Get unique categories from articles (excluding any category containing 'UI/UX')
   const uniqueCategories = [
     "All Categories",
-    ...new Set(allArticles.map((article) => article.category)),
+    ...new Set(
+      allArticles
+        .filter((article) => !article.category.toLowerCase().includes("ui/ux"))
+        .map((article) => article.category)
+    ),
   ];
 
   return (
