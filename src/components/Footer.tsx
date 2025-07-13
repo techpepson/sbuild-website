@@ -66,7 +66,7 @@ const Footer = () => {
               software to drive growth and efficiency for businesses of all
               sizes.
             </p>
-            {/* <div className="flex space-x-4">
+            <div className="flex space-x-4">
               <a
                 target="_blank"
                 href="https://www.facebook.com/profile.php?id=61561514013919"
@@ -95,7 +95,7 @@ const Footer = () => {
               >
                 <Linkedin className="h-5 w-5" />
               </a>
-            </div> */}
+            </div>
           </div>
 
           {/* Footer Links */}
