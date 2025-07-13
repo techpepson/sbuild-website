@@ -601,7 +601,7 @@ const Work = () => {
                 <div className="w-16 h-16 rounded-full bg-gradient-to-r from-teal-500 to-emerald-500 flex items-center justify-center mb-4">
                   <Globe className="h-8 w-8 text-white" />
                 </div>
-                <h3 className="text-4xl font-display font-bold mb-2">50+</h3>
+                <h3 className="text-4xl font-display font-bold mb-2">3+</h3>
                 <p className="text-muted-foreground text-center">
                   Successful Projects
                 </p>
@@ -611,7 +611,7 @@ const Work = () => {
                 <div className="w-16 h-16 rounded-full bg-gradient-to-r from-purple-500 to-indigo-500 flex items-center justify-center mb-4">
                   <Users className="h-8 w-8 text-white" />
                 </div>
-                <h3 className="text-4xl font-display font-bold mb-2">20+</h3>
+                <h3 className="text-4xl font-display font-bold mb-2">10+</h3>
                 <p className="text-muted-foreground text-center">
                   Industry Partnerships
                 </p>
@@ -621,7 +621,7 @@ const Work = () => {
                 <div className="w-16 h-16 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 flex items-center justify-center mb-4">
                   <Zap className="h-8 w-8 text-white" />
                 </div>
-                <h3 className="text-4xl font-display font-bold mb-2">100K+</h3>
+                <h3 className="text-4xl font-display font-bold mb-2">20+</h3>
                 <p className="text-muted-foreground text-center">
                   Users Benefiting
                 </p>

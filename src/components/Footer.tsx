@@ -26,17 +26,17 @@ const Footer = () => {
         { name: "Contact", href: "/contact" },
       ],
     },
-    {
-      title: "Services",
-      links: [
-        { name: "Custom SaaS Development", href: "/services#saas" },
-        { name: "Cloud Integration", href: "/services#cloud" },
-        { name: "API Development", href: "/services#api" },
-        { name: "UI/UX Design", href: "/services#design" },
-        { name: "Maintenance & Support", href: "/services#support" },
-        { name: "Mobile App Development", href: "/services#support" },
-      ],
-    },
+    // {
+    //   title: "Services",
+    //   links: [
+    //     { name: "Custom SaaS Development", href: "/services#saas" },
+    //     // { name: "Cloud Integration", href: "/services#cloud" },
+    //     { name: "API Development", href: "/services#api" },
+    //     { name: "UI/UX Design", href: "/services#design" },
+    //     { name: "Maintenance & Support", href: "/services#support" },
+    //     { name: "Mobile App Development", href: "/services#support" },
+    //   ],
+    // },
     {
       title: "Resources",
       links: [
@@ -44,7 +44,6 @@ const Footer = () => {
         { name: "FAQs", href: "/faqs" },
         { name: "Privacy Policy", href: "/privacy" },
         { name: "Terms of Service", href: "/terms" },
-        { name: "Careers", href: "/careers" },
       ],
     },
   ];
@@ -67,7 +66,7 @@ const Footer = () => {
               software to drive growth and efficiency for businesses of all
               sizes.
             </p>
-            <div className="flex space-x-4">
+            {/* <div className="flex space-x-4">
               <a
                 target="_blank"
                 href="https://www.facebook.com/profile.php?id=61561514013919"
@@ -96,7 +95,7 @@ const Footer = () => {
               >
                 <Linkedin className="h-5 w-5" />
               </a>
-            </div>
+            </div> */}
           </div>
 
           {/* Footer Links */}

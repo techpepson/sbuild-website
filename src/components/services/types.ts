@@ -12,7 +12,7 @@ export interface ServiceType {
     overview: string;
     benefits: string[];
     process: string[];
-    technologies: string[];
+    tools: string[];
     caseStudies?: string[];
   };
 }

@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { useInView } from "react-intersection-observer";
 import { cn } from "@/lib/utils";
+import { Link } from "react-router-dom";
 
 const AboutSection = () => {
   const [ref, inView] = useInView({
@@ -151,10 +152,12 @@ const AboutSection = () => {
               ))}
             </div>
 
-            <Button className="bg-gradient-to-r from-sbuild to-cyan-600 hover:from-sbuild/90 hover:to-cyan-600/90 text-white shadow-lg hover:shadow-xl transition-all duration-300">
-              Learn More About Us
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
+            <Link to="/about">
+              <Button className="bg-gradient-to-r from-sbuild to-cyan-600 hover:from-sbuild/90 hover:to-cyan-600/90 text-white shadow-lg hover:shadow-xl transition-all duration-300">
+                Learn More About Us
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </Link>
           </div>
         </div>
       </div>

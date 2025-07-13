@@ -152,10 +152,10 @@ const ServiceCard = ({ service, index }: ServiceCardProps) => {
             {/* Technologies */}
             <div className="mt-8">
               <h4 className="text-xl font-semibold mb-4 text-sbuild">
-                Technologies We Use
+                Tools We Use
               </h4>
               <div className="flex flex-wrap gap-2">
-                {service.detailedContent.technologies.map((tech, idx) => (
+                {service.detailedContent.tools.map((tech, idx) => (
                   <span
                     key={idx}
                     className="px-3 py-1 bg-white border border-gray-200 rounded-full text-sm font-medium"

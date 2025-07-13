@@ -31,7 +31,7 @@ const ServicesList = () => {
         "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&auto=format&fit=crop&q=80",
       detailedContent: {
         overview:
-          "Our comprehensive data analytics services transform raw data into actionable insights that drive business growth and operational efficiency. We leverage cutting-edge technologies and methodologies to help organizations make data-driven decisions.",
+          "Our comprehensive data analytics services transform raw data into actionable insights that drive business growth and operational efficiency. We leverage cutting-edge tools and methodologies to help organizations make data-driven decisions.",
         benefits: [
           "Improved decision-making through data-driven insights",
           "Enhanced operational efficiency and cost reduction",
@@ -46,7 +46,7 @@ const ServicesList = () => {
           "Analysis and visualization development",
           "Insight delivery and ongoing optimization",
         ],
-        technologies: [
+        tools: [
           "Python",
           "R",
           "SQL",
@@ -97,7 +97,7 @@ const ServicesList = () => {
           "Ongoing guidance and support throughout development",
           "Performance evaluation and continuous improvement",
         ],
-        technologies: [
+        tools: [
           "Agile/Scrum",
           "DevOps",
           "CI/CD",
@@ -147,7 +147,7 @@ const ServicesList = () => {
           "Implementation roadmap development",
           "Performance monitoring and strategy refinement",
         ],
-        technologies: [
+        tools: [
           "SWOT Analysis",
           "Business Model Canvas",
           "Lean Startup",
@@ -197,7 +197,7 @@ const ServicesList = () => {
           "User testing and iteration",
           "Design system development and handoff",
         ],
-        technologies: [
+        tools: [
           "Figma",
           "Adobe XD",
           "Sketch",
@@ -248,7 +248,7 @@ const ServicesList = () => {
           "Performance optimization and tuning",
           "Ongoing support and consultation",
         ],
-        technologies: [
+        tools: [
           "Monitoring Tools",
           "Automated Testing",
           "CI/CD",
@@ -298,7 +298,7 @@ const ServicesList = () => {
           "Caching strategy implementation",
           "Load testing and continuous monitoring",
         ],
-        technologies: [
+        tools: [
           "Performance Profiling",
           "Database Optimization",
           "CDN",
@@ -348,7 +348,7 @@ const ServicesList = () => {
           "App store submission and optimization",
           "Post-launch support and updates",
         ],
-        technologies: [
+        tools: [
           "React Native",
           "Flutter",
           "Swift",
