@@ -79,7 +79,7 @@ const ServicesList = () => {
         "Quality assurance and testing strategy development",
       ],
       image:
-        "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1573165265437-f5e267bb3db6?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       detailedContent: {
         overview:
           "Our expert consultancy services provide strategic guidance and technical expertise to help organizations navigate complex software development challenges. We work closely with your team to ensure successful project delivery and long-term success.",

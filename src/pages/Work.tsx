@@ -23,6 +23,7 @@ import {
   DrawerDescription,
   DrawerFooter,
 } from "@/components/ui/drawer";
+import Stats from "@/components/Stats";
 
 // Project details drawer component
 const ProjectDetails = ({
@@ -583,62 +584,7 @@ const Work = () => {
         </section>
 
         {/* Stats Section */}
-        <section className="py-20 bg-gray-50">
-          <div className="container px-4 mx-auto max-w-7xl">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-display font-semibold tracking-tight mb-4">
-                Our Impact in Numbers
-              </h2>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                We've helped businesses across various industries transform
-                their operations and achieve remarkable growth through our SaaS
-                solutions.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-              <div className="flex flex-col items-center">
-                <div className="w-16 h-16 rounded-full bg-gradient-to-r from-teal-500 to-emerald-500 flex items-center justify-center mb-4">
-                  <Globe className="h-8 w-8 text-white" />
-                </div>
-                <h3 className="text-4xl font-display font-bold mb-2">3+</h3>
-                <p className="text-muted-foreground text-center">
-                  Successful Projects
-                </p>
-              </div>
-
-              <div className="flex flex-col items-center">
-                <div className="w-16 h-16 rounded-full bg-gradient-to-r from-purple-500 to-indigo-500 flex items-center justify-center mb-4">
-                  <Users className="h-8 w-8 text-white" />
-                </div>
-                <h3 className="text-4xl font-display font-bold mb-2">10+</h3>
-                <p className="text-muted-foreground text-center">
-                  Industry Partnerships
-                </p>
-              </div>
-
-              <div className="flex flex-col items-center">
-                <div className="w-16 h-16 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 flex items-center justify-center mb-4">
-                  <Zap className="h-8 w-8 text-white" />
-                </div>
-                <h3 className="text-4xl font-display font-bold mb-2">20+</h3>
-                <p className="text-muted-foreground text-center">
-                  Users Benefiting
-                </p>
-              </div>
-
-              <div className="flex flex-col items-center">
-                <div className="w-16 h-16 rounded-full bg-gradient-to-r from-orange-500 to-amber-500 flex items-center justify-center mb-4">
-                  <BarChart className="h-8 w-8 text-white" />
-                </div>
-                <h3 className="text-4xl font-display font-bold mb-2">98%</h3>
-                <p className="text-muted-foreground text-center">
-                  Client Satisfaction
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
+        <Stats />
 
         {/* Project Details Drawer */}
         <Drawer
@@ -651,7 +597,6 @@ const Work = () => {
             projectData={projectData}
           />
         </Drawer>
-
         {/* Call to Action */}
         <CallToAction />
       </main>

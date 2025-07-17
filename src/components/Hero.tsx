@@ -14,11 +14,11 @@ import { cn } from "@/lib/utils";
 import { Link } from "react-router-dom";
 
 const backgroundImages = [
-  "/christina-wocintechchat-com-Q80LYxv_Tbs-unsplash.jpg",
+  "/bg-image1.jpg",
   "/emile-perron-xrVDYZRGdw4-unsplash.jpg",
   "/fotis-fotopoulos-LJ9KY8pIH3E-unsplash.jpg",
   "/Image20250616135229.jpg",
-  "/Image20250616135237.jpg",
+  "/bg-image2.jpg",
 ];
 
 const Hero = () => {
@@ -103,7 +103,7 @@ const Hero = () => {
             key={img}
             src={img}
             alt="Hero background"
-            className="w-full h-full object-cover absolute inset-0 transition-opacity duration-1000"
+            className="w-full h-full object-cover absolute inset-0 duration-1000"
             style={{
               opacity: idx === bgIndex ? 1 : 0,
               transition: "opacity 1s",
@@ -112,7 +112,7 @@ const Hero = () => {
             draggable={true}
           />
         ))}
-        <div className="absolute inset-0 bg-black/50"></div>
+        <div className="absolute inset-0 bg-black/26"></div>
       </div>
 
       {/* Floating decorative elements */}

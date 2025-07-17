@@ -60,7 +60,7 @@ const Stats = () => {
                 )}
               >
                 <span className="text-white text-3xl font-bold">
-                  {stat.value.charAt(0)}
+                  {stat.value.split("+")}
                 </span>
               </div>
               <h3 className="text-4xl font-display font-bold mb-2">
