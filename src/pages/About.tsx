@@ -199,7 +199,7 @@ const About = () => {
                   Our Story
                 </h2>
                 <p className="text-lg text-muted-foreground mb-6">
-                  Founded in 2018, SBuild Solutions was born out of a vision to
+                  Founded in 2023, SBuild Solutions was born out of a vision to
                   make powerful SaaS technology accessible to businesses of all
                   sizes. We recognized that many organizations struggle with
                   outdated systems that hamper growth and operational

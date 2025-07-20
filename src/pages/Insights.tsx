@@ -67,9 +67,19 @@ const Insights = () => {
     activeCategory === "All Categories" ? undefined : activeCategory
   );
 
+  // Remove duplicate articles by title (case-insensitive, trimmed)
+  const uniqueArticles = allArticles.filter(
+    (article, index, self) =>
+      index ===
+      self.findIndex(
+        (a) =>
+          a.title.trim().toLowerCase() === article.title.trim().toLowerCase()
+      )
+  );
+
   // Apply search filter
   const filteredArticles = searchQuery
-    ? allArticles.filter(
+    ? uniqueArticles.filter(
         (article) =>
           (article.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
             article.excerpt.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -80,7 +90,7 @@ const Insights = () => {
           article.title.trim().toLowerCase() !== "ui/ux design" &&
           !article.category.toLowerCase().includes("ui/ux")
       )
-    : allArticles.filter(
+    : uniqueArticles.filter(
         (article) =>
           article.title.trim().toLowerCase() !== "ui/ux design" &&
           !article.category.toLowerCase().includes("ui/ux")

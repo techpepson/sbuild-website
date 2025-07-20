@@ -17,7 +17,7 @@ const backgroundImages = [
   "/bg-image1.jpg",
   "/emile-perron-xrVDYZRGdw4-unsplash.jpg",
   "/fotis-fotopoulos-LJ9KY8pIH3E-unsplash.jpg",
-  "/Image20250616135229.jpg",
+  // "/Image20250616135229.jpg",
   "/bg-image2.jpg",
 ];
 
@@ -151,7 +151,12 @@ const Hero = () => {
           transition: "opacity 0.2s ease-out, transform 0.1s ease-out",
         }}
       >
-        <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
+        {/* Overlay for text visibility */}
+        <div
+          className="absolute inset-0 bg-black/40 rounded-2xl z-0"
+          style={{ pointerEvents: "none" }}
+        />
+        <div className="flex flex-col items-center text-center max-w-4xl mx-auto relative z-10">
           {/* Badge */}
           <div
             className={cn(
