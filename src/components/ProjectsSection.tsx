@@ -20,7 +20,7 @@ const ProjectsSection = () => {
       category: "Education",
       year: "2025",
       status: "completed",
-      image_url: "/sgs-image.jpg",
+      image_url: "/sgs-image.png",
       description:
         "A comprehensive alumni management system for the School of Graduate Studies that fosters connections, shares updates, and provides resources for continued professional and academic growth.",
       results: [

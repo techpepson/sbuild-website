@@ -79,7 +79,7 @@ const ServicesList = () => {
         "Quality assurance and testing strategy development",
       ],
       image:
-        "https://images.unsplash.com/photo-1573165265437-f5e267bb3db6?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "https://plus.unsplash.com/premium_photo-1689700527463-efbf5c2e652c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8YmxhY2slMjBkZXZlbG9wZXJzJTIwY29uc3VsdGFuY3l8ZW58MHx8MHx8fDA%3D",
       detailedContent: {
         overview:
           "Our expert consultancy services provide strategic guidance and technical expertise to help organizations navigate complex software development challenges. We work closely with your team to ensure successful project delivery and long-term success.",
@@ -129,7 +129,7 @@ const ServicesList = () => {
         "Performance metrics and KPI development",
       ],
       image:
-        "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&auto=format&fit=crop&q=80",
+        "https://plus.unsplash.com/premium_photo-1742842721075-55df896c09eb?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8YmxhY2slMjBwZXJzb24lMjBkb2luZyUyMGJ1c2luZXNzJTIwcGxhbm5pbmclMjBhbmQlMjBkZXZlbG9wbWVudHxlbnwwfHwwfHx8MA%3D%3D",
       detailedContent: {
         overview:
           "Our business planning and development services help organizations create sustainable growth strategies, optimize operations, and achieve their long-term objectives. We provide comprehensive guidance from initial planning to successful execution.",
@@ -230,7 +230,7 @@ const ServicesList = () => {
         "Regular feature enhancements",
       ],
       image:
-        "https://images.unsplash.com/photo-1553877522-43269d4ea984?w=800&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1599949104055-2d04026aee1e?q=80&w=1073&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       detailedContent: {
         overview:
           "Our comprehensive maintenance and support services ensure your SaaS applications run smoothly, securely, and efficiently. We provide proactive monitoring, regular updates, and responsive support to minimize downtime and maximize performance.",
@@ -363,6 +363,56 @@ const ServicesList = () => {
           "Increased user engagement by 200% through mobile app launch",
           "Reduced customer support calls by 60% through mobile self-service features",
           "Generated 40% of total revenue through mobile commerce integration",
+        ],
+      },
+    },
+    {
+      id: "training",
+      icon: <Globe className="h-12 w-12" />, // You can change the icon if you want
+      title: "Training",
+      description:
+        "We offer hands-on training programs in programming, web development, and modern software technologies. Our courses are designed for all skill levels, empowering individuals and teams to build real-world solutions and advance their tech careers.",
+      gradient: "gradient-blue",
+      features: [
+        "Beginner to advanced programming courses",
+        "Web and mobile app development workshops",
+        "Mentorship and career guidance",
+        "Project-based learning",
+        "Certification upon completion",
+      ],
+      image:
+        "https://plus.unsplash.com/premium_photo-1689700526305-0f4cb4c03ed3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fGJsYWNrJTIwbWFuJTIwdGVhY2hpbmclMjBjb2RpbmclMjBhbmQlMjBzdHVkZW50cyUyMGxlYXJuaW5nfGVufDB8fDB8fHww", // Black person coding
+      detailedContent: {
+        overview:
+          "Our training programs are tailored to help aspiring developers and professionals master the latest programming languages, frameworks, and tools. We focus on practical, project-based learning to ensure our students gain real-world experience.",
+        benefits: [
+          "Gain in-demand tech skills",
+          "Learn from experienced instructors",
+          "Access to mentorship and support",
+          "Build a portfolio of real projects",
+          "Boost your career opportunities",
+        ],
+        process: [
+          "Skill assessment and goal setting",
+          "Interactive lessons and coding exercises",
+          "Project work and peer collaboration",
+          "Mentorship and feedback",
+          "Certification and career support",
+        ],
+        tools: [
+          "JavaScript",
+          "Python",
+          "React",
+          "Node.js",
+          "Git & GitHub",
+          "APIs",
+          "Databases",
+          "Cloud Platforms",
+        ],
+        caseStudies: [
+          "Trained over 200 students in full-stack development",
+          "Helped career switchers land their first tech jobs",
+          "Partnered with local organizations to upskill teams",
         ],
       },
     },
