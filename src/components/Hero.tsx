@@ -137,13 +137,13 @@ const Hero = () => {
           style={mouseParallax(5)}
         ></div>
         <div
-          className="absolute bottom-1/2 left-2/3 h-72 w-72 rounded-full bg-gradient-to-r from-amber-500/10 to-orange-500/10 blur-3xl"
+          className="absolute bottom-1/2 left-2/3 h-74 w-74 rounded-full bg-gradient-to-r from-amber-500/10 to-orange-500/10 blur-3xl"
           style={mouseParallax(8)}
         ></div>
       </div>
 
       <div
-        className="container px-4 mx-auto max-w-7xl relative z-10"
+        className="flex justify-center w-full relative z-10"
         style={{
           opacity: Math.max(contentOpacity, 0),
           transform: `translateY(${parallaxOffset * 0.2}px)`,
@@ -151,7 +151,7 @@ const Hero = () => {
           transition: "opacity 0.2s ease-out, transform 0.1s ease-out",
         }}
       >
-        <div className="relative inline-block px-3 py- rounded-2xl">
+        <div className="relative inline-block max-w-7xl w-full px-4 py-10 rounded-2xl">
           {/* Overlay for text visibility, fits content, sits behind text */}
           <div
             className="absolute inset-0 bg-black/40 rounded-2xl"
@@ -190,7 +190,7 @@ const Hero = () => {
             {/* Subheadline */}
             <p
               className={cn(
-                "text-md md:text-xl text-white/90 mb-8 max-w-3xl",
+                "text-md md:text-xl text-white/90 mb-8",
                 "transition-all duration-700 delay-200 ease-out",
                 isVisible
                   ? "opacity-100 transform-none"
@@ -206,7 +206,7 @@ const Hero = () => {
             {/* CTA Buttons */}
             <div
               className={cn(
-                "flex flex-col sm:flex-row gap-4 mb-16 w-full sm:w-auto justify-center",
+                "flex flex-col sm:flex-row gap-4 mb-16 sm:w-auto justify-center",
                 "transition-all duration-700 delay-300 ease-out",
                 isVisible
                   ? "opacity-100 transform-none"
@@ -234,7 +234,7 @@ const Hero = () => {
             {/* Feature highlights */}
             <div
               className={cn(
-                "grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-3xl",
+                "grid grid-cols-1 md:grid-cols-3 gap-6",
                 "transition-all duration-700 delay-400 ease-out",
                 isVisible
                   ? "opacity-100 transform-none"
