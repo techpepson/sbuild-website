@@ -151,7 +151,7 @@ const Hero = () => {
           transition: "opacity 0.2s ease-out, transform 0.1s ease-out",
         }}
       >
-        <div className="relative inline-block px-8 py-8 rounded-2xl">
+        <div className="relative inline-block px-3 py- rounded-2xl">
           {/* Overlay for text visibility, fits content, sits behind text */}
           <div
             className="absolute inset-0 bg-black/40 rounded-2xl"
