@@ -25,7 +25,7 @@ const ServicesSection = () => {
       title: "Custom SaaS Development",
       description:
         "Tailor-made SaaS applications designed to meet your specific business requirements and goals.",
-      gradient: "gradient-teal",
+      gradient: "from-sbuild to-sbuild/50",
       id: "saas",
     },
     {
