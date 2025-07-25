@@ -94,7 +94,7 @@ const Hero = () => {
   return (
     <section
       ref={heroRef}
-      className="relative pt-32 md:pt-40 pb-20 overflow-hidden min-h-screen flex items-center"
+      className="relative pt-16 md:pt-10 pb-10 overflow-hidden min-h-screen flex items-center"
     >
       {/* Sliding background images */}
       <div className="absolute inset-0 z-0">
@@ -151,10 +151,10 @@ const Hero = () => {
           transition: "opacity 0.2s ease-out, transform 0.1s ease-out",
         }}
       >
-        <div className="relative inline-block max-w-7xl w-full px-4 py-10 rounded-2xl">
+        <div className="relative inline-block max-w-screen-lg w-full px-4 py-2 rounded-2xl">
           {/* Overlay for text visibility, fits content, sits behind text */}
           <div
-            className="absolute inset-0 bg-black/40 rounded-2xl"
+            className="absolute inset-0 bg-black/20 rounded-2xl backdrop-blur-sm"
             style={{ zIndex: 0 }}
           />
           <div className="relative z-10 flex flex-col items-center text-center text-white">

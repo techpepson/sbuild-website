@@ -49,7 +49,7 @@ const Navbar = () => {
         { "--header-height": scrolled ? "64px" : "80px" } as React.CSSProperties
       }
     >
-      <div className="container px-4 mx-auto max-w-7xl">
+      <div className="container px-4 mx-auto max-w-5xl">
         <div className="flex items-center justify-between bg-black/20 rounded-xl px-4 py-2 shadow-sm backdrop-blur-md">
           <Logo />
           <DesktopNav
