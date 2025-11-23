@@ -363,6 +363,23 @@ const Work = () => {
           "Expected completion: Q3 2024",
         ],
       },
+      {
+        id: "prog-6",
+        title: "Sbuild Datahub",
+        client: "Sbuild Solutions",
+        category: "Data",
+        year: "2025",
+        status: "in-progress",
+        image_url: "/thesis-flow.jpg",
+        description:
+          "A secure, web-based system designed to streamline the submission and tracking of postgraduate thesis and dissertations for the University of Ghana.",
+        results: [
+          "Developing online thesis submission platform",
+          "Implementing real-time progress tracking",
+          "Creating supervisor and department monitoring tools",
+          "Expected completion: Q3 2024",
+        ],
+      },
     ],
     future: [
       {

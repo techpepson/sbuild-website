@@ -95,6 +95,11 @@ const Hero = () => {
     <section
       ref={heroRef}
       className="relative pt-16 md:pt-10 pb-10 overflow-hidden min-h-screen flex items-center"
+      style={{
+        width: "100vw",
+        marginLeft: "calc(50% - 50vw)",
+        marginRight: "calc(50% - 50vw)",
+      }}
     >
       {/* Sliding background images */}
       <div className="absolute inset-0 z-0">
@@ -112,7 +117,7 @@ const Hero = () => {
             draggable={true}
           />
         ))}
-        <div className="absolute inset-0 bg-black/26"></div>
+        <div className="absolute inset-0 bg-black/40"></div>
       </div>
 
       {/* Floating decorative elements */}
