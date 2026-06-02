@@ -100,7 +100,7 @@ const ProjectsSection = () => {
                 inView
                   ? "opacity-100 translate-y-0"
                   : "opacity-0 translate-y-8",
-                `delay-${index * 100}`
+                `delay-${index * 100}`,
               )}
             >
               <div className="relative h-56 overflow-hidden">

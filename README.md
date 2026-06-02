@@ -66,7 +66,7 @@ SBuild Solutions is a leading Ghanaian SaaS development company specializing in 
 3. **Insights data (dummy by default, Supabase optional)**
 
    By default, the Insights pages use local dummy tech-company articles so the site works without any backend.
-   
+
    If you want to load real articles from Supabase, copy `.env.example` to `.env` and fill in your Supabase values:
 
    Copy `.env.example` to `.env` and fill in your Supabase values:

@@ -67,7 +67,7 @@ const Insights = () => {
     isLoading,
     error,
   } = useArticles(
-    activeCategory === "All Categories" ? undefined : activeCategory
+    activeCategory === "All Categories" ? undefined : activeCategory,
   );
 
   // Remove duplicate articles by title (case-insensitive, trimmed)
@@ -76,8 +76,8 @@ const Insights = () => {
       index ===
       self.findIndex(
         (a) =>
-          a.title.trim().toLowerCase() === article.title.trim().toLowerCase()
-      )
+          a.title.trim().toLowerCase() === article.title.trim().toLowerCase(),
+      ),
   );
 
   // Apply search filter
@@ -91,12 +91,12 @@ const Insights = () => {
               .toLowerCase()
               .includes(searchQuery.toLowerCase())) &&
           article.title.trim().toLowerCase() !== "ui/ux design" &&
-          !article.category.toLowerCase().includes("ui/ux")
+          !article.category.toLowerCase().includes("ui/ux"),
       )
     : uniqueArticles.filter(
         (article) =>
           article.title.trim().toLowerCase() !== "ui/ux design" &&
-          !article.category.toLowerCase().includes("ui/ux")
+          !article.category.toLowerCase().includes("ui/ux"),
       );
 
   const featuredArticle =
@@ -109,7 +109,7 @@ const Insights = () => {
     ...new Set(
       allArticles
         .filter((article) => !article.category.toLowerCase().includes("ui/ux"))
-        .map((article) => article.category)
+        .map((article) => article.category),
     ),
   ];
 
@@ -136,7 +136,7 @@ const Insights = () => {
                 "transition-all duration-700 transform",
                 heroInView
                   ? "opacity-100 translate-y-0"
-                  : "opacity-0 translate-y-10"
+                  : "opacity-0 translate-y-10",
               )}
             >
               <div className="inline-flex items-center py-1 px-3 mb-6 text-xs font-medium rounded-full border border-sbuild/10 bg-sbuild/5 text-sbuild">
@@ -158,7 +158,7 @@ const Insights = () => {
                 "transition-all duration-700 delay-200 transform",
                 heroInView
                   ? "opacity-100 translate-y-0"
-                  : "opacity-0 translate-y-10"
+                  : "opacity-0 translate-y-10",
               )}
             >
               <div className="relative group">
@@ -187,7 +187,7 @@ const Insights = () => {
                     "transition-all duration-300",
                     category === activeCategory
                       ? "bg-gradient-to-r from-sbuild to-cyan-600 hover:from-sbuild/90 hover:to-cyan-600/90 text-white shadow-lg"
-                      : "hover:border-sbuild/50 hover:text-sbuild"
+                      : "hover:border-sbuild/50 hover:text-sbuild",
                   )}
                   onClick={() => setActiveCategory(category)}
                 >
@@ -271,7 +271,7 @@ const Insights = () => {
                   "transition-all duration-700 transform",
                   featuredInView
                     ? "opacity-100 translate-y-0"
-                    : "opacity-0 translate-y-10"
+                    : "opacity-0 translate-y-10",
                 )}
               >
                 Featured Article
@@ -283,7 +283,7 @@ const Insights = () => {
                   "transition-all duration-700 transform",
                   featuredInView
                     ? "opacity-100 translate-y-0"
-                    : "opacity-0 translate-y-10"
+                    : "opacity-0 translate-y-10",
                 )}
               >
                 <div className="flex flex-col lg:flex-row">
@@ -356,7 +356,7 @@ const Insights = () => {
                   "transition-all duration-700 transform",
                   articlesInView
                     ? "opacity-100 translate-y-0"
-                    : "opacity-0 translate-y-10"
+                    : "opacity-0 translate-y-10",
                 )}
               >
                 {searchQuery ? "Search Results" : "Latest Articles"}
@@ -372,7 +372,7 @@ const Insights = () => {
                       articlesInView
                         ? "opacity-100 translate-y-0"
                         : "opacity-0 translate-y-10",
-                      `delay-${index * 100}`
+                      `delay-${index * 100}`,
                     )}
                   >
                     <div className="h-48 overflow-hidden">

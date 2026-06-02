@@ -190,7 +190,7 @@ const InsightDetails = () => {
                   "transition-all duration-700 transform",
                   inView
                     ? "opacity-100 translate-y-0"
-                    : "opacity-0 translate-y-10"
+                    : "opacity-0 translate-y-10",
                 )}
               >
                 <div className="flex items-center gap-2 mb-6 text-sbuild">
@@ -257,7 +257,7 @@ const InsightDetails = () => {
                 inView
                   ? "opacity-100 translate-y-0"
                   : "opacity-0 translate-y-10",
-                "delay-100"
+                "delay-100",
               )}
             >
               <img
@@ -281,7 +281,7 @@ const InsightDetails = () => {
                   inView
                     ? "opacity-100 translate-y-0"
                     : "opacity-0 translate-y-10",
-                  "delay-200"
+                  "delay-200",
                 )}
                 dangerouslySetInnerHTML={{ __html: article.content }}
               ></div>
@@ -336,7 +336,7 @@ const InsightDetails = () => {
                     inView
                       ? "opacity-100 translate-y-0"
                       : "opacity-0 translate-y-10",
-                    `delay-${(index + 3) * 100}`
+                    `delay-${(index + 3) * 100}`,
                   )}
                 >
                   <div className="h-40 overflow-hidden">
