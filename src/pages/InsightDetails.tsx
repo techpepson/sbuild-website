@@ -15,11 +15,13 @@ import { useInView } from "react-intersection-observer";
 import { cn } from "@/lib/utils";
 import { useArticle, useArticles } from "@/hooks/use-articles-data";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useToast } from "@/components/ui/use-toast";
 
 const InsightDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const articleId = id || "";
+  const { toast } = useToast();
 
   const { data: article, isLoading, error } = useArticle(articleId);
   const { data: articles = [] } = useArticles();
@@ -116,6 +118,63 @@ const InsightDetails = () => {
   const relatedArticles = articles
     .filter((a) => a.id !== article.id)
     .slice(0, 3);
+
+  const copyTextToClipboard = async (text: string) => {
+    if (navigator.clipboard?.writeText) {
+      await navigator.clipboard.writeText(text);
+      return;
+    }
+
+    const textarea = document.createElement("textarea");
+    textarea.value = text;
+    textarea.setAttribute("readonly", "");
+    textarea.style.position = "fixed";
+    textarea.style.left = "-9999px";
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand("copy");
+    document.body.removeChild(textarea);
+  };
+
+  const handleShare = async () => {
+    const url = window.location.href;
+
+    try {
+      if (navigator.share) {
+        await navigator.share({
+          title: article.title,
+          text: article.excerpt,
+          url,
+        });
+        return;
+      }
+
+      await copyTextToClipboard(url);
+      toast({
+        title: "Link copied",
+        description: "Article link copied to clipboard.",
+      });
+    } catch (err) {
+      // If the user cancels the native share sheet, don't show an error.
+      if (err instanceof DOMException && err.name === "AbortError") {
+        return;
+      }
+
+      try {
+        await copyTextToClipboard(url);
+        toast({
+          title: "Link copied",
+          description: "Article link copied to clipboard.",
+        });
+      } catch {
+        toast({
+          title: "Share failed",
+          description: "Could not share or copy the article link.",
+          variant: "destructive",
+        });
+      }
+    }
+  };
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -235,6 +294,7 @@ const InsightDetails = () => {
                       variant="outline"
                       size="sm"
                       className="rounded-full mr-2"
+                      onClick={handleShare}
                     >
                       <Share2 className="h-4 w-4 mr-2" />
                       Share This Article

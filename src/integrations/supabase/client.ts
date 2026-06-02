@@ -3,8 +3,21 @@
 import { createClient } from '@supabase/supabase-js';
 import type { Database } from './types';
 
-const SUPABASE_URL = "https://azvyntadrosupjslreec.supabase.co";
-const SUPABASE_PUBLISHABLE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF6dnludGFkcm9zdXBqc2xyZWVjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDI0NzkzMjgsImV4cCI6MjA1ODA1NTMyOH0.OZGIJ-oxf-2KN3m8LeKaHAFTmzyrEtlplFec3WYEISE";
+const ENV_SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL as string | undefined;
+const ENV_SUPABASE_ANON_KEY =
+	import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined;
+
+const SUPABASE_URL =
+	ENV_SUPABASE_URL ?? "https://azvyntadrosupjslreec.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY =
+	ENV_SUPABASE_ANON_KEY ??
+	"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF6dnludGFkcm9zdXBqc2xyZWVjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDI0NzkzMjgsImV4cCI6MjA1ODA1NTMyOH0.OZGIJ-oxf-2KN3m8LeKaHAFTmzyrEtlplFec3WYEISE";
+
+if (import.meta.env.DEV && (!ENV_SUPABASE_URL || !ENV_SUPABASE_ANON_KEY)) {
+	console.warn(
+		'[supabase] Missing VITE_SUPABASE_URL / VITE_SUPABASE_ANON_KEY. Using fallback values from src/integrations/supabase/client.ts.'
+	);
+}
 
 // Import the supabase client like this:
 // import { supabase } from "@/integrations/supabase/client";

@@ -22,7 +22,7 @@ import { Input } from "@/components/ui/input";
 import { Link } from "react-router-dom";
 import { useInView } from "react-intersection-observer";
 import { cn } from "@/lib/utils";
-import { useArticles, Article } from "@/hooks/use-articles";
+import { useArticles, Article } from "@/hooks/use-articles-data";
 import { useSearchParams } from "react-router-dom";
 
 const Insights = () => {
@@ -51,13 +51,16 @@ const Insights = () => {
   }, []);
 
   useEffect(() => {
+    const nextParams = new URLSearchParams(searchParams);
+
     if (activeCategory === "All Categories") {
-      searchParams.delete("category");
+      nextParams.delete("category");
     } else {
-      searchParams.set("category", activeCategory);
+      nextParams.set("category", activeCategory);
     }
-    setSearchParams(searchParams);
-  }, [activeCategory]);
+
+    setSearchParams(nextParams, { replace: true });
+  }, [activeCategory, searchParams, setSearchParams]);
 
   const {
     data: allArticles = [],

@@ -63,7 +63,23 @@ SBuild Solutions is a leading Ghanaian SaaS development company specializing in 
    yarn install
    ```
 
-3. **Start development server**
+3. **Insights data (dummy by default, Supabase optional)**
+
+   By default, the Insights pages use local dummy tech-company articles so the site works without any backend.
+   
+   If you want to load real articles from Supabase, copy `.env.example` to `.env` and fill in your Supabase values:
+
+   Copy `.env.example` to `.env` and fill in your Supabase values:
+
+   ```bash
+   copy .env.example .env
+   ```
+
+   Then set:
+   - `VITE_SUPABASE_URL`
+   - `VITE_SUPABASE_ANON_KEY`
+
+4. **Start development server**
 
    ```bash
    npm run dev
@@ -71,7 +87,7 @@ SBuild Solutions is a leading Ghanaian SaaS development company specializing in 
    yarn dev
    ```
 
-4. **Open your browser**
+5. **Open your browser**
    Navigate to `http://localhost:5173` to view the website
 
 ## 📁 Project Structure

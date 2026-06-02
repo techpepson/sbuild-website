@@ -15,7 +15,7 @@ const ProjectsSection = () => {
   const completedProjects = [
     {
       id: "comp-1",
-      title: "SGS Alumni System",
+      title: "DCS Alumni Connect",
       client: "University of Ghana - School of Graduate Studies",
       category: "Education",
       year: "2025",

@@ -92,7 +92,7 @@ const ContactPage = () => {
               <div className="flex flex-wrap justify-center gap-4">
                 <div className="inline-flex items-center rounded-full bg-white px-4 py-2 shadow-sm border border-gray-100">
                   <Phone className="h-4 w-4 text-sbuild mr-2" />
-                  <span>+233558628269</span>
+                  <span>+233544814744 / +233536909471</span>
                 </div>
 
                 <div className="flex items-center rounded-full bg-white px-4 py-2 shadow-sm border border-gray-100">
@@ -101,7 +101,7 @@ const ContactPage = () => {
                     href="mailto:sbuildsolutions@gmail.com"
                     className="text-sbuild hover:underline"
                   >
-                    sbuildsolutions@gmail.com
+                    info@sbuildsolutions.org
                   </a>
                 </div>
               </div>
@@ -120,7 +120,7 @@ const ContactPage = () => {
                   "transition-all duration-700 transform",
                   inViewLeft
                     ? "opacity-100 translate-x-0"
-                    : "opacity-0 -translate-x-10"
+                    : "opacity-0 -translate-x-10",
                 )}
               >
                 <Card className="shadow-md border border-gray-100/80 overflow-hidden">
@@ -312,7 +312,7 @@ const ContactPage = () => {
                   "transition-all duration-700 transform",
                   inViewRight
                     ? "opacity-100 translate-x-0"
-                    : "opacity-0 translate-x-10"
+                    : "opacity-0 translate-x-10",
                 )}
               >
                 <div className="space-y-8">

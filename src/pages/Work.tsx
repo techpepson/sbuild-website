@@ -76,15 +76,15 @@ const ProjectDetails = ({
               project.status === "completed"
                 ? "bg-green-100 text-green-800"
                 : project.status === "in-progress"
-                ? "bg-blue-100 text-blue-800"
-                : "bg-yellow-100 text-yellow-800"
+                  ? "bg-blue-100 text-blue-800"
+                  : "bg-yellow-100 text-yellow-800",
             )}
           >
             {project.status === "completed"
               ? "Completed"
               : project.status === "in-progress"
-              ? "In Progress"
-              : "Future Project"}
+                ? "In Progress"
+                : "Future Project"}
           </div>
         </div>
 
@@ -117,8 +117,12 @@ const ProjectStatusTabs = ({
   onTabChange: (tab: string) => void;
 }) => {
   const tabs = [
-    { id: "completed", label: "Completed Projects", count: 3 },
-    { id: "in-progress", label: "In Progress", count: 2 },
+    {
+      id: "completed",
+      label: "Completed Projects",
+      count: 8,
+    },
+    { id: "in-progress", label: "In Progress", count: 3 },
     { id: "future", label: "Future Projects", count: 6 },
   ];
 
@@ -132,7 +136,7 @@ const ProjectStatusTabs = ({
             "px-6 py-3 rounded-full text-sm font-medium transition-all flex items-center gap-2",
             activeTab === tab.id
               ? "bg-sbuild text-white shadow-md"
-              : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+              : "bg-gray-100 text-gray-600 hover:bg-gray-200",
           )}
         >
           {tab.label}
@@ -141,7 +145,7 @@ const ProjectStatusTabs = ({
               "px-2 py-0.5 rounded-full text-xs",
               activeTab === tab.id
                 ? "bg-white/20 text-white"
-                : "bg-gray-200 text-gray-600"
+                : "bg-gray-200 text-gray-600",
             )}
           >
             {tab.count}
@@ -174,7 +178,7 @@ const ProjectCard = ({
       className={cn(
         "group overflow-hidden rounded-xl bg-white shadow-sm border border-gray-100 transition-all hover:-translate-y-1 hover:shadow-md",
         "transition-all duration-500 transform",
-        inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+        inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8",
       )}
     >
       <div className="relative h-56 overflow-hidden">
@@ -195,15 +199,15 @@ const ProjectCard = ({
             project.status === "completed"
               ? "bg-green-500 text-white"
               : project.status === "in-progress"
-              ? "bg-blue-500 text-white"
-              : "bg-yellow-500 text-white"
+                ? "bg-blue-500 text-white"
+                : "bg-yellow-500 text-white",
           )}
         >
           {project.status === "completed"
             ? "Completed"
             : project.status === "in-progress"
-            ? "In Progress"
-            : "Future Project"}
+              ? "In Progress"
+              : "Future Project"}
         </div>
       </div>
 
@@ -278,23 +282,40 @@ const Work = () => {
     completed: [
       {
         id: "comp-1",
-        title: "SGS Alumni System",
-        client: "University of Ghana - School of Graduate Studies",
-        category: "Education",
+        title: "LuggageBS",
+        client: "Student Storage Solutions",
+        category: "Mobile App",
         year: "2025",
         status: "completed",
-        image_url: "/sgs-image.png",
+        image_url: "/luggage-bs.jpg",
         description:
-          "A comprehensive alumni management system for the School of Graduate Studies that fosters connections, shares updates, and provides resources for continued professional and academic growth.",
+          "A mobile app designed to revolutionize the way students manage their belongings during vacation breaks by providing seamless storage booking, item tracking, and hassle-free payments.",
         results: [
-          "Streamlined bulk enrolment of graduating postgraduate alumni",
-          "Implemented event broadcasting and job advertisement features",
-          "Enhanced alumni network engagement through donations and birthday wishes",
-          "Improved find friend functionality for better alumni connections",
+          "Developing storage slot booking system",
+          "Implementing item tracking and management",
+          "Integrating secure payment processing",
+          "Expected completion: Q2 2024",
         ],
       },
       {
         id: "comp-2",
+        title: "ThesisFlow",
+        client: "University of Ghana - School of Graduate Studies",
+        category: "Education",
+        year: "2025",
+        status: "completed",
+        image_url: "/thesis-flow.jpg",
+        description:
+          "A secure, web-based system designed to streamline the submission and tracking of postgraduate thesis and dissertations for the University of Ghana.",
+        results: [
+          "Developing online thesis submission platform",
+          "Implementing real-time progress tracking",
+          "Creating supervisor and department monitoring tools",
+          "Expected completion: Q3 2024",
+        ],
+      },
+      {
+        id: "comp-3",
         title: "Risk Management System",
         client: "University of Ghana - Risk Management Office",
         category: "Risk Management",
@@ -311,7 +332,7 @@ const Work = () => {
         ],
       },
       {
-        id: "comp-3",
+        id: "comp-4",
         title: "SGS Accreditation Portal",
         client: "University of Ghana - School of Graduate Studies",
         category: "Education",
@@ -327,57 +348,124 @@ const Work = () => {
           "Reduced administrative complexities and processing time",
         ],
       },
-    ],
-    "in-progress": [
       {
-        id: "prog-4",
-        title: "LuggageBS",
-        client: "Student Storage Solutions",
-        category: "Mobile App",
-        year: "2025",
-        status: "in-progress",
-        image_url: "/luggage-bs.jpg",
+        id: "comp-5",
+        title: "Amplifying Voices for an Inclusive Ghana",
+        client: "AI4Inclusive Ghana",
+        category: "Social Impact",
+        year: "2026",
+        status: "completed",
+        image_url: "/inclusive-app.jpeg",
         description:
-          "A mobile app designed to revolutionize the way students manage their belongings during vacation breaks by providing seamless storage booking, item tracking, and hassle-free payments.",
+          "A web application that uses AI and social media analytics to track inclusion trends and drive policy change for marginalized communities.",
         results: [
-          "Developing storage slot booking system",
-          "Implementing item tracking and management",
-          "Integrating secure payment processing",
-          "Expected completion: Q2 2024",
+          "Developed AI-powered social media monitoring tools",
+          "Provided real-time insights on inclusion trends",
+          "Facilitated data-driven policy advocacy",
+          "Empowered marginalized voices in national discourse",
         ],
       },
       {
-        id: "prog-5",
-        title: "ThesisFlow",
+        id: "comp-6",
+        title: "Skill Hub",
+        client: "Sbuild Solutions",
+        category: "Career Development",
+        year: "2026",
+        status: "completed",
+        image_url: "/skill.png",
+        description:
+          "A web application that lets users build skills with training that coaches them forward.",
+        results: [
+          "Developed a career development platform with personalized learning paths",
+          "Implemented AI-driven skill assessment and recommendation engine",
+          "Facilitated access to curated training resources and mentorship opportunities",
+          "Empowered users to build skills and advance their careers effectively",
+        ],
+      },
+      {
+        id: "comp-7",
+        title: "Postgraduate Workshop Website",
+        client: "Department of Computer Science, University of Ghana",
+        category: "Education",
+        year: "2026",
+        status: "completed",
+        image_url: "/workshop.png",
+        description:
+          "A flagship academic event by the Department of Computer Science, University of Ghana — now in its second edition. It brings postgraduate researchers together to share, debate, and celebrate academic work. Students present thesis work as posters, papers, or technical demos. A panel of judges awards prizes for the best presentations across all categories.",
+        results: [
+          "Developing online submission and review platform for workshop papers and posters",
+          "Implementing real-time progress tracking for submissions and reviews",
+          "Creating event management tools for scheduling, announcements, and participant engagement",
+          "Expected completion: Q4 2026",
+        ],
+      },
+      {
+        id: "comp-8",
+        title: "DCS Alumni Connect",
         client: "University of Ghana - School of Graduate Studies",
         category: "Education",
         year: "2025",
-        status: "in-progress",
-        image_url: "/thesis-flow.jpg",
+        status: "completed",
+        image_url: "/sgs-image.png",
         description:
-          "A secure, web-based system designed to streamline the submission and tracking of postgraduate thesis and dissertations for the University of Ghana.",
+          "A comprehensive alumni management system for the School of Graduate Studies that fosters connections, shares updates, and provides resources for continued professional and academic growth.",
         results: [
-          "Developing online thesis submission platform",
-          "Implementing real-time progress tracking",
-          "Creating supervisor and department monitoring tools",
-          "Expected completion: Q3 2024",
+          "Streamlined bulk enrolment of graduating postgraduate alumni",
+          "Implemented event broadcasting and job advertisement features",
+          "Enhanced alumni network engagement through donations and birthday wishes",
+          "Improved find friend functionality for better alumni connections",
         ],
       },
+    ],
+    "in-progress": [
       {
-        id: "prog-6",
+        id: "prog-2",
         title: "Sbuild Datahub",
         client: "Sbuild Solutions",
         category: "Data",
         year: "2025",
         status: "in-progress",
-        image_url: "/thesis-flow.jpg",
+        image_url: "/data.png",
         description:
           "A secure, web-based system designed to streamline the submission and tracking of postgraduate thesis and dissertations for the University of Ghana.",
         results: [
           "Developing online thesis submission platform",
           "Implementing real-time progress tracking",
           "Creating supervisor and department monitoring tools",
-          "Expected completion: Q3 2024",
+          "Expected completion: Q3 2026",
+        ],
+      },
+      {
+        id: "prog-3",
+        title: "ISSER Grant Hub",
+        client: "ISSER, University of Ghana",
+        category: "Research",
+        year: "2025",
+        status: "in-progress",
+        image_url: "/isser.png",
+        description:
+          "A web-based system designed for the complete research grant lifecycle — from application to final reports.",
+        results: [
+          "Developing online grant application and review platform",
+          "Implementing real-time progress tracking for grant applications",
+          "Creating reporting tools for grant recipients and administrators",
+          "Expected completion: Q4 2026",
+        ],
+      },
+      {
+        id: "prog-4",
+        title: "PharmaCare",
+        category: "Healthcare",
+        year: "2026",
+        status: "in-progress",
+        image_url: "/pharma.png",
+        description:
+          "PharmaCare is a modern pharmacy management system designed to streamline pharmacy operations through digital solutions. It helps pharmacists manage inventory, prescriptions, sales, patient records, billing, and reporting from a centralized platform, improving efficiency, accuracy, and customer service. The system provides real-time stock monitoring, automated workflows, and analytics to support better decision-making and business growth.",
+        results: [
+          "Streamlined inventory management with real-time stock monitoring",
+          "Automated prescription processing and patient record management",
+          "Enhanced sales tracking, billing, and reporting capabilities",
+          "Improved operational efficiency and customer service for pharmacies",
         ],
       },
     ],
@@ -397,7 +485,7 @@ const Work = () => {
           "Planning natural language processing integration",
           "Designing multilingual response system",
           "Developing local language support",
-          "Expected start: Q2 2025",
+          "Expected start: Q2 2027",
         ],
       },
       {
@@ -415,7 +503,7 @@ const Work = () => {
           "Planning image recognition algorithms",
           "Designing mobile app interface",
           "Developing crop database",
-          "Expected start: Q3 2025",
+          "Expected start: Q3 2027",
         ],
       },
       {
@@ -433,7 +521,7 @@ const Work = () => {
           "Planning text processing algorithms",
           "Designing summarization features",
           "Developing sentiment analysis tools",
-          "Expected start: Q4 2025",
+          "Expected start: Q4 2027",
         ],
       },
       {
@@ -451,7 +539,7 @@ const Work = () => {
           "Planning speech recognition integration",
           "Designing voice command system",
           "Developing business logic modules",
-          "Expected start: Q1 2026",
+          "Expected start: Q4 2027",
         ],
       },
       {
@@ -469,7 +557,7 @@ const Work = () => {
           "Planning fraud detection algorithms",
           "Designing real-time monitoring system",
           "Developing security protocols",
-          "Expected start: Q2 2026",
+          "Expected start: Q2 2027",
         ],
       },
       {
@@ -487,7 +575,7 @@ const Work = () => {
           "Planning recommendation algorithms",
           "Designing user preference tracking",
           "Developing product matching system",
-          "Expected start: Q3 2026",
+          "Expected start: Q3 2027",
         ],
       },
     ],
@@ -536,7 +624,7 @@ const Work = () => {
                   "transition-all duration-700 ease-out",
                   heroInView
                     ? "opacity-100 transform-none"
-                    : "opacity-0 translate-y-4"
+                    : "opacity-0 translate-y-4",
                 )}
               >
                 Our Portfolio
@@ -547,7 +635,7 @@ const Work = () => {
                   "transition-all duration-700 delay-100 ease-out",
                   heroInView
                     ? "opacity-100 transform-none"
-                    : "opacity-0 translate-y-4"
+                    : "opacity-0 translate-y-4",
                 )}
               >
                 Our <span className="text-sbuild">Work</span> in Action
@@ -558,7 +646,7 @@ const Work = () => {
                   "transition-all duration-700 delay-200 ease-out",
                   heroInView
                     ? "opacity-100 transform-none"
-                    : "opacity-0 translate-y-4"
+                    : "opacity-0 translate-y-4",
                 )}
               >
                 Explore our featured SaaS projects that have helped businesses
