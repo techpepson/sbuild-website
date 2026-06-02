@@ -119,8 +119,8 @@ const About = () => {
         "https://images.unsplash.com/photo-1552481902-9ef2babf332d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8Z3JlZWslMjBnb2RzfGVufDB8fDB8fHww",
     },
     {
-      name: "Mr. Kingsley Quarshie",
-      role: "Frontend Developer & Research Project Manager",
+      name: "Ms. Jennifer Oppong",
+      role: " Program Manager & Business Analyst",
       image:
         "https://plus.unsplash.com/premium_photo-1734301371434-7aa82950e9af?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Z3JlZWslMjBnb2RzfGVufDB8fDB8fHww",
     },
@@ -147,7 +147,7 @@ const About = () => {
                   "transition-all duration-700 ease-out",
                   heroInView
                     ? "opacity-100 transform-none"
-                    : "opacity-0 translate-y-4"
+                    : "opacity-0 translate-y-4",
                 )}
               >
                 About SBuild Solutions
@@ -158,7 +158,7 @@ const About = () => {
                   "transition-all duration-700 delay-100 ease-out",
                   heroInView
                     ? "opacity-100 transform-none"
-                    : "opacity-0 translate-y-4"
+                    : "opacity-0 translate-y-4",
                 )}
               >
                 Building the Future of{" "}
@@ -170,7 +170,7 @@ const About = () => {
                   "transition-all duration-700 delay-200 ease-out",
                   heroInView
                     ? "opacity-100 transform-none"
-                    : "opacity-0 translate-y-4"
+                    : "opacity-0 translate-y-4",
                 )}
               >
                 SBuild Solutions is a leading SaaS development company
@@ -192,7 +192,7 @@ const About = () => {
                   "transition-all duration-700 ease-out",
                   missionInView
                     ? "opacity-100 animate-fade-in-left"
-                    : "opacity-0"
+                    : "opacity-0",
                 )}
               >
                 <h2 className="text-3xl md:text-4xl font-display font-semibold mb-6 tracking-tight">
@@ -234,7 +234,7 @@ const About = () => {
                   "relative transition-all duration-700 ease-out h-full",
                   missionInView
                     ? "opacity-100 animate-fade-in-right"
-                    : "opacity-0"
+                    : "opacity-0",
                 )}
               >
                 <div className="relative overflow-hidden rounded-2xl border-8 border-white shadow-xl">
@@ -265,7 +265,7 @@ const About = () => {
                   "transition-all duration-700 ease-out",
                   valuesInView
                     ? "opacity-100 transform-none"
-                    : "opacity-0 translate-y-4"
+                    : "opacity-0 translate-y-4",
                 )}
               >
                 Our Core Values
@@ -276,7 +276,7 @@ const About = () => {
                   "transition-all duration-700 delay-100 ease-out",
                   valuesInView
                     ? "opacity-100 transform-none"
-                    : "opacity-0 translate-y-4"
+                    : "opacity-0 translate-y-4",
                 )}
               >
                 These principles guide every decision we make and every line of
@@ -295,13 +295,13 @@ const About = () => {
                     valuesInView
                       ? "opacity-100 translate-y-0"
                       : "opacity-0 translate-y-10",
-                    `delay-${index * 100}`
+                    `delay-${index * 100}`,
                   )}
                 >
                   <div
                     className={cn(
                       "h-12 w-12 rounded-full flex items-center justify-center mb-6",
-                      value.bgColor
+                      value.bgColor,
                     )}
                   >
                     <div className={value.color}>{value.icon}</div>
@@ -324,7 +324,7 @@ const About = () => {
                   "transition-all duration-700 ease-out",
                   teamInView
                     ? "opacity-100 transform-none"
-                    : "opacity-0 translate-y-4"
+                    : "opacity-0 translate-y-4",
                 )}
               >
                 Meet Our Leadership Team
@@ -335,7 +335,7 @@ const About = () => {
                   "transition-all duration-700 delay-100 ease-out",
                   teamInView
                     ? "opacity-100 transform-none"
-                    : "opacity-0 translate-y-4"
+                    : "opacity-0 translate-y-4",
                 )}
               >
                 Our diverse team brings together years of experience in software
@@ -353,7 +353,7 @@ const About = () => {
                     teamInView
                       ? "opacity-100 translate-y-0"
                       : "opacity-0 translate-y-10",
-                    `delay-${index * 100}`
+                    `delay-${index * 100}`,
                   )}
                 >
                   <div className="aspect-square w-full overflow-hidden">
