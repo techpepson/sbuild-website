@@ -79,48 +79,48 @@ const About = () => {
   const teamMembers = [
     {
       name: "Prof. Solomon Mensah",
-      role: "Founder & C.E.O.",
+      role: "Founder & Chief Executive Officer",
       image: "/lovable-uploads/prof-image.jpg",
     },
     {
       name: "Ms. Endurance Offeibea",
-      role: "Product Manager & UI/UX Designer",
+      role: "Head of Product & UI/UX Design",
       image:
         "https://images.unsplash.com/photo-1646113235031-9c5d2cdcc21c?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     },
     {
       name: "Ms. Elizabeth Akuafum Dick",
-      role: "Communication & Operations Manager",
+      role: "Head of Operations & Communications",
       image:
         "https://plus.unsplash.com/premium_photo-1692948505024-20a1288d0b65?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fHVucmVhbCUyMGh1bWFufGVufDB8fDB8fHww",
     },
     {
       name: "Mr. Evans Narh",
-      role: "Lead UI/UX Designer & Data Analyst",
+      role: "Lead Product Designer & Data Analyst",
       image:
         "https://plus.unsplash.com/premium_photo-1670966282879-ef5f3cbf1000?q=80&w=823&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     },
     {
       name: "Mr. Benson Yeboah",
-      role: "Full Stack Developer",
+      role: "Senior Full-Stack Developer",
       image:
         "https://images.unsplash.com/photo-1628367647980-d194c0d568d7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fHpldXN8ZW58MHx8MHx8fDA%3D",
     },
     {
       name: "Mr. Lord Konadu",
-      role: "Full Stack Developer & QA Manager",
+      role: "Head of Engineering & QA",
       image:
         "https://plus.unsplash.com/premium_photo-1682310209998-4ab788b6625a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Y2h1cmNoJTIwbG9nb3xlbnwwfHwwfHx8MA%3D%3D",
     },
     {
       name: "Mr. Dickson Peprah",
-      role: "Mobile & Web App Developer",
+      role: "Senior Mobile & Web Developer",
       image:
         "https://images.unsplash.com/photo-1552481902-9ef2babf332d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8Z3JlZWslMjBnb2RzfGVufDB8fDB8fHww",
     },
     {
       name: "Ms. Jennifer Oppong",
-      role: " Program Manager & Business Analyst",
+      role: "Director of Programs & Business Strategy",
       image:
         "https://plus.unsplash.com/premium_photo-1734301371434-7aa82950e9af?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Z3JlZWslMjBnb2RzfGVufDB8fDB8fHww",
     },
@@ -348,7 +348,7 @@ const About = () => {
                 <div
                   key={index}
                   className={cn(
-                    "bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 transition-all hover:-translate-y-1 hover:shadow-md",
+                    "group bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 transition-all hover:-translate-y-1.5 hover:shadow-md",
                     "transition-all duration-700 transform",
                     teamInView
                       ? "opacity-100 translate-y-0"
@@ -356,16 +356,21 @@ const About = () => {
                     `delay-${index * 100}`,
                   )}
                 >
-                  <div className="aspect-square w-full overflow-hidden">
-                    <img
-                      src={member.image}
-                      alt={member.name}
-                      className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
-                    />
+                  <div className="relative mt-8 flex justify-center">
+                    {/* Glowing background ring on card hover */}
+                    <div className="absolute inset-0 mx-auto w-32 h-32 rounded-full bg-sbuild/10 opacity-0 group-hover:opacity-100 blur-md transition-opacity duration-500"></div>
+                    <div className="relative w-32 h-32 rounded-full border-4 border-white shadow-md overflow-hidden transition-all duration-500 group-hover:border-sbuild/30 group-hover:scale-105">
+                      <img
+                        src={member.image}
+                        alt={member.name}
+                        className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110 group-hover:rotate-3"
+                        draggable={false}
+                      />
+                    </div>
                   </div>
-                  <div className="p-6">
-                    <h3 className="text-xl font-medium mb-1">{member.name}</h3>
-                    <p className="text-sbuild mb-4">{member.role}</p>
+                  <div className="p-6 text-center">
+                    <h3 className="text-lg font-semibold mb-1 text-gray-900 transition-colors duration-300 group-hover:text-sbuild">{member.name}</h3>
+                    <p className="text-sm font-medium text-sbuild/80 mb-2">{member.role}</p>
                     {/* <div className="flex space-x-3">
                       <a href="#" className="text-gray-400 hover:text-sbuild">
                         <svg

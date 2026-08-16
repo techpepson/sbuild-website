@@ -3,42 +3,25 @@ import { Button } from "@/components/ui/button";
 import {
   ArrowRight,
   ArrowUpRight,
-  LineChart,
-  Package,
   Shield,
-  Sparkles,
   Zap,
-  LifeBuoy,
+  CheckCircle2,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Link } from "react-router-dom";
 
-const backgroundImages = [
-  "/bg-image1.jpg",
-  "/Image20250616140443.jpg",
-  "/lauren-mancke-aOC7TSLb1o8-unsplash.jpg",
-  // "/Image20250616135229.jpg",
-  // "https://images.unsplash.com/photo-1602992708529-c9fdb12905c9?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-];
-
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
-  const [mousePosition, setMousePosition] = useState({
-    x: 0,
-    y: 0,
-  });
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const heroRef = useRef<HTMLElement>(null);
-  const [bgIndex, setBgIndex] = useState(0);
-  const bgTimeout = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
-    // Initial page load animation
+    // Entrance animations trigger
     const timer = setTimeout(() => {
       setIsVisible(true);
     }, 100);
 
-    // Scroll effect handler
     const handleScroll = () => {
       if (heroRef.current) {
         const scrollPosition = window.scrollY;
@@ -48,256 +31,198 @@ const Hero = () => {
       }
     };
 
-    // Mouse move effect for parallax
     const handleMouseMove = (e: MouseEvent) => {
       if (heroRef.current) {
         const { clientX, clientY } = e;
-        const { width, height } = heroRef.current.getBoundingClientRect();
+        const { left, top, width, height } =
+          heroRef.current.getBoundingClientRect();
 
-        // Calculate position relative to center of the container
-        const x = (clientX / width - 0.5) * 2; // -1 to 1
-        const y = (clientY / height - 0.5) * 2; // -1 to 1
+        // Calculate position relative to container
+        const x = ((clientX - left) / width - 0.5) * 2; // -1 to 1
+        const y = ((clientY - top) / height - 0.5) * 2; // -1 to 1
 
-        setMousePosition({
-          x,
-          y,
-        });
+        setMousePosition({ x, y });
       }
     };
+
     window.addEventListener("scroll", handleScroll);
     window.addEventListener("mousemove", handleMouseMove);
 
-    // Background slider
-    if (bgTimeout.current) clearTimeout(bgTimeout.current);
-    bgTimeout.current = setTimeout(() => {
-      setBgIndex((prev) => (prev + 1) % backgroundImages.length);
-    }, 4000);
     return () => {
       clearTimeout(timer);
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("mousemove", handleMouseMove);
-      if (bgTimeout.current) clearTimeout(bgTimeout.current);
     };
-  }, [bgIndex]);
+  }, []);
 
-  // Calculate parallax and opacity effects based on scroll progress
-  const parallaxOffset = scrollProgress * 100; // pixels to move elements
-  const contentOpacity = 1 - scrollProgress * 1.5; // fade out content faster than scroll
+  const parallaxOffset = scrollProgress * 120;
+  const contentOpacity = 1 - scrollProgress * 1.5;
 
-  // Mouse parallax for decorative elements
-  const mouseParallax = (strength: number) => ({
-    transform: `translate(${mousePosition.x * strength}px, ${
-      mousePosition.y * strength
-    }px)`,
-    transition: "transform 0.1s ease-out",
+  // Parallax translation styling generator
+  const getMouseParallax = (strength: number) => ({
+    transform: `translate(${mousePosition.x * strength}px, ${mousePosition.y * strength}px)`,
+    transition: "transform 0.15s ease-out",
   });
+
   return (
     <section
       ref={heroRef}
-      className="relative pt-16 md:pt-10 pb-10 overflow-hidden min-h-screen flex items-center"
+      className="relative pt-28 pb-20 md:pt-36 md:pb-24 overflow-hidden min-h-screen flex items-center bg-[#021312]"
       style={{
         width: "100vw",
         marginLeft: "calc(50% - 50vw)",
         marginRight: "calc(50% - 50vw)",
       }}
     >
-      {/* Sliding background images */}
-      <div className="absolute inset-0 z-0">
-        {backgroundImages.map((img, idx) => (
-          <img
-            key={img}
-            src={img}
-            alt="Hero background"
-            className="w-full h-full object-cover absolute inset-0 duration-1000"
-            style={{
-              opacity: idx === bgIndex ? 1 : 0,
-              transition: "opacity 1s",
-              transform: `translateY(${parallaxOffset * 0.4}px)`,
-            }}
-            draggable={true}
-          />
-        ))}
-        <div className="absolute inset-0 bg-black/40"></div>
-      </div>
-
-      {/* Floating decorative elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Glowing circles */}
+      {/* Background Image and Overlay System */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        <img
+          src="/landi.jpeg"
+          alt="Hero background"
+          className="w-full h-full object-cover absolute inset-0 transition-transform duration-700 ease-out"
+          style={{
+            transform: `translateY(${parallaxOffset * 0.35}px)`,
+          }}
+          draggable={false}
+        />
+        {/* Dark overlay with brand color cast for legibility */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/75 via-[#021312]/80 to-[#010909]/95 z-10"></div>
+        {/* Grid pattern overlay */}
+        <div className="absolute inset-0 bg-grid-pattern opacity-10 z-20"></div>
+        {/* Glow circles to add depth on top of the image overlay */}
         <div
-          className="absolute top-1/4 left-1/4 h-32 w-32 rounded-full bg-sbuild/10 blur-xl"
-          style={mouseParallax(15)}
+          className="absolute top-1/4 left-1/4 h-72 w-72 rounded-full bg-sbuild/20 blur-[100px] animate-pulse-soft z-20"
+          style={getMouseParallax(15)}
         ></div>
         <div
-          className="absolute top-3/4 right-1/4 h-40 w-40 rounded-full bg-blue-500/10 blur-xl"
-          style={mouseParallax(10)}
-        ></div>
-        <div
-          className="absolute bottom-1/4 left-1/3 h-24 w-24 rounded-full bg-purple-500/10 blur-xl"
-          style={mouseParallax(20)}
-        ></div>
-
-        {/* Gradient shapes */}
-        <div
-          className="absolute top-1/3 right-1/3 h-64 w-64 rounded-full bg-gradient-to-r from-pink-500/20 to-purple-500/20 blur-3xl"
-          style={mouseParallax(5)}
-        ></div>
-        <div
-          className="absolute bottom-1/2 left-2/3 h-74 w-74 rounded-full bg-gradient-to-r from-amber-500/10 to-orange-500/10 blur-3xl"
-          style={mouseParallax(8)}
+          className="absolute bottom-1/4 right-1/4 h-96 w-96 rounded-full bg-cyan-500/10 blur-[120px] animate-pulse-soft z-20"
+          style={getMouseParallax(10)}
         ></div>
       </div>
 
-      <div
-        className="flex justify-center w-full relative z-10"
-        style={{
-          opacity: Math.max(contentOpacity, 0),
-          transform: `translateY(${parallaxOffset * 0.2}px)`,
-          // subtle parallax for content
-          transition: "opacity 0.2s ease-out, transform 0.1s ease-out",
-        }}
-      >
-        <div className="relative inline-block max-w-screen-lg w-full px-4 py-2 rounded-2xl">
-          {/* Overlay for text visibility, fits content, sits behind text */}
+      {/* Main Content Area */}
+      <div className="container px-4 mx-auto max-w-5xl relative z-30">
+        <div
+          className="flex flex-col items-center text-center justify-center min-h-[calc(100vh-160px)]"
+          style={{
+            opacity: Math.max(contentOpacity, 0),
+            transform: `translateY(${parallaxOffset * 0.15}px)`,
+            transition: "opacity 0.2s ease-out, transform 0.1s ease-out",
+          }}
+        >
+          {/* Actionable Badge */}
           <div
-            className="absolute inset-0 bg-black/20 rounded-2xl backdrop-blur-sm"
-            style={{ zIndex: 0 }}
-          />
-          <div className="relative z-10 flex flex-col items-center text-center text-white">
-            {/* Badge */}
-            <div
-              className={cn(
-                "inline-flex items-center py-1 px-3 mb-6 text-xs font-medium rounded-full",
-                "border border-white/30 bg-white/10 text-white",
-                "transition-all duration-700 ease-out",
-                isVisible
-                  ? "opacity-100 transform-none"
-                  : "opacity-0 translate-y-4"
-              )}
+            className={cn(
+              "inline-flex items-center py-1 px-3.5 mb-6 text-xs font-semibold rounded-full",
+              "border border-white/20 bg-white/5 text-white/90 backdrop-blur-md",
+              "transition-all duration-700 ease-out shadow-sm hover:border-sbuild/40 hover:bg-sbuild/5",
+              isVisible
+                ? "opacity-100 transform-none"
+                : "opacity-0 translate-y-4",
+            )}
+          >
+            <span className="flex h-2.5 w-2.5 rounded-full bg-sbuild mr-2 animate-pulse"></span>
+            SBuild Solutions - Empowering Your Digital Transformation
+          </div>
+
+          {/* Main Headline */}
+          <h1
+            className={cn(
+              "text-4xl md:text-6xl lg:text-7.5xl font-display font-bold tracking-tight text-white mb-6 leading-[1.1] max-w-4xl",
+              "transition-all duration-700 delay-100 ease-out",
+              isVisible
+                ? "opacity-100 transform-none"
+                : "opacity-0 translate-y-4",
+            )}
+          >
+            Innovative{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-sbuild to-cyan-400">
+              SaaS Solutions
+            </span>{" "}
+            <br />
+            to Scale Your Business
+          </h1>
+
+          {/* Subheadline description */}
+          <p
+            className={cn(
+              "text-base md:text-xl text-white/80 mb-8 max-w-2xl leading-relaxed",
+              "transition-all duration-700 delay-200 ease-out",
+              isVisible
+                ? "opacity-100 transform-none"
+                : "opacity-0 translate-y-4",
+            )}
+          >
+            At SBuild Solutions, we craft innovative software solutions that
+            drive business growth. Our expert team combines cutting-edge
+            technologies like AI, ML, and IoT to create scalable, secure, and
+            transformative applications that accelerate your success.
+          </p>
+
+          {/* Action CTA Buttons */}
+          <div
+            className={cn(
+              "flex flex-col sm:flex-row gap-4 mb-16 w-full sm:w-auto justify-center",
+              "transition-all duration-700 delay-300 ease-out",
+              isVisible
+                ? "opacity-100 transform-none"
+                : "opacity-0 translate-y-4",
+            )}
+          >
+            <Link to="/contact">
+              <Button className="h-12 px-8 w-full sm:w-auto bg-sbuild hover:bg-sbuild/90 text-white rounded-lg shadow-lg shadow-sbuild/30 transition-all duration-300 flex items-center justify-center font-medium">
+                Get Started
+                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </Button>
+            </Link>
+            <a
+              href="https://calendly.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full sm:w-auto"
             >
-              <span className="flex h-2 w-2 rounded-full bg-sbuild mr-2"></span>
-              Sbuild Solutions - Empowering Your Digital Transformation
+              <Button className="h-12 px-8 w-full sm:w-auto bg-white/5 text-white hover:bg-white/15 border border-white/15 rounded-lg transition-all duration-300 backdrop-blur-sm flex items-center justify-center font-medium">
+                Schedule a Meeting
+                <ArrowUpRight className="ml-2 h-4 w-4" />
+              </Button>
+            </a>
+          </div>
+
+          {/* Trust Badges */}
+          <div
+            className={cn(
+              "flex flex-wrap items-center justify-center gap-6 md:gap-8 text-sm text-white/60",
+              "transition-all duration-700 delay-450 ease-out",
+              isVisible
+                ? "opacity-100 transform-none"
+                : "opacity-0 translate-y-4",
+            )}
+          >
+            <div className="flex items-center gap-2">
+              <CheckCircle2 className="h-4.5 w-4.5 text-sbuild" />
+              <span>99.9% Uptime SLA</span>
             </div>
-
-            {/* Headline */}
-            <h1
-              className={cn(
-                "text-4xl md:text-6xl lg:text-7xl font-display font-semibold tracking-tight leading-tight mb-6 text-white",
-                "transition-all duration-700 delay-100 ease-out",
-                isVisible
-                  ? "opacity-100 transform-none"
-                  : "opacity-0 translate-y-4"
-              )}
-            >
-              Innovative <span className="text-sbuild">SaaS Solutions</span> to
-              Scale Your Business
-            </h1>
-
-            {/* Subheadline */}
-            <p
-              className={cn(
-                "text-md md:text-xl text-white/90 mb-8",
-                "transition-all duration-700 delay-200 ease-out",
-                isVisible
-                  ? "opacity-100 transform-none"
-                  : "opacity-0 translate-y-4"
-              )}
-            >
-              At SBuild Solutions, we craft innovative software solutions that
-              drive business growth. Our expert team combines cutting-edge
-              technologies like AI, ML, and IoT to create scalable, secure, and
-              transformative applications that accelerate your success.
-            </p>
-
-            {/* CTA Buttons */}
-            <div
-              className={cn(
-                "flex flex-col sm:flex-row gap-4 mb-16 sm:w-auto justify-center",
-                "transition-all duration-700 delay-300 ease-out",
-                isVisible
-                  ? "opacity-100 transform-none"
-                  : "opacity-0 translate-y-4"
-              )}
-            >
-              <Link to="/contact">
-                <Button className="h-12 px-8 bg-sbuild hover:bg-sbuild/90 text-white rounded-lg shadow-lg shadow-sbuild/20 transition-all duration-300">
-                  Get Started
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              </Link>
-              <a
-                href="https://calendly.com"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Button className="h-12 px-8 bg-white/10 text-white hover:bg-white/20 border border-white/20 rounded-lg transition-all duration-300 backdrop-blur-sm">
-                  Schedule a Meeting
-                  <ArrowUpRight className="ml-2 h-4 w-4" />
-                </Button>
-              </a>
+            <div className="flex items-center gap-2">
+              <Shield className="h-4.5 w-4.5 text-sbuild" />
+              <span>Enterprise Security</span>
             </div>
-
-            {/* Feature highlights */}
-            <div
-              className={cn(
-                "grid grid-cols-1 md:grid-cols-3 gap-6",
-                "transition-all duration-700 delay-400 ease-out",
-                isVisible
-                  ? "opacity-100 transform-none"
-                  : "opacity-0 translate-y-4"
-              )}
-            >
-              <div className="p-6 border border-white/10 bg-white/5 backdrop-blur-md rounded-xl flex flex-col items-center text-center hover:bg-white/10 transition-all duration-300 hover:scale-105 hover:shadow-lg">
-                <div className="h-12 w-12 rounded-full bg-sbuild/20 flex items-center justify-center mb-4">
-                  <Package className="h-6 w-6 text-sbuild" />
-                </div>
-                <h3 className="text-lg font-medium mb-2 text-white">
-                  Custom Solutions
-                </h3>
-                <p className="text-sm text-white/80">
-                  Tailored SaaS applications designed to meet your specific
-                  business needs.
-                </p>
-              </div>
-
-              <div className="p-6 border border-white/10 bg-white/5 backdrop-blur-md rounded-xl flex flex-col items-center text-center hover:bg-white/10 transition-all duration-300 hover:scale-105 hover:shadow-lg">
-                <div className="h-12 w-12 rounded-full bg-sbuild/20 flex items-center justify-center mb-4">
-                  <LineChart className="h-6 w-6 text-sbuild" />
-                </div>
-                <h3 className="text-lg font-medium mb-2 text-white">
-                  Scalable Architecture
-                </h3>
-                <p className="text-sm text-white/80">
-                  Build solutions that grow with your business, from startup to
-                  enterprise.
-                </p>
-              </div>
-
-              <div className="p-6 border border-white/10 bg-white/5 backdrop-blur-md rounded-xl flex flex-col items-center text-center hover:bg-white/10 transition-all duration-300 hover:scale-105 hover:shadow-lg">
-                <div className="h-12 w-12 rounded-full bg-sbuild/20 flex items-center justify-center mb-4">
-                  <Shield className="h-6 w-6 text-sbuild" />
-                </div>
-                <h3 className="text-lg font-medium mb-2 text-white">
-                  Enterprise Security
-                </h3>
-                <p className="text-sm text-white/80">
-                  Advanced security protocols to keep your data and users
-                  protected.
-                </p>
-              </div>
+            <div className="flex items-center gap-2">
+              <Zap className="h-4.5 w-4.5 text-sbuild" />
+              <span>AI-Powered Insights</span>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Animated particles or sparkles */}
-      <div className="absolute inset-0 z-10 pointer-events-none opacity-30">
-        <Sparkle count={20} color="#ffffff" size={1} />
+      {/* Sparkles Particle Layer */}
+      <div className="absolute inset-0 z-10 pointer-events-none opacity-20">
+        <Sparkle count={15} color="#ffffff" size={1} />
       </div>
     </section>
   );
 };
 
-// Simple sparkle effect component
+// Particle sparkle builder
 const Sparkle = ({
   count,
   color,
@@ -307,13 +232,11 @@ const Sparkle = ({
   color: string;
   size: number;
 }) => {
-  const sparkles = Array.from({
-    length: count,
-  }).map((_, i) => {
+  const sparkles = Array.from({ length: count }).map((_, i) => {
     const top = `${Math.random() * 100}%`;
     const left = `${Math.random() * 100}%`;
-    const animationDuration = 1 + Math.random() * 3;
-    const animationDelay = Math.random() * 5;
+    const duration = 2 + Math.random() * 4;
+    const delay = Math.random() * 5;
     return (
       <div
         key={i}
@@ -325,12 +248,13 @@ const Sparkle = ({
           height: `${size * (1 + Math.random())}px`,
           backgroundColor: color,
           boxShadow: `0 0 ${8 * size}px ${2 * size}px ${color}`,
-          animationDuration: `${animationDuration}s`,
-          animationDelay: `${animationDelay}s`,
+          animationDuration: `${duration}s`,
+          animationDelay: `${delay}s`,
         }}
       />
     );
   });
   return <>{sparkles}</>;
 };
+
 export default Hero;
