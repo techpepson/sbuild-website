@@ -124,6 +124,30 @@ const About = () => {
       image:
         "https://plus.unsplash.com/premium_photo-1734301371434-7aa82950e9af?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Z3JlZWslMjBnb2RzfGVufDB8fDB8fHww",
     },
+    {
+      name: "Mr. Joel",
+      role: "Frontend Developer",
+      image:
+        "https://plus.unsplash.com/premium_photo-1682310209998-4ab788b6625a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Y2h1cmNoJTIwbG9nb3xlbnwwfHwwfHx8MA%3D%3D",
+    },
+    {
+      name: "Mr. Amos",
+      role: "Backend Developer",
+      image:
+        "https://media.istockphoto.com/id/523406944/photo/apollo-belvedere-statues.webp?a=1&b=1&s=612x612&w=0&k=20&c=-g25jJqL5ZE4QUV_fTfN1C45BgXc_3PWKsBkrzHq0rY=",
+    },
+    {
+      name: "Ms. Araba",
+      role: "UI/UX Designer",
+      image:
+        "https://plus.unsplash.com/premium_photo-1719864933065-6639a2d32e56?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGdyZWVrJTIwZ29kc3xlbnwwfHwwfHx8MA%3D%3D",
+    },
+    {
+      name: "Mr. Ekow",
+      role: "Data Analyst & Machine Learning Engineer",
+      image:
+        "https://images.unsplash.com/photo-1552481902-9ef2babf332d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGdyZWVrJTIwZ29kc3xlbnwwfHwwfHx8MA%3D%3D",
+    },
   ];
 
   return (
@@ -369,8 +393,12 @@ const About = () => {
                     </div>
                   </div>
                   <div className="p-6 text-center">
-                    <h3 className="text-lg font-semibold mb-1 text-gray-900 transition-colors duration-300 group-hover:text-sbuild">{member.name}</h3>
-                    <p className="text-sm font-medium text-sbuild/80 mb-2">{member.role}</p>
+                    <h3 className="text-lg font-semibold mb-1 text-gray-900 transition-colors duration-300 group-hover:text-sbuild">
+                      {member.name}
+                    </h3>
+                    <p className="text-sm font-medium text-sbuild/80 mb-2">
+                      {member.role}
+                    </p>
                     {/* <div className="flex space-x-3">
                       <a href="#" className="text-gray-400 hover:text-sbuild">
                         <svg
